@@ -1,0 +1,233 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="historiaPersonalNino">
+            <h2><span jhiTranslate="innapcitasApp.historiaPersonalNino.detail.title">Historia Personal Nino</span> {{historiaPersonalNino.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.primerNombre">Primer Nombre</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.primerNombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.segundoNombre">Segundo Nombre</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.segundoNombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.primerApellido">Primer Apellido</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.primerApellido}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.segundoApellido">Segundo Apellido</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.segundoApellido}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.edad">Edad</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.edad}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.lugarNacimiento">Lugar Nacimiento</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.lugarNacimiento}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.fechaNacimiento">Fecha Nacimiento</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.fechaNacimiento}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.cedula">Cedula</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.cedula}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.nacionalidad">Nacionalidad</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.nacionalidad}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.profesion">Profesion</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.profesion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.ocupacionActual">Ocupacion Actual</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.ocupacionActual}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.religion">Religion</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.religion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.direccionHabitacion">Direccion Habitacion</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.direccionHabitacion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.ciudad">Ciudad</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.ciudad}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.estado">Estado</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.estado}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.pais">Pais</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.pais}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoFijo">Telefono Fijo</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.telefonoFijo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoCelular">Telefono Celular</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.telefonoCelular}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.email">Email</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.familiarMedico">Familiar Medico</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.familiarMedico}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.carnetFamiliarMedico">Carnet Familiar Medico</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.carnetFamiliarMedico}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.especialidadFamiliarMedico">Especialidad Familiar Medico</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.especialidadFamiliarMedico}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.lugarTrabajoFamiliarMedico">Lugar Trabajo Familiar Medico</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.lugarTrabajoFamiliarMedico}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.appellidosNombresRepresentante">Appellidos Nombres Representante</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.appellidosNombresRepresentante}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.lugarFechaNacimientoRepresentante">Lugar Fecha Nacimiento Representante</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.lugarFechaNacimientoRepresentante}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.cedulaRepresentante">Cedula Representante</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.cedulaRepresentante}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.edadRepresentante">Edad Representante</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.edadRepresentante}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoCelularRepresentante">Telefono Celular Representante</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.telefonoCelularRepresentante}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoHabitacionRepresentante">Telefono Habitacion Representante</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.telefonoHabitacionRepresentante}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.quienTraeNinoConsulta">Quien Trae Nino Consulta</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.quienTraeNinoConsulta}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.cantidadHermanos">Cantidad Hermanos</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.cantidadHermanos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.posicionHermano">Posicion Hermano</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.posicionHermano}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.relacionMadre">Relacion Madre</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.relacionMadre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.relacionPadre">Relacion Padre</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.relacionPadre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.relacionHermanos">Relacion Hermanos</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.relacionHermanos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.relacionOtros">Relacion Otros</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.relacionOtros}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.gradoAfectividadNino">Grado Afectividad Nino</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.gradoAfectividadNino}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.caracterNino">Caracter Nino</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.caracterNino}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.quienCuidaNinoPadresTrabajan">Quien Cuida Nino Padres Trabajan</span></dt>
+                <dd>
+                    <span>{{historiaPersonalNino.quienCuidaNinoPadresTrabajan}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.sexo">Sexo</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalNino.sexo">
+                        <a [routerLink]="['/sexo', historiaPersonalNino.sexo?.id, 'view']">{{historiaPersonalNino.sexo?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.referidoPor">Referido Por</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalNino.referidoPor">
+                        <a [routerLink]="['/referencia-medica', historiaPersonalNino.referidoPor?.id, 'view']">{{historiaPersonalNino.referidoPor?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.estadoCivil">Estado Civil</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalNino.estadoCivil">
+                        <a [routerLink]="['/estado-civil', historiaPersonalNino.estadoCivil?.id, 'view']">{{historiaPersonalNino.estadoCivil?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.tipoConsulta">Tipo Consulta</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalNino.tipoConsulta">
+                        <a [routerLink]="['/tipo-consulta', historiaPersonalNino.tipoConsulta?.id, 'view']">{{historiaPersonalNino.tipoConsulta?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.especialidad">Especialidad</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalNino.especialidad">
+                        <a [routerLink]="['/especialidad', historiaPersonalNino.especialidad?.id, 'view']">{{historiaPersonalNino.especialidad?.especialidad}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.gradoInstruccionMadre">Grado Instruccion Madre</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalNino.gradoInstruccionMadre">
+                        <a [routerLink]="['/grado-instruccion', historiaPersonalNino.gradoInstruccionMadre?.id, 'view']">{{historiaPersonalNino.gradoInstruccionMadre?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.gradoInstruccionPadre">Grado Instruccion Padre</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalNino.gradoInstruccionPadre">
+                        <a [routerLink]="['/grado-instruccion', historiaPersonalNino.gradoInstruccionPadre?.id, 'view']">{{historiaPersonalNino.gradoInstruccionPadre?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.gradoInstruccionOtro">Grado Instruccion Otro</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalNino.gradoInstruccionOtro">
+                        <a [routerLink]="['/grado-instruccion', historiaPersonalNino.gradoInstruccionOtro?.id, 'view']">{{historiaPersonalNino.gradoInstruccionOtro?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalNino.paciente">Cita</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalNino.paciente">
+                        <a [routerLink]="['/cita', historiaPersonalNino.paciente?.id, 'view']">{{historiaPersonalNino.paciente?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/historia-personal-nino', historiaPersonalNino.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cabecera-informe-heading" jhiTranslate="innapcitasApp.cabeceraInforme.home.createOrEditLabel">Create or edit a Cabecera Informe</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cabeceraInforme.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cabeceraInforme.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cabeceraInforme.nombre" for="field_nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+                        [(ngModel)]="cabeceraInforme.nombre" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cabeceraInforme.cabecera">Cabecera</label>
+                    <editor name="cabecera" id="field_cabecera"
+                            [(ngModel)]="cabeceraInforme.cabecera"
+                            apiKey="5ymwv5nk2b0x6mtw4cyg4u74g2jnyuh6cf5uvfbj7tq1nwzx"
+                            [init]="{
+                                 height: 500,
+                                 menubar: false,
+                                 plugins: [
+                                    'advlist autolink lists link image charmap print',
+                                    'preview anchor searchreplace visualblocks code',
+                                    'fullscreen insertdatetime media table paste',
+                                    'help wordcount'
+                                 ],
+                                 toolbar:
+                                   'undo redo | formatselect | bold italic backcolor | \
+                                   alignleft aligncenter alignright alignjustify | \
+                                   bullist numlist outdent indent | removeformat | table media code'
+                               }"
+                    ></editor>
+                    <div [hidden]="!(editForm.controls.cabecera?.dirty && editForm.controls.cabecera?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.cabecera?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

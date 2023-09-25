@@ -1,0 +1,980 @@
+<div class="row justify-content-center" style="margin-right: 0px; margin-left: 0px;">
+    <div *ngIf="isSaving" class="loading-screen"><div class="loading-animation"></div></div>
+    <div class="col-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="getInformeFile()" type="button" class="btn btn-success float-right">
+                <fa-icon [icon]="'heart'"></fa-icon>&nbsp;<span > Imprimir Informe</span>
+            </button>
+            <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="getEvolucionFile()" type="button" class="btn btn-secondary float-right">
+                <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span > Imprimir Evolución</span>
+            </button>
+            <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="sendEvolucionFile()" type="button" class="btn btn-info float-right">
+                <fa-icon [icon]="'envelope'"></fa-icon>&nbsp;<span > Enviar Evolución</span>
+            </button>
+            <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="sendInformeFile()" type="button" class="btn btn-primary float-right">
+                <fa-icon [icon]="'envelope'"></fa-icon>&nbsp;<span > Enviar Informe</span>
+            </button>
+            <button *ngIf="evolucionPaciente.cita.estatusCita?.id == 1 || evolucionPaciente.cita.estatusCita?.id == 4" (click)="updateEstatus(evolucionPaciente.cita, true)" type="button" class="btn btn-success float-right">
+                <fa-icon [icon]="'check'"></fa-icon>&nbsp;<span class="d-none d-md-inline"> Finalizar Cita</span>
+            </button>
+            <h2 jhiTranslate="innapcitasApp.evolucionPaciente.home.createOrEditLabel">Create or edit a Evolucion Paciente</h2>
+
+            <br>
+            <div class="form-group">
+                <h4 class="form-control-label" jhiTranslate="innapcitasApp.cita.paciente">Paciente</h4>
+                <div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <label class="form-control-label" jhiTranslate="settings.form.firstname">Nombre</label>
+                            <input disabled type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
+                                   [(ngModel)]="evolucionPaciente.cita.paciente.firstName" minlength=1 maxlength=50 #firstNameInput="ngModel" required>
+                        </div>
+                        <div class="col-sm">
+                            <label class="form-control-label" jhiTranslate="settings.form.lastname">Apellido</label>
+                            <input disabled type="text" class="form-control" id="lastName" name="lastName"
+                                   [(ngModel)]="evolucionPaciente.cita.paciente.lastName" minlength=1 maxlength=50 #lastNameInput="ngModel" required>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <label class="form-control-label" jhiTranslate="settings.form.telefono">Telefono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="{{'settings.form.telefono.placeholder' | translate}}"
+                                   [(ngModel)]="evolucionPaciente.cita.paciente.telefono" #telefonoInput="ngModel" readonly>
+                        </div>
+                        <div class="col-sm" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO']">
+                            <label class="form-control-label" jhiTranslate="settings.form.numeroHistoria">Numero Historia</label>
+                            <input type="text" class="form-control" id="numeroHistoria" name="numeroHistoria" placeholder="{{'settings.form.numeroHistoria.placeholder' | translate}}"
+                                   [(ngModel)]="evolucionPaciente.cita.paciente.numeroHistoria" #numeroHistoriaInput="ngModel" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <jhi-alert></jhi-alert>
+            <jhi-alert-error></jhi-alert-error>
+
+            <h2 *ngIf="evolucionesAnteriores" jhiTranslate="innapcitasApp.evolucionPaciente.home.informeMedicoAnteriores">Create or edit a Evolucion Paciente</h2>
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <div class="" *ngFor="let evo of evolucionesAnteriores ;trackBy: trackId">
+                <br>
+                <h3 (click)="evo.mostrar = !evo.mostrar" style="background-color: #e8e8e8; padding: 15px; border-radius: 10px; cursor: pointer;"><fa-icon *ngIf="!evo.mostrar" [icon]="'chevron-right'"></fa-icon><fa-icon *ngIf="evo.mostrar" [icon]="'chevron-down'"></fa-icon> <span jhiTranslate="innapcitasApp.evolucionPaciente.home.informeMedico">Evolucion paciente</span> anterior {{evo.id}} {{evo.fecha | date:'d MMM y h:mm a'}} </h3>
+
+                <div *ngIf="evo.mostrar">
+                    <div class="form-group">
+                        <table><tr><td><h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.informacionRelevante" for="field_informacionRelevante">Informacion Relevante</h4></td><td>&nbsp;</td><td><button type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'informacionRelevante')" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                        <div style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;" [innerHTML]="evo.informacionRelevante"></div>
+                    </div>
+                    <h4>Signos Vitales</h4>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.fecha" for="field_fecha">Fecha</label>
+                        <div class="d-flex">
+                            <input readonly id="anterior_field_fecha" type="datetime-local" class="form-control" name="fecha" [(ngModel)]="evo.fecha" placeholder="YYYY-MM-DD HH:mm"
+                            />
+                            <span class="input-group-append">
+                                    </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.tAAcostada" for="field_tAAcostada">T A Acostada</label>
+                        <input readonly type="text" class="form-control" name="tAAcostada" id="anterior_field_tAAcostada"
+                               [(ngModel)]="evo.tAAcostada" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.tASentada" for="field_tASentada">T A Sentada</label>
+                        <input readonly type="text" class="form-control" name="tASentada" id="anterior_field_tASentada"
+                               [(ngModel)]="evo.tASentada" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.tAParada" for="field_tAParada">T A Parada</label>
+                        <input readonly type="text" class="form-control" name="tAParada" id="anterior_field_tAParada"
+                               [(ngModel)]="evo.tAParada" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.peso" for="field_peso">Peso</label>
+                        <input readonly (change)="calcularImc()" type="text" class="form-control" name="peso" id="anterior_field_peso"
+                               [(ngModel)]="evo.peso" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.talla" for="field_talla">Talla</label>
+                        <input readonly (change)="calcularImc()" type="text" class="form-control" name="talla" id="anterior_field_talla"
+                               [(ngModel)]="evo.talla" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.imc" for="field_imc">Imc</label>
+                        <input readonly type="text" class="form-control" name="imc" id="anterior_field_imc"
+                               [(ngModel)]="evo.imc" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.frecuenciaCardiaca" for="field_frecuenciaCardiaca">Frecuencia Cardiaca</label>
+                        <input readonly type="text" class="form-control" name="frecuenciaCardiaca" id="anterior_field_frecuenciaCardiaca"
+                               [(ngModel)]="evo.frecuenciaCardiaca" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.frecuenciaRespiratoria" for="field_frecuenciaRespiratoria">Frecuencia Respiratoria</label>
+                        <input readonly type="text" class="form-control" name="frecuenciaRespiratoria" id="anterior_field_frecuenciaRespiratoria"
+                               [(ngModel)]="evo.frecuenciaRespiratoria" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.firma" for="field_firma">Firma</label>
+                        <input readonly type="text" class="form-control" name="firma" id="anterior_field_firma"
+                               [(ngModel)]="evo.firma" />
+                    </div>
+                    <div class="form-group">
+                        <table><tr><td><h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.nuevosSintomas" for="field_informacionRelevante">Nuevos Sintomas</h4></td><td>&nbsp;</td><td><button type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'nuevosSintomas')" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                        <div style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;" [innerHTML]="evo.nuevosSintomas"></div>
+                    </div>
+                    <h5>Lateralidad</h5>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadMano" for="field_lateralidadMano">Lateralidad Mano</label>
+                        <select disabled class="form-control" name="lateralidadMano" id="anterior_field_lateralidadMano"
+                                [(ngModel)]="evo.lateralidadMano">
+                            <option value="Derecha">Derecha</option>
+                            <option value="Izquierda">Izquierda</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadPierna" for="field_lateralidadPierna">Lateralidad Pierna</label>
+                        <select disabled class="form-control" name="lateralidadPierna" id="anterior_field_lateralidadPierna"
+                                [(ngModel)]="evo.lateralidadPierna" >
+                            <option value="Derecha">Derecha</option>
+                            <option value="Izquierda">Izquierda</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadOjo" for="field_lateralidadOjo">Lateralidad Ojo</label>
+                        <select disabled class="form-control" name="lateralidadOjo" id="anterior_field_lateralidadOjo"
+                                [(ngModel)]="evo.lateralidadOjo" >
+                            <option value="Derecho">Derecho</option>
+                            <option value="Izquierdo">Izquierdo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadOido" for="field_lateralidadOido">Lateralidad Oido</label>
+                        <select disabled class="form-control" name="lateralidadOido" id="anterior_field_lateralidadOido"
+                                [(ngModel)]="evo.lateralidadOido" >
+                            <option value="Derecho">Derecho</option>
+                            <option value="Izquierdo">Izquierdo</option>
+                        </select>
+                    </div>
+                    <h4>Examen Funcional y Físico</h4>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenPiel" for="field_examenPiel">Examen Piel</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenPiel')" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenPiel" id="anterior_field_examenPiel"
+                               [(ngModel)]="evo.examenPiel" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenCabeza" for="field_examenCabeza">Examen Cabeza</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenCabeza" id="anterior_field_examenCabeza"
+                               [(ngModel)]="evo.examenCabeza" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenOjos" for="field_examenOjos">Examen Ojos</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenOjos" id="anterior_field_examenOjos"
+                               [(ngModel)]="evo.examenOjos" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenOrl" for="field_examenOrl">Examen Orl</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenOrl" id="anterior_field_examenOrl"
+                               [(ngModel)]="evo.examenOrl" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenCuello" for="field_examenCuello">Examen Cuello</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenCuello" id="anterior_field_examenCuello"
+                               [(ngModel)]="evo.examenCuello" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenCardiovascular" for="field_examenCardiovascular">Examen Cardiovascular</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenCardiovascular" id="anterior_field_examenCardiovascular"
+                               [(ngModel)]="evo.examenCardiovascular" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenPulmonar" for="field_examenPulmonar">Examen Pulmonar</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenPulmonar" id="anterior_field_examenPulmonar"
+                               [(ngModel)]="evo.examenPulmonar" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenAbdomen" for="field_examenAbdomen">Examen Abdomen</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenAbdomen" id="anterior_field_examenAbdomen"
+                               [(ngModel)]="evo.examenAbdomen" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenGenitourinario" for="field_examenGenitourinario">Examen Genitourinario</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenGenitourinario" id="anterior_field_examenGenitourinario"
+                               [(ngModel)]="evo.examenGenitourinario" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenNeurologico" for="field_examenNeurologico">Examen Neurologico</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenNeurologico" id="anterior_field_examenNeurologico"
+                               [(ngModel)]="evo.examenNeurologico" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenArticular" for="field_examenArticular">Examen Articular</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenArticular" id="anterior_field_examenArticular"
+                               [(ngModel)]="evo.examenArticular" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenNeuromuscular" for="field_examenNeuromuscular">Examen Neuromuscular</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenNeuromuscular" id="anterior_field_examenNeuromuscular"
+                               [(ngModel)]="evo.examenNeuromuscular" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenMental" for="field_examenMental">Examen Mental</label>
+                        &nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary float-right" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                        <input readonly type="text" class="form-control" name="examenMental" id="anterior_field_examenMental"
+                               [(ngModel)]="evo.examenMental" />
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <h3>Exámenes Complementarios:</h3>
+                        </div>
+
+                    </div>
+
+
+
+                    <div *ngFor="let examenComplementario of evo.examenesComplementarios; let i = index"  class="carta-gris">
+                        <table style="width:100%">
+                            <tr>
+                                <td  style="width:45%">
+                                    <h4><b><fa-icon [icon]="'book'"></fa-icon> Examen {{i + 1}}</b></h4>
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td  style="width:45%; text-align: right;">
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="innapcitasApp.examenComplementario.descripcion">Descripcion</label>
+                                <input readonly type="text" class="form-control" name="evo.examenesComplementarios[{{i}}].descripcion"
+                                       [(ngModel)]="examenComplementario.descripcion" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="innapcitasApp.examenComplementario.archivo" for="field_archivo">Archivo</label>
+                                <div>
+                                    <div *ngIf="examenComplementario.archivoContentType" class="form-text text-danger clearfix">
+                                        <a class="pull-left" (click)="openFile(examenComplementario.archivoContentType, examenComplementario)" jhiTranslate="entity.action.open">open</a><br>
+                                        <span class="pull-left">{{examenComplementario.archivoContentType}}</span>
+                                        <button type="button" (click)="examenComplementario.archivo=null;examenComplementario.archivoContentType=null;"
+                                                class="btn btn-secondary btn-xs pull-right">
+                                            <fa-icon [icon]="'times'"></fa-icon>
+                                        </button>
+                                    </div>
+                                    <input readonly type="file" id="anterior_file_archivo" (change)="setFileData($event, examenComplementario, 'archivo', false)" jhiTranslate="entity.action.addblob"/>
+                                </div>
+                                <input readonly type="hidden" class="form-control" name="evo.examenesComplementarios[{{i}}].archivo" id="anterior_field_archivo"
+                                       [(ngModel)]="examenComplementario.archivo" />
+                                <input readonly type="hidden" class="form-control" name="evo.examenesComplementarios[{{i}}].archivoContentType" id="anterior_field_archivoContentType"
+                                       [(ngModel)]="examenComplementario.archivoContentType" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <div class="form-group">
+                        <table><tr><td><h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.impresionesDiagnosticas" for="field_impresionesDiagnosticas">Impresiones Diagnosticas</h4></td><td>&nbsp;</td><td><button type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'impresionesDiagnosticas')" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                        <div style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;"
+                             [innerHTML]="evo.impresionesDiagnosticas"></div>
+                    </div>
+                    <h3 jhiTranslate="innapcitasApp.evolucionPaciente.planes">Planes</h3>
+
+                    <br/>
+
+                    <div class="form-group">
+                        <table><tr><td><h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.recomendaciones" for="field_recomendaciones">Recomendaciones</h4></td><td>&nbsp;</td><td><button type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'recomendaciones')" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                        <div style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;"
+                             [innerHTML]="evo.recomendaciones"></div>
+                    </div>
+                    <div class="form-group">
+                        <table><tr><td><label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.recomendacionesGenerales">Recomendaciones Generales</label></td><td>&nbsp;</td><td><button type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'recomendacionesGenerales')" *ngIf="showDots"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                        <div style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;"
+                             [innerHTML]="evo.recomendacionesGenerales"></div>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.proximaConsulta" for="field_proximaConsulta">Proxima Consulta</label>
+                        <div class="input-group">
+                            <input readonly id="anterior_field_proximaConsulta" type="text" class="form-control" name="proximaConsulta" ngbDatepicker  #proximaConsultaDp="ngbDatepicker" [(ngModel)]="evo.proximaConsulta"
+                            />
+                            <!--<span class="input-group-append">
+                                <button type="button" class="btn btn-secondary" (click)="proximaConsultaDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                            </span>-->
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <h3>Lista de Récipes</h3><br/>
+                    <div class="form-group">
+                        <div *ngFor="let recipe of recipes; let i = index">
+                            <div class="row">
+                                <div class="col">
+                                    <h4 class="form-control-label" for="field_recipe">Recipe {{i + 1}}</h4>
+                                </div>
+                                <div class="col">
+                                    <!--                                            <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="getRecipeFile(i)" type="button" class="btn btn-success float-right">
+                                                                                    <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span > Imprimir Récipe</span>
+                                                                                </button>-->
+                                </div>
+                            </div>
+                            <div class="carta-gris" style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;" [innerHTML]="recipe"></div>
+                            <br/>
+                        </div>
+                        <!--<textarea rows="8" cols="50" type="text" class="form-control" name="recipe" id="anterior_field_recipe"
+                               [(ngModel)]="evo.recipe"></textarea>-->
+                    </div>
+
+                    <h3>Lista de Indicaciones</h3><br/>
+                    <div class="form-group">
+                        <div *ngFor="let recipe of indicaciones; let i = index">
+                            <div class="row">
+                                <div class="col">
+                                    <h4 class="form-control-label" for="field_indicaciones">Indicaciones {{i + 1}}</h4>
+                                </div>
+                                <div class="col">
+                                    <!-- <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="getIndicacionesFile(i)" type="button" class="btn btn-success float-right">
+                                         <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span > Imprimir Indicaciones</span>
+                                     </button>-->
+                                </div>
+                            </div>
+                            <div class="carta-gris" style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;" [innerHTML]="recipe"></div>
+                            <br/>
+                        </div>
+                        <!--<textarea rows="8" cols="50" type="text" class="form-control" name="indicaciones" id="anterior_field_indicaciones"
+                               [(ngModel)]="evo.indicaciones"></textarea>-->
+                    </div>
+                    <!--<button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO']" [routerLink]="['/evolucion-paciente', evo.id, 'edit']" type="button" class="btn btn-secondary botoncillo-derecho botoncillo-izquierdo">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span class="d-none d-md-inline"> Editar Informe</span>
+                    </button>-->
+                </div>
+
+            </div>
+
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+            <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+            <hr>
+            <div>
+                <h2 id="jhi-evolucion-paciente-heading" jhiTranslate="innapcitasApp.evolucionPaciente.home.informeMedico">Create or edit a Evolucion Paciente</h2>
+
+                <div class="form-group" [hidden]="!evolucionPaciente.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                           [(ngModel)]="evolucionPaciente.id" readonly />
+                </div>
+
+                <div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.cita">Cita</label>
+                            <input disabled type="text" class="form-control" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
+                                   [(ngModel)]="evolucionPaciente.cita.id" minlength=1 maxlength=50 #firstNameInput="ngModel" required>
+                        </div>
+                        <div class="col-sm">
+                            <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.fechaCita">Fecha Cita</label>
+                            <input disabled type="text" class="form-control" name="lastName"
+                                   [(ngModel)]="evolucionPaciente.cita.fecha" minlength=1 maxlength=50 #lastNameInput="ngModel" required>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.notas" for="field_motica">Cita</label>
+                    <input type="text" class="form-control" id="field_motica" name="field_motivoConsulta"
+                           [(ngModel)]="evolucionPaciente.cita.notas" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.tipoConsulta" for="field_motica">Tipo de Consulta</label>
+                    <input type="text" class="form-control" id="field_tipoConsulta" name="field_tipoConsulta"
+                           [(ngModel)]="evolucionPaciente.cita.tipoConsulta.nombre" readonly />
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                    <table><tr><td><h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.informacionRelevante" for="field_informacionRelevante">Informacion Relevante</h4></td><td>&nbsp;</td><td><button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'informacionRelevante')"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                    <editor name="informacionRelevante" id="field_informacionRelevante"
+                            [(ngModel)]="evolucionPaciente.informacionRelevante"
+                            apiKey="5ymwv5nk2b0x6mtw4cyg4u74g2jnyuh6cf5uvfbj7tq1nwzx"
+                            [init]="{
+                             height: 250,
+                             menubar: false,
+                             plugins: [
+                                'advlist autolink lists link image charmap print',
+                                'preview anchor searchreplace visualblocks code',
+                                'fullscreen insertdatetime media table paste',
+                                'help wordcount'
+                             ],
+                             contextmenu: 'paste | link image inserttable | cell row column deletetable',
+                             browser_spellcheck: true,
+                             toolbar:
+                               'undo redo | formatselect | bold italic backcolor | \
+                               alignleft aligncenter alignright alignjustify | \
+                               bullist numlist outdent indent | removeformat | table media code'
+                           }"
+                    ></editor>
+                </div>
+                <h4>Signos Vitales</h4>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.fecha" for="field_fecha">Fecha</label>
+                    <div class="d-flex">
+                        <input id="field_fecha" type="datetime-local" class="form-control" name="fecha" [(ngModel)]="fecha" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="showDate()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <span *ngIf="datePop">
+                        <dl-date-time-picker
+                            startView="day"
+                            maxView="year"
+                            minView="minute"
+                            minuteStep="5"
+                            [(ngModel)]="fecha"
+                            name="fecha"
+                        >
+                        </dl-date-time-picker>
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.tAAcostada" for="field_tAAcostada">T A Acostada</label>
+                    <input type="text" class="form-control" name="tAAcostada" id="field_tAAcostada"
+                           [(ngModel)]="evolucionPaciente.tAAcostada" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.tASentada" for="field_tASentada">T A Sentada</label>
+                    <input type="text" class="form-control" name="tASentada" id="field_tASentada"
+                           [(ngModel)]="evolucionPaciente.tASentada" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.tAParada" for="field_tAParada">T A Parada</label>
+                    <input type="text" class="form-control" name="tAParada" id="field_tAParada"
+                           [(ngModel)]="evolucionPaciente.tAParada" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.peso" for="field_peso">Peso</label>
+                    <input (change)="calcularImc()" type="text" class="form-control" name="peso" id="field_peso"
+                           [(ngModel)]="evolucionPaciente.peso" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.talla" for="field_talla">Talla</label>
+                    <input (change)="calcularImc()" type="text" class="form-control" name="talla" id="field_talla"
+                           [(ngModel)]="evolucionPaciente.talla" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.imc" for="field_imc">Imc</label>
+                    <input type="text" class="form-control" name="imc" id="field_imc"
+                           [(ngModel)]="evolucionPaciente.imc" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.frecuenciaCardiaca" for="field_frecuenciaCardiaca">Frecuencia Cardiaca</label>
+                    <input type="text" class="form-control" name="frecuenciaCardiaca" id="field_frecuenciaCardiaca"
+                           [(ngModel)]="evolucionPaciente.frecuenciaCardiaca" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.frecuenciaRespiratoria" for="field_frecuenciaRespiratoria">Frecuencia Respiratoria</label>
+                    <input type="text" class="form-control" name="frecuenciaRespiratoria" id="field_frecuenciaRespiratoria"
+                           [(ngModel)]="evolucionPaciente.frecuenciaRespiratoria" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.firma" for="field_firma">Firma</label>
+                    <input type="text" class="form-control" name="firma" id="field_firma"
+                           [(ngModel)]="evolucionPaciente.firma" />
+                </div>
+                <div class="form-group">
+                    <table><tr><td><h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.nuevosSintomas" for="field_informacionRelevante">Nuevos Sintomas</h4></td><td>&nbsp;</td><td><button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'nuevosSintomas')"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                    <editor name="nuevosSintomas" id="field_nuevosSintomas"
+                            [(ngModel)]="evolucionPaciente.nuevosSintomas"
+                            apiKey="5ymwv5nk2b0x6mtw4cyg4u74g2jnyuh6cf5uvfbj7tq1nwzx"
+                            [init]="{
+                             height: 250,
+                             menubar: false,
+                             plugins: [
+                                'advlist autolink lists link image charmap print',
+                                'preview anchor searchreplace visualblocks code',
+                                'fullscreen insertdatetime media table paste',
+                                'help wordcount'
+                             ],
+                             contextmenu: 'paste | link image inserttable | cell row column deletetable',
+                             browser_spellcheck: true,
+                             toolbar:
+                               'undo redo | formatselect | bold italic backcolor | \
+                               alignleft aligncenter alignright alignjustify | \
+                               bullist numlist outdent indent | removeformat | table media code'
+                           }"
+                    ></editor>
+                </div>
+                <h5>Lateralidad</h5>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadMano" for="field_lateralidadMano">Lateralidad Mano</label>
+                    <select class="form-control" name="lateralidadMano" id="field_lateralidadMano"
+                            [(ngModel)]="evolucionPaciente.lateralidadMano">
+                        <option value="Derecha">Derecha</option>
+                        <option value="Izquierda">Izquierda</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadPierna" for="field_lateralidadPierna">Lateralidad Pierna</label>
+                    <select class="form-control" name="lateralidadPierna" id="field_lateralidadPierna"
+                            [(ngModel)]="evolucionPaciente.lateralidadPierna" >
+                        <option value="Derecha">Derecha</option>
+                        <option value="Izquierda">Izquierda</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadOjo" for="field_lateralidadOjo">Lateralidad Ojo</label>
+                    <select class="form-control" name="lateralidadOjo" id="field_lateralidadOjo"
+                            [(ngModel)]="evolucionPaciente.lateralidadOjo" >
+                        <option value="Derecho">Derecho</option>
+                        <option value="Izquierdo">Izquierdo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadOido" for="field_lateralidadOido">Lateralidad Oido</label>
+                    <select class="form-control" name="lateralidadOido" id="field_lateralidadOido"
+                            [(ngModel)]="evolucionPaciente.lateralidadOido" >
+                        <option value="Derecho">Derecho</option>
+                        <option value="Izquierdo">Izquierdo</option>
+                    </select>
+                </div>
+                <h4>Examen Funcional y Físico</h4>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenPiel" for="field_examenPiel">Examen Piel</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenPiel')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenPiel" id="field_examenPiel"
+                           [(ngModel)]="evolucionPaciente.examenPiel" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenCabeza" for="field_examenCabeza">Examen Cabeza</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenCabeza')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenCabeza" id="field_examenCabeza"
+                           [(ngModel)]="evolucionPaciente.examenCabeza" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenOjos" for="field_examenOjos">Examen Ojos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenOjos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenOjos" id="field_examenOjos"
+                           [(ngModel)]="evolucionPaciente.examenOjos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenOrl" for="field_examenOrl">Examen Orl</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenOrl')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenOrl" id="field_examenOrl"
+                           [(ngModel)]="evolucionPaciente.examenOrl" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenCuello" for="field_examenCuello">Examen Cuello</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenCuello')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenCuello" id="field_examenCuello"
+                           [(ngModel)]="evolucionPaciente.examenCuello" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenCardiovascular" for="field_examenCardiovascular">Examen Cardiovascular</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenCardiovascular')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenCardiovascular" id="field_examenCardiovascular"
+                           [(ngModel)]="evolucionPaciente.examenCardiovascular" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenPulmonar" for="field_examenPulmonar">Examen Pulmonar</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenPulmonar')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenPulmonar" id="field_examenPulmonar"
+                           [(ngModel)]="evolucionPaciente.examenPulmonar" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenAbdomen" for="field_examenAbdomen">Examen Abdomen</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenAbdomen')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenAbdomen" id="field_examenAbdomen"
+                           [(ngModel)]="evolucionPaciente.examenAbdomen" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenGenitourinario" for="field_examenGenitourinario">Examen Genitourinario</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenGenitourinario')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenGenitourinario" id="field_examenGenitourinario"
+                           [(ngModel)]="evolucionPaciente.examenGenitourinario" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenNeurologico" for="field_examenNeurologico">Examen Neurologico</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenNeurologico')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenNeurologico" id="field_examenNeurologico"
+                           [(ngModel)]="evolucionPaciente.examenNeurologico" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenArticular" for="field_examenArticular">Examen Articular</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenArticular')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenArticular" id="field_examenArticular"
+                           [(ngModel)]="evolucionPaciente.examenArticular" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenNeuromuscular" for="field_examenNeuromuscular">Examen Neuromuscular</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenNeuromuscular')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenNeuromuscular" id="field_examenNeuromuscular"
+                           [(ngModel)]="evolucionPaciente.examenNeuromuscular" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenMental" for="field_examenMental">Examen Mental</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'examenMental')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="examenMental" id="field_examenMental"
+                           [(ngModel)]="evolucionPaciente.examenMental" />
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h3>Exámenes Complementarios:</h3>
+                    </div>
+
+                </div>
+
+
+
+                <div *ngFor="let examenComplementario of evolucionPaciente.examenesComplementarios; let i = index"  class="carta-gris">
+                    <table style="width:100%">
+                        <tr>
+                            <td  style="width:45%">
+                                <h4><b><fa-icon [icon]="'book'"></fa-icon> Examen {{i + 1}}</b></h4>
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td  style="width:45%; text-align: right;">
+                                <div class="btn btn-danger" (click)="deleteFieldExamen(i)">
+                                    <span class="glyphicon glyphicon-remove-circle"></span>
+                                    <span class="hidden-xs">
+                                             <fa-icon [icon]="'times'"></fa-icon> Eliminar Examen
+                                        </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="innapcitasApp.examenComplementario.descripcion">Descripcion</label>
+                            <input type="text" class="form-control" name="evolucionPaciente.examenesComplementarios[{{i}}].descripcion"
+                                   [(ngModel)]="examenComplementario.descripcion" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="innapcitasApp.examenComplementario.archivo" for="field_archivo">Archivo</label>
+                            <div>
+                                <div *ngIf="examenComplementario.archivoContentType" class="form-text text-danger clearfix">
+                                    <a class="pull-left" (click)="openFile(examenComplementario.archivoContentType, examenComplementario)" jhiTranslate="entity.action.open">open</a><br>
+                                    <span class="pull-left">{{examenComplementario.archivoContentType}}</span>
+                                    <button type="button" (click)="examenComplementario.archivo=null;examenComplementario.archivoContentType=null;"
+                                            class="btn btn-secondary btn-xs pull-right">
+                                        <fa-icon [icon]="'times'"></fa-icon>
+                                    </button>
+                                </div>
+                                <input type="file" id="file_archivo" (change)="setFileData($event, examenComplementario, 'archivo', false)" jhiTranslate="entity.action.addblob"/>
+                            </div>
+                            <input type="hidden" class="form-control" name="evolucionPaciente.examenesComplementarios[{{i}}].archivo" id="field_archivo"
+                                   [(ngModel)]="examenComplementario.archivo" />
+                            <input type="hidden" class="form-control" name="evolucionPaciente.examenesComplementarios[{{i}}].archivoContentType" id="field_archivoContentType"
+                                   [(ngModel)]="examenComplementario.archivoContentType" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-auto">
+                    <div class="btn btn-success" (click)="addFieldExamen()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="hidden-xs">
+                                    + Agregar Examen
+                                </span>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="form-group">
+                    <table><tr><td><h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.impresionesDiagnosticas" for="field_impresionesDiagnosticas">Impresiones Diagnosticas</h4></td><td>&nbsp;</td><td><button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'impresionesDiagnosticas')"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                    <editor name="impresionesDiagnosticas" id="field_impresionesDiagnosticas"
+                            [(ngModel)]="evolucionPaciente.impresionesDiagnosticas"
+                            apiKey="5ymwv5nk2b0x6mtw4cyg4u74g2jnyuh6cf5uvfbj7tq1nwzx"
+                            [init]="{
+                             height: 250,
+                             menubar: false,
+                             plugins: [
+                                'advlist autolink lists link image charmap print',
+                                'preview anchor searchreplace visualblocks code',
+                                'fullscreen insertdatetime media table paste',
+                                'help wordcount'
+                             ],
+                             contextmenu: 'paste | link image inserttable | cell row column deletetable',
+                             browser_spellcheck: true,
+                             toolbar:
+                               'undo redo | formatselect | bold italic backcolor | \
+                               alignleft aligncenter alignright alignjustify | \
+                               bullist numlist outdent indent | removeformat | table media code'
+                           }"
+                    ></editor>
+                </div>
+                <h3 jhiTranslate="innapcitasApp.evolucionPaciente.planes">Planes</h3>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.tratamiento" for="field_tratamiento">Tratamiento</h4>
+                        </div>
+
+                    </div>
+
+                    <div *ngFor="let medicamento of evolucionPaciente.medicamentos; let i = index" class="carta-gris">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:45%">
+                                    <h4><b><fa-icon [icon]="'heart'"></fa-icon>  Medicamento {{i + 1}}</b></h4>
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td  style="width:45%; text-align: right;">
+                                    <div class="btn btn-danger" (click)="deleteFieldMedicamento(i)">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        <span class="hidden-xs">
+                                             <fa-icon [icon]="'times'"></fa-icon> Eliminar Medicamento
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="form-control-label">Nombre Medicamento</label>
+                                <input type="text" (change)="updateRecipes()" class="form-control" name="evolucionPaciente.medicamentos[{{i}}].nombre"
+                                       [(ngModel)]="evolucionPaciente.medicamentos[i].nombre" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Indicación</label>
+                                <input type="text" (change)="updateRecipes()" class="form-control" name="evolucionPaciente.medicamentos[{{i}}].indicacion"
+                                       [(ngModel)]="evolucionPaciente.medicamentos[i].indicacion" />
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" (change)="updateRecipes()" name="evolucionPaciente.medicamentos[{{i}}].esPsicotropico"
+                                       [(ngModel)]="evolucionPaciente.medicamentos[i].esPsicotropico" /> <label class="form-control-label">Es Psicotrópico</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-auto">
+                    <div class="btn btn-success" (click)="addFieldMedicamento()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="hidden-xs">
+                                    + Agregar Medicamento
+                                </span>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-group">
+                    <table><tr><td><h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.recomendaciones" for="field_recomendaciones">Recomendaciones</h4></td><td>&nbsp;</td><td><button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'recomendaciones')"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                    <editor name="recomendaciones" id="field_recomendaciones"
+                            [(ngModel)]="evolucionPaciente.recomendaciones"
+                            (ngModelChange)="updateRecipes()"
+                            apiKey="5ymwv5nk2b0x6mtw4cyg4u74g2jnyuh6cf5uvfbj7tq1nwzx"
+                            [init]="{
+                             height: 250,
+                             menubar: false,
+                             plugins: [
+                                'advlist autolink lists link image charmap print',
+                                'preview anchor searchreplace visualblocks code',
+                                'fullscreen insertdatetime media table paste',
+                                'help wordcount'
+                             ],
+                             contextmenu: 'paste | link image inserttable | cell row column deletetable',
+                             browser_spellcheck: true,
+                             toolbar:
+                               'undo redo | formatselect | bold italic backcolor | \
+                               alignleft aligncenter alignright alignjustify | \
+                               bullist numlist outdent indent | removeformat | table media code'
+                           }"
+                    ></editor>
+                </div>
+                <div class="form-group">
+                    <table><tr><td><label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.recomendacionesGenerales">Recomendaciones Generales</label></td><td>&nbsp;</td><td><button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(evolucionPaciente,'recomendacionesGenerales')"><fa-icon [icon]="'comment-dots'"></fa-icon></button></td></tr></table>
+                    <editor name="recomendacionesGenerales" id="field_recomendacionesGenerales"
+                            [(ngModel)]="evolucionPaciente.recomendacionesGenerales"
+                            (ngModelChange)="updateRecipes()"
+                            apiKey="5ymwv5nk2b0x6mtw4cyg4u74g2jnyuh6cf5uvfbj7tq1nwzx"
+                            [init]="{
+                             height: 250,
+                             menubar: false,
+                             plugins: [
+                                'advlist autolink lists link image charmap print',
+                                'preview anchor searchreplace visualblocks code',
+                                'fullscreen insertdatetime media table paste',
+                                'help wordcount'
+                             ],
+                             contextmenu: 'paste | link image inserttable | cell row column deletetable',
+                             browser_spellcheck: true,
+                             toolbar:
+                               'undo redo | formatselect | bold italic backcolor | \
+                               alignleft aligncenter alignright alignjustify | \
+                               bullist numlist outdent indent | removeformat | table media code'
+                           }"
+                    ></editor>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.examenesIndicados" for="field_tratamiento">Examenes Indicados</h4>
+                        </div>
+
+                    </div>
+
+                    <div *ngFor="let examenIndicado of evolucionPaciente.examenesIndicadosList; let i = index" class="carta-gris">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:45%">
+                                    <h4><b><fa-icon [icon]="'list'"></fa-icon>  Examen Indicado {{i + 1}}</b></h4>
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td  style="width:45%; text-align: right;">
+                                    <div class="btn btn-danger" (click)="deleteFieldExamenIndicado(i)">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        <span class="hidden-xs">
+                                             <fa-icon [icon]="'times'"></fa-icon> Eliminar Examen Indicado
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="form-control-label">Tipo de Examen</label>
+                                <input type="text" (change)="updateRecipes()" class="form-control" name="evolucionPaciente.examenesIndicadosList[{{i}}].examen"
+                                       [(ngModel)]="evolucionPaciente.examenesIndicadosList[i].examen" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Referencia</label>
+                                <input type="text" (change)="updateRecipes()" class="form-control" name="evolucionPaciente.examenesIndicadosList[{{i}}].referencia"
+                                       [(ngModel)]="evolucionPaciente.examenesIndicadosList[i].referencia" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-auto">
+                        <div class="btn btn-success" (click)="addFieldExamenIndicado()">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="hidden-xs">
+                                    + Agregar Examen Indicado
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.evolucionPaciente.proximaConsulta" for="field_proximaConsulta">Proxima Consulta</label>
+                    <div class="input-group">
+                        <input id="field_proximaConsulta" type="text" class="form-control" name="proximaConsulta" ngbDatepicker  #proximaConsultaDp="ngbDatepicker" [(ngModel)]="evolucionPaciente.proximaConsulta"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="proximaConsultaDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <br/>
+
+                <h3>Lista de Récipes</h3><br/>
+                <div class="form-group">
+                    <div *ngFor="let recipe of recipes; let i = index">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="form-control-label" for="field_recipe">Recipe {{i + 1}}</h4>
+                            </div>
+                            <div class="col">
+                                <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="getRecipeFile(i)" type="button" class="btn btn-success float-right">
+                                    <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span > Imprimir Récipe</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carta-gris" style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;" [innerHTML]="recipe"></div>
+                        <br/>
+                    </div>
+                    <!--<textarea rows="8" cols="50" type="text" class="form-control" name="recipe" id="field_recipe"
+                           [(ngModel)]="evolucionPaciente.recipe"></textarea>-->
+                </div>
+
+                <h3>Lista de Indicaciones</h3><br/>
+                <div class="form-group">
+                    <div *ngFor="let recipe of indicaciones; let i = index">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="form-control-label" for="field_indicaciones">Indicaciones {{i + 1}}</h4>
+                            </div>
+                            <div class="col">
+                                <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="getIndicacionesFile(i)" type="button" class="btn btn-success float-right">
+                                    <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span > Imprimir Indicaciones</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carta-gris" style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;" [innerHTML]="recipe"></div>
+                        <br/>
+                    </div>
+                    <!--<textarea rows="8" cols="50" type="text" class="form-control" name="indicaciones" id="field_indicaciones"
+                           [(ngModel)]="evolucionPaciente.indicaciones"></textarea>-->
+                </div>
+
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                <button *ngIf="evolucionPaciente.cita.estatusCita?.id == 1 || evolucionPaciente.cita.estatusCita?.id == 4" (click)="updateEstatus(evolucionPaciente.cita, true)" type="button" class="btn btn-success">
+                    <fa-icon [icon]="'check'"></fa-icon>&nbsp;<span class="d-none d-md-inline"> Finalizar Cita</span>
+                </button>
+                <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="getInformeFile()" type="button" class="btn btn-success float-right">
+                    <fa-icon [icon]="'heart'"></fa-icon>&nbsp;<span > Imprimir Informe</span>
+                </button>
+                <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="getEvolucionFile()" type="button" class="btn btn-secondary float-right">
+                    <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span > Imprimir Evolución</span>
+                </button>
+                <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="sendEvolucionFile()" type="button" class="btn btn-info float-right">
+                    <fa-icon [icon]="'envelope'"></fa-icon>&nbsp;<span > Enviar Evolución</span>
+                </button>
+                <button *jhiHasAnyAuthority="['ROLE_MEDICO','ROLE_ADMIN']" (click)="sendInformeFile()" type="button" class="btn btn-primary float-right">
+                    <fa-icon [icon]="'envelope'"></fa-icon>&nbsp;<span > Enviar Informe</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="plantillaInforme">
+            <h2><span jhiTranslate="innapcitasApp.plantillaInforme.detail.title">Plantilla Informe</span> {{plantillaInforme.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.plantillaInforme.nombre">Nombre</span></dt>
+                <dd>
+                    <span>{{plantillaInforme.nombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.plantillaInforme.texto">Texto</span></dt>
+                <dd>
+                    <span>{{plantillaInforme.texto}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.plantillaInforme.especialidad">Especialidad</span></dt>
+                <dd>
+                    <div *ngIf="plantillaInforme.especialidad">
+                        <a [routerLink]="['/especialidad', plantillaInforme.especialidad?.id, 'view']">{{plantillaInforme.especialidad?.especialidad}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/plantilla-informe', plantillaInforme.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

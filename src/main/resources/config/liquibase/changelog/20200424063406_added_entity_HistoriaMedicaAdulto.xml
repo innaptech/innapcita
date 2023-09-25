@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity HistoriaMedicaAdulto.
+    -->
+    <changeSet id="20200424063406-1" author="jhipster">
+        <createTable tableName="historia_medica_adulto">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="primer_nombre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="primer_apellido" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="email" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cedula" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="abuelos_viven" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edad_abuelos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero_abuelos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_abuelos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tios_viven" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edad_tios" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero_tios" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_tios" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="padre_vive" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edad_padre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero_padre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_padre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="madre_vive" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edad_madre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero_madre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_madre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="hermanos_viven" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edad_hermanos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero_hermanos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_hermanos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="esposo_vive" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edad_esposo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero_esposo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_esposo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="hijos_viven" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edad_hijos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero_hijos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_hijos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="hijas_viven" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edad_hijas" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero_hijas" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_hijas" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sarampion" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="renales" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="vertigos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cardiacos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dolor_de_cabeza" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lechina" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="alergias" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="diarreas" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="varices" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="hipertension_arterial" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="rubeola" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="neurologicos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="otorrinolaringologos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="catarros" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_mental" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="parotiditis" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sobrepeso" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="reumaticos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="infecciones" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="intervencion_quirurgica" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="parasitosis" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="epilepsia" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dermatologicos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pulmonares" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="trastornos_del_aprendizaje" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tiroides" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="asma" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dolor_de_columna" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tuberculosis" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="traumatismos_craneoencefalicos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="mareos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="desmayos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="muscular_o_fractura" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="intestinales" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_de_transmision_sexual" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="estomacales" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="higado" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="colesterol_trigliceridos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="desorden_menstrual" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="uso_de_metodo_anticonceptivo" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cuantos_embarazos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cuantos_abortos" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cuantos_hijos_viven" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="problemas_en_los_senos" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="ultima_menstruacion" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_y_ano_del_diagnostico_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tratamiento_indicado_o_intervencion_quirurgica_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_y_ano_del_diagnostico_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tratamiento_indicado_o_intervencion_quirurgica_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="enfermedad_y_ano_del_diagnostico_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tratamiento_indicado_o_intervencion_quirurgica_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="medicamento_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dosis_diaria_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="medicamento_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dosis_diaria_2" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="medicamento_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dosis_diaria_3" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="notas" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="paciente_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-especialidad-medico-heading" jhiTranslate="innapcitasApp.especialidadMedico.home.createOrEditLabel">Create or edit a Especialidad Medico</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!especialidadMedico.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="especialidadMedico.id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.especialidadMedico.medico">Medico</label>
+                    <ng-autocomplete
+                        [(ngModel)]="especialidadMedico.medico ? especialidadMedico.medico.email : especialidadMedico.medico"
+                        name="especialidadMedico.medico"
+                        [data]="users"
+                        [searchKeyword]="keyword2"
+                        (selected)='selectEventPaciente($event)'
+                        (inputChanged)='onChangeSearchUsers($event)'
+                        (inputFocused)='onFocused($event)'
+                        [itemTemplate]="itemTemplatePaciente"
+                        [notFoundTemplate]="notFoundTemplatePaciente">
+                    </ng-autocomplete>
+
+                    <ng-template #itemTemplatePaciente let-item>
+                        <a [innerHTML]="item.firstName + ' ' + item.lastName + ' - ' + item.email"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplatePaciente let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
+
+                    <input *ngIf="especialidadMedico.medico" type="text" class="form-control" name="medico"
+                           [(ngModel)]="especialidadMedico.medico.firstName + ' ' + especialidadMedico.medico.lastName + ' - ' + especialidadMedico.medico.email" readonly />
+                </div>
+                <div [hidden]="!(editForm.controls.medico?.dirty && editForm.controls.medico?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.medico?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.especialidadMedico.especialidad" for="field_especialidad">Especialidad</label>
+                    <select class="form-control" id="field_especialidad" name="especialidad" [(ngModel)]="especialidadMedico.especialidad"  required>
+                        <option *ngIf="!editForm.value.especialidad" [ngValue]="null" selected></option>
+                        <option [ngValue]="especialidadOption.id === especialidadMedico.especialidad?.id ? especialidadMedico.especialidad : especialidadOption" *ngFor="let especialidadOption of especialidads; trackBy: trackEspecialidadById">{{especialidadOption.especialidad}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.especialidad?.dirty && editForm.controls.especialidad?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.especialidad?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.especialidadMedico.montoHora" for="field_montoHora">Monto Hora</label>
+                    <input type="number" class="form-control" name="montoHora" id="field_montoHora"
+                        [(ngModel)]="especialidadMedico.montoHora" required/>
+                    <div [hidden]="!(editForm.controls.montoHora?.dirty && editForm.controls.montoHora?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.montoHora?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.montoHora?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.especialidadMedico.montoHoraOnline" for="field_montoHoraOnline">Monto Hora Online</label>
+                    <input type="number" class="form-control" name="montoHoraOnline" id="field_montoHoraOnline"
+                        [(ngModel)]="especialidadMedico.montoHoraOnline" required/>
+                    <div [hidden]="!(editForm.controls.montoHoraOnline?.dirty && editForm.controls.montoHoraOnline?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.montoHoraOnline?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.montoHoraOnline?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.especialidadMedico.descripcion" for="field_descripcion">Descripcion</label>
+                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                           [(ngModel)]="especialidadMedico.descripcion" />
+                </div>
+
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

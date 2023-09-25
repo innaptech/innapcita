@@ -1,0 +1,138 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="innapcitasApp.evolucionPaciente.home.title">Evolucion Pacientes</span>
+        <!--<button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-evolucion-paciente" [routerLink]="['/evolucion-paciente/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="innapcitasApp.evolucionPaciente.home.createLabel">
+            Create new Evolucion Paciente
+            </span>
+        </button>-->
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="evolucionPacientes">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fecha"><span jhiTranslate="innapcitasApp.evolucionPaciente.fecha">Fecha</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="peso"><span jhiTranslate="innapcitasApp.evolucionPaciente.peso">Peso</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tAAcostada"><span jhiTranslate="innapcitasApp.evolucionPaciente.tAAcostada">T A Acostada</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tASentada"><span jhiTranslate="innapcitasApp.evolucionPaciente.tASentada">T A Sentada</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tAParada"><span jhiTranslate="innapcitasApp.evolucionPaciente.tAParada">T A Parada</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="talla"><span jhiTranslate="innapcitasApp.evolucionPaciente.talla">Talla</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="imc"><span jhiTranslate="innapcitasApp.evolucionPaciente.imc">Imc</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="firma"><span jhiTranslate="innapcitasApp.evolucionPaciente.firma">Firma</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nuevosSintomas"><span jhiTranslate="innapcitasApp.evolucionPaciente.nuevosSintomas">Nuevos Sintomas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lateralidadMano"><span jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadMano">Lateralidad Mano</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lateralidadPierna"><span jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadPierna">Lateralidad Pierna</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lateralidadOjo"><span jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadOjo">Lateralidad Ojo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lateralidadOido"><span jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadOido">Lateralidad Oido</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenPiel"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenPiel">Examen Piel</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenCabeza"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenCabeza">Examen Cabeza</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenOjos"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenOjos">Examen Ojos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenOrl"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenOrl">Examen Orl</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenCuello"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenCuello">Examen Cuello</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenCardiovascular"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenCardiovascular">Examen Cardiovascular</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenPulmonar"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenPulmonar">Examen Pulmonar</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenAbdomen"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenAbdomen">Examen Abdomen</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenGenitourinario"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenGenitourinario">Examen Genitourinario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenNeurologico"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenNeurologico">Examen Neurologico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenArticular"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenArticular">Examen Articular</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenNeuromuscular"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenNeuromuscular">Examen Neuromuscular</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="impresionesDiagnosticas"><span jhiTranslate="innapcitasApp.evolucionPaciente.impresionesDiagnosticas">Impresiones Diagnosticas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tratamiento"><span jhiTranslate="innapcitasApp.evolucionPaciente.tratamiento">Tratamiento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="recomendaciones"><span jhiTranslate="innapcitasApp.evolucionPaciente.recomendaciones">Recomendaciones</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="proximaConsulta"><span jhiTranslate="innapcitasApp.evolucionPaciente.proximaConsulta">Proxima Consulta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="frecuenciaCardiaca"><span jhiTranslate="innapcitasApp.evolucionPaciente.frecuenciaCardiaca">Frecuencia Cardiaca</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="frecuenciaRespiratoria"><span jhiTranslate="innapcitasApp.evolucionPaciente.frecuenciaRespiratoria">Frecuencia Respiratoria</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="examenMental"><span jhiTranslate="innapcitasApp.evolucionPaciente.examenMental">Examen Mental</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="informacionRelevante"><span jhiTranslate="innapcitasApp.evolucionPaciente.informacionRelevante">Informacion Relevante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="recomendacionesGenerales"><span jhiTranslate="innapcitasApp.evolucionPaciente.recomendacionesGenerales">Recomendaciones Generales</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="recipe"><span jhiTranslate="innapcitasApp.evolucionPaciente.recipe">Recipe</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="indicaciones"><span jhiTranslate="innapcitasApp.evolucionPaciente.indicaciones">Indicaciones</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cita.id"><span jhiTranslate="innapcitasApp.evolucionPaciente.cita">Cita</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let evolucionPaciente of evolucionPacientes ;trackBy: trackId">
+                <td><a [routerLink]="['/evolucion-paciente', evolucionPaciente.id, 'view' ]">{{evolucionPaciente.id}}</a></td>
+                <td>{{evolucionPaciente.fecha | date:'medium'}}</td>
+                <td>{{evolucionPaciente.peso}}</td>
+                <td>{{evolucionPaciente.tAAcostada}}</td>
+                <td>{{evolucionPaciente.tASentada}}</td>
+                <td>{{evolucionPaciente.tAParada}}</td>
+                <td>{{evolucionPaciente.talla}}</td>
+                <td>{{evolucionPaciente.imc}}</td>
+                <td>{{evolucionPaciente.firma}}</td>
+                <td>{{evolucionPaciente.nuevosSintomas}}</td>
+                <td>{{evolucionPaciente.lateralidadMano}}</td>
+                <td>{{evolucionPaciente.lateralidadPierna}}</td>
+                <td>{{evolucionPaciente.lateralidadOjo}}</td>
+                <td>{{evolucionPaciente.lateralidadOido}}</td>
+                <td>{{evolucionPaciente.examenPiel}}</td>
+                <td>{{evolucionPaciente.examenCabeza}}</td>
+                <td>{{evolucionPaciente.examenOjos}}</td>
+                <td>{{evolucionPaciente.examenOrl}}</td>
+                <td>{{evolucionPaciente.examenCuello}}</td>
+                <td>{{evolucionPaciente.examenCardiovascular}}</td>
+                <td>{{evolucionPaciente.examenPulmonar}}</td>
+                <td>{{evolucionPaciente.examenAbdomen}}</td>
+                <td>{{evolucionPaciente.examenGenitourinario}}</td>
+                <td>{{evolucionPaciente.examenNeurologico}}</td>
+                <td>{{evolucionPaciente.examenArticular}}</td>
+                <td>{{evolucionPaciente.examenNeuromuscular}}</td>
+                <td>{{evolucionPaciente.impresionesDiagnosticas}}</td>
+                <td>{{evolucionPaciente.tratamiento}}</td>
+                <td>{{evolucionPaciente.recomendaciones}}</td>
+                <td>{{evolucionPaciente.proximaConsulta | date:'mediumDate'}}</td>
+                <td>{{evolucionPaciente.frecuenciaCardiaca}}</td>
+                <td>{{evolucionPaciente.frecuenciaRespiratoria}}</td>
+                <td>{{evolucionPaciente.examenMental}}</td>
+                <td>{{evolucionPaciente.informacionRelevante}}</td>
+                <td>{{evolucionPaciente.recomendacionesGenerales}}</td>
+                <td>{{evolucionPaciente.recipe}}</td>
+                <td>{{evolucionPaciente.indicaciones}}</td>
+                <td>
+                    <div *ngIf="evolucionPaciente.cita">
+                        <a [routerLink]="['../cita', evolucionPaciente.cita?.id, 'view' ]" >{{evolucionPaciente.cita?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/evolucion-paciente', evolucionPaciente.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/evolucion-paciente', evolucionPaciente.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'evolucion-paciente', { outlets: { popup: evolucionPaciente.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="evolucionPacientes && evolucionPacientes.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

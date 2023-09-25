@@ -1,0 +1,26 @@
+{
+    "innapcitasApp": {
+        "especialidadMedico": {
+            "home": {
+                "title": "Servicios de Salud",
+                "createLabel": "Crear nuevo Servicio de Salud",
+                "createOrEditLabel": "Crear o editar Servicio de Salud",
+                "search": "Search for Servicio de Salud"
+            },
+            "created": "Un nuevo Servicio de Salud ha sido creado con el identificador {{ param }}",
+            "updated": "Un Servicio de Salud ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Servicio de Salud ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Servicio de Salud {{ id }}?"
+            },
+            "detail": {
+                "title": "Servicio de Salud"
+            },
+            "montoHora": "Monto Hora Presencial",
+            "descripcion": "Especialidades",
+            "montoHoraOnline": "Monto Hora Online",
+            "medico": "Usuario",
+            "especialidad": "Especialidad"
+        }
+    }
+}

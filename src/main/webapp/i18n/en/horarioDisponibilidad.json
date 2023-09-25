@@ -1,0 +1,23 @@
+{
+    "innapcitasApp": {
+        "horarioDisponibilidad": {
+            "home": {
+                "title": "Horario Disponibilidads",
+                "createLabel": "Create a new Horario Disponibilidad",
+                "createOrEditLabel": "Create or edit a Horario Disponibilidad",
+                "search": "Search for Horario Disponibilidad"
+            },
+            "created": "A new Horario Disponibilidad is created with identifier {{ param }}",
+            "updated": "A Horario Disponibilidad is updated with identifier {{ param }}",
+            "deleted": "A Horario Disponibilidad is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Horario Disponibilidad {{ id }}?"
+            },
+            "detail": {
+                "title": "Horario Disponibilidad"
+            },
+            "diaSemana": "Dia Semana",
+            "especialidadMedico": "Servicio de Salud"
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "innapcitasApp": {
+        "cita": {
+            "home": {
+                "title": "Citas",
+                "titleUser": "Mis Citas",
+                "createLabel": "Create a new Cita",
+                "createOrEditLabel": "Create or edit a Cita"
+            },
+            "created": "A new Cita is created with identifier {{ param }}",
+            "updated": "A Cita is updated with identifier {{ param }}",
+            "deleted": "A Cita is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Cita {{ id }}?"
+            },
+            "detail": {
+                "title": "Cita"
+            },
+            "fecha": "Fecha",
+            "notas": "Notas",
+            "pacienteNino": "Paciente Nino",
+            "paciente": "Paciente",
+            "especialidadMedico": "Especialidad Medico",
+            "especialidad": "Especialidad",
+            "tipoConsulta": "Tipo Consulta",
+            "historiaPersonalAdulto": "Historia Personal Adulto",
+            "historiaMedicaAdulto": "Historia Medica Adulto",
+            "historiaPersonalNino": "Historia Personal Nino",
+            "historiaMedicaNino": "Historia Medica Nino",
+            "llenarHistoriaPersonalAdulto": "Llenar Historia Personal Adulto",
+            "llenarHistoriaMedicaAdulto": "Llenar Historia Medica Adulto",
+            "llenarHistoriaPersonalNino": "Llenar Historia Personal Nino",
+            "llenarHistoriaMedicaNino": "Llenar Historia Medica Nino",
+            "identificador": "Identificador",
+            "especialidadDelMedico": "Buscar por especialidades del Médico Tratante",
+            "user": "User",
+            "estatusCita": "Status",
+            "cancelar": "Cancel",
+            "consultaOnline": "Online Appointment"
+        }
+    }
+}

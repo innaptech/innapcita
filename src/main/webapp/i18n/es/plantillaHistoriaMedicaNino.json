@@ -1,0 +1,23 @@
+{
+    "innapcitasApp": {
+        "plantillaHistoriaMedicaNino": {
+            "home": {
+                "title": "Plantilla Historia Medica Ninos",
+                "createLabel": "Crear nuevo Plantilla Historia Medica Nino",
+                "createOrEditLabel": "Crear o editar Plantilla Historia Medica Nino"
+            },
+            "created": "Un nuevo Plantilla Historia Medica Nino ha sido creado con el identificador {{ param }}",
+            "updated": "Un Plantilla Historia Medica Nino ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Plantilla Historia Medica Nino ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Plantilla Historia Medica Nino {{ id }}?"
+            },
+            "detail": {
+                "title": "Plantilla Historia Medica Nino"
+            },
+            "nombre": "Nombre",
+            "contenido": "Contenido",
+            "activo": "Activo"
+        }
+    }
+}

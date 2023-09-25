@@ -1,0 +1,150 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="innapcitasApp.historiaPersonalAdulto.home.title">Historia Personal Adultos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-historia-personal-adulto" [routerLink]="['/historia-personal-adulto/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="innapcitasApp.historiaPersonalAdulto.home.createLabel">
+            Create new Historia Personal Adulto
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="historiaPersonalAdultos">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="primerNombre"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.primerNombre">Primer Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="segundoNombre"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.segundoNombre">Segundo Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="primerApellido"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.primerApellido">Primer Apellido</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="segundoApellido"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.segundoApellido">Segundo Apellido</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edad"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.edad">Edad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lugarNacimiento"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.lugarNacimiento">Lugar Nacimiento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fechaNacimiento"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.fechaNacimiento">Fecha Nacimiento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cedula"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.cedula">Cedula</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nacionalidad"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.nacionalidad">Nacionalidad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="profesion"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.profesion">Profesion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ocupacionActual"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.ocupacionActual">Ocupacion Actual</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="religion"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.religion">Religion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="direccionHabitacion"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.direccionHabitacion">Direccion Habitacion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ciudad"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.ciudad">Ciudad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estado"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.estado">Estado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pais"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.pais">Pais</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefonoFijo"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.telefonoFijo">Telefono Fijo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefonoCelular"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.telefonoCelular">Telefono Celular</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="direccionTrabajo"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.direccionTrabajo">Direccion Trabajo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefonoTrabajo"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.telefonoTrabajo">Telefono Trabajo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="faxTrabajo"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.faxTrabajo">Fax Trabajo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="familiarMedico"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.familiarMedico">Familiar Medico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="carnetFamiliarMedico"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.carnetFamiliarMedico">Carnet Familiar Medico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="especialidadFamiliarMedico"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.especialidadFamiliarMedico">Especialidad Familiar Medico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lugarTrabajoFamiliarMedico"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.lugarTrabajoFamiliarMedico">Lugar Trabajo Familiar Medico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="notas"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.notas">Notas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sexo.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.sexo">Sexo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="referidoPor.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.referidoPor">Referido Por</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estadoCivil.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.estadoCivil">Estado Civil</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tipoConsulta.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.tipoConsulta">Tipo Consulta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="especialidad.especialidad"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.especialidad">Especialidad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cita.id"><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.cita">Cita</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let historiaPersonalAdulto of historiaPersonalAdultos ;trackBy: trackId">
+                <td><a [routerLink]="['/historia-personal-adulto', historiaPersonalAdulto.id, 'view' ]">{{historiaPersonalAdulto.id}}</a></td>
+                <td>{{historiaPersonalAdulto.primerNombre}}</td>
+                <td>{{historiaPersonalAdulto.segundoNombre}}</td>
+                <td>{{historiaPersonalAdulto.primerApellido}}</td>
+                <td>{{historiaPersonalAdulto.segundoApellido}}</td>
+                <td>{{historiaPersonalAdulto.edad}}</td>
+                <td>{{historiaPersonalAdulto.lugarNacimiento}}</td>
+                <td>{{historiaPersonalAdulto.fechaNacimiento | date:'mediumDate'}}</td>
+                <td>{{historiaPersonalAdulto.cedula}}</td>
+                <td>{{historiaPersonalAdulto.nacionalidad}}</td>
+                <td>{{historiaPersonalAdulto.profesion}}</td>
+                <td>{{historiaPersonalAdulto.ocupacionActual}}</td>
+                <td>{{historiaPersonalAdulto.religion}}</td>
+                <td>{{historiaPersonalAdulto.direccionHabitacion}}</td>
+                <td>{{historiaPersonalAdulto.ciudad}}</td>
+                <td>{{historiaPersonalAdulto.estado}}</td>
+                <td>{{historiaPersonalAdulto.pais}}</td>
+                <td>{{historiaPersonalAdulto.telefonoFijo}}</td>
+                <td>{{historiaPersonalAdulto.telefonoCelular}}</td>
+                <td>{{historiaPersonalAdulto.email}}</td>
+                <td>{{historiaPersonalAdulto.direccionTrabajo}}</td>
+                <td>{{historiaPersonalAdulto.telefonoTrabajo}}</td>
+                <td>{{historiaPersonalAdulto.faxTrabajo}}</td>
+                <td>{{historiaPersonalAdulto.familiarMedico}}</td>
+                <td>{{historiaPersonalAdulto.carnetFamiliarMedico}}</td>
+                <td>{{historiaPersonalAdulto.especialidadFamiliarMedico}}</td>
+                <td>{{historiaPersonalAdulto.lugarTrabajoFamiliarMedico}}</td>
+                <td>{{historiaPersonalAdulto.notas}}</td>
+                <td>
+                    <div *ngIf="historiaPersonalAdulto.sexo">
+                        <a [routerLink]="['../sexo', historiaPersonalAdulto.sexo?.id, 'view' ]" >{{historiaPersonalAdulto.sexo?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalAdulto.referidoPor">
+                        <a [routerLink]="['../referencia-medica', historiaPersonalAdulto.referidoPor?.id, 'view' ]" >{{historiaPersonalAdulto.referidoPor?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalAdulto.estadoCivil">
+                        <a [routerLink]="['../estado-civil', historiaPersonalAdulto.estadoCivil?.id, 'view' ]" >{{historiaPersonalAdulto.estadoCivil?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalAdulto.tipoConsulta">
+                        <a [routerLink]="['../tipo-consulta', historiaPersonalAdulto.tipoConsulta?.id, 'view' ]" >{{historiaPersonalAdulto.tipoConsulta?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalAdulto.especialidad">
+                        <a [routerLink]="['../especialidad', historiaPersonalAdulto.especialidad?.id, 'view' ]" >{{historiaPersonalAdulto.especialidad?.especialidad}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalAdulto.cita">
+                        <a [routerLink]="['../cita', historiaPersonalAdulto.cita?.id, 'view' ]" >{{historiaPersonalAdulto.cita?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/historia-personal-adulto', historiaPersonalAdulto.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/historia-personal-adulto', historiaPersonalAdulto.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'historia-personal-adulto', { outlets: { popup: historiaPersonalAdulto.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="historiaPersonalAdultos && historiaPersonalAdultos.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

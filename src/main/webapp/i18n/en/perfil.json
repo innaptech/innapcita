@@ -1,0 +1,38 @@
+{
+    "innapcitasApp": {
+        "perfil": {
+            "home": {
+                "title": "Perfils",
+                "createLabel": "Create a new Perfil",
+                "createOrEditLabel": "Create or edit a Perfil"
+            },
+            "created": "A new Perfil is created with identifier {{ param }}",
+            "updated": "A Perfil is updated with identifier {{ param }}",
+            "deleted": "A Perfil is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Perfil {{ id }}?"
+            },
+            "detail": {
+                "title": "Perfil"
+            },
+            "foto": "Foto",
+            "descripcion": "Descripcion",
+            "sello": "Sello",
+            "profesion": "Profesion",
+            "email": "Email",
+            "telefono": "Telefono",
+            "direccion": "Direccion",
+            "experiencia": "Experiencia",
+            "reconocimientos": "Reconocimientos",
+            "actividadProfesionalActual": "Actividad Profesional Actual",
+            "colegiaturasAsociaciones": "Colegiaturas Asociaciones",
+            "areasDeInteres": "Areas De Interes",
+            "rif": "Rif",
+            "institucion": "Institucion",
+            "logoInstitucion": "Logo Institucion",
+            "otrasInstituciones": "Otras Instituciones",
+            "titulo": "Titulo",
+            "user": "User"
+        }
+    }
+}

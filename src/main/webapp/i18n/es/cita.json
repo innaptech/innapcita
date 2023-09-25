@@ -1,0 +1,44 @@
+{
+    "innapcitasApp": {
+        "cita": {
+            "home": {
+                "title": "Citas",
+                "titleUser": "Mis Citas",
+                "createLabel": "Agendar nueva Cita",
+                "createOrEditLabel": "Crear o editar Cita"
+            },
+            "created": "Un nuevo Cita ha sido creado con el identificador {{ param }}",
+            "updated": "Un Cita ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Cita ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Está seguro(a) de que quiere eliminar la Cita {{ id }}? (Puede Cancelarla y permanecerá en el sistema)"
+            },
+            "detail": {
+                "title": "Cita"
+            },
+            "fecha": "Fecha",
+            "notas": "Motivo de Consulta",
+            "pacienteNino": "Paciente es Niño",
+            "paciente": "Paciente",
+            "especialidadMedico": "Médico Tratante",
+            "especialidad": "Especialidad",
+            "tipoConsulta": "Tipo de Consulta",
+            "historiaPersonalAdulto": "Datos Personales",
+            "historiaMedicaAdulto": "Historia Medica",
+            "historiaPersonalNino": "Datos Personales",
+            "historiaMedicaNino": "Historia Medica",
+            "llenarHistoriaPersonalAdulto": "Datos Personales",
+            "llenarHistoriaMedicaAdulto": "Historia Medica",
+            "llenarHistoriaPersonalNino": "Datos Personales",
+            "llenarHistoriaMedicaNino": "Historia Medica",
+            "identificador": "Identificador",
+            "especialidadDelMedico": "Buscar por especialidades del Médico Tratante",
+            "user": "Usuario",
+            "estatusCita": "Estatus",
+            "cancelar": "Eliminar Cita",
+            "no": "Volver",
+            "consultaOnline": "Cita Online",
+            "citaexitosa": "Cita creada exitosamente! Le enviaremos un correo con la información a la brevedad posible.<br/>Favor llenar sus datos personales:"
+        }
+    }
+}

@@ -1,0 +1,66 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="innapcitasApp.plantillaHistoriaPersonalNino.home.title">Plantilla Historia Personal Ninos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-plantilla-historia-personal-nino" [routerLink]="['/plantilla-historia-personal-nino/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="innapcitasApp.plantillaHistoriaPersonalNino.home.createLabel">
+            Create new Plantilla Historia Personal Nino
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="plantillaHistoriaPersonalNinos">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nombre"><span jhiTranslate="innapcitasApp.plantillaHistoriaPersonalNino.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="contenido"><span jhiTranslate="innapcitasApp.plantillaHistoriaPersonalNino.contenido">Contenido</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="activo"><span jhiTranslate="innapcitasApp.plantillaHistoriaPersonalNino.activo">Activo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let plantillaHistoriaPersonalNino of plantillaHistoriaPersonalNinos ;trackBy: trackId">
+                <td><a [routerLink]="['/plantilla-historia-personal-nino', plantillaHistoriaPersonalNino.id, 'view' ]">{{plantillaHistoriaPersonalNino.id}}</a></td>
+                <td>{{plantillaHistoriaPersonalNino.nombre}}</td>
+                <td><div style="border-radius: 15px; border-style: solid; border-width: 1px; border-color: black; background-color: white; padding: 25px;" [innerHTML]="plantillaHistoriaPersonalNino.contenido"></div></td>
+                <td>{{plantillaHistoriaPersonalNino.activo}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/plantilla-historia-personal-nino', plantillaHistoriaPersonalNino.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/plantilla-historia-personal-nino', plantillaHistoriaPersonalNino.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'plantilla-historia-personal-nino', { outlets: { popup: plantillaHistoriaPersonalNino.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="plantillaHistoriaPersonalNinos && plantillaHistoriaPersonalNinos.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

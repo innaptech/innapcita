@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Cita.
+    -->
+    <changeSet id="20190508150838-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="paciente_id"
+                                 baseTableName="cita"
+                                 constraintName="fk_cita_paciente_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="especialidad_medico_id"
+                                 baseTableName="cita"
+                                 constraintName="fk_cita_especialidad_medico_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="especialidad_medico"/>
+
+        <addForeignKeyConstraint baseColumnNames="especialidad_id"
+                                 baseTableName="cita"
+                                 constraintName="fk_cita_especialidad_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="especialidad"/>
+
+        <addForeignKeyConstraint baseColumnNames="tipo_consulta_id"
+                                 baseTableName="cita"
+                                 constraintName="fk_cita_tipo_consulta_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tipo_consulta"/>
+
+        <addForeignKeyConstraint baseColumnNames="estatus_cita_id"
+                                 baseTableName="cita"
+                                 constraintName="fk_cita_estatus_cita_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="estatus_cita"/>
+
+    </changeSet>
+</databaseChangeLog>

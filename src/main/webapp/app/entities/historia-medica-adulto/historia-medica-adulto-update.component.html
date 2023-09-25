@@ -1,0 +1,737 @@
+<div class="row justify-content-center" style="margin-right: 0px; margin-left: 0px;">
+    <div *ngIf="isSaving" class="loading-screen"><div class="loading-animation"></div></div>
+    <div class="col-12">
+    <jhi-alert></jhi-alert>
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="getFile()" type="button" class="btn btn-success float-right">
+                <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span > PDF</span>
+            </button>
+            <h2 id="jhi-historia-medica-adulto-heading" jhiTranslate="innapcitasApp.historiaMedicaAdulto.home.createOrEditLabel">Create or edit a Historia Medica Adulto</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!historiaMedicaAdulto.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="historiaMedicaAdulto.id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.primerNombre" for="field_primerNombre">Primer Nombre</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'primerNombre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="primerNombre" id="field_primerNombre"
+                        [(ngModel)]="historiaMedicaAdulto.primerNombre" required/>
+                    <div [hidden]="!(editForm.controls.primerNombre?.dirty && editForm.controls.primerNombre?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.primerNombre?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.primerApellido" for="field_primerApellido">Primer Apellido</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'primerApellido')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="primerApellido" id="field_primerApellido"
+                        [(ngModel)]="historiaMedicaAdulto.primerApellido" required/>
+                    <div [hidden]="!(editForm.controls.primerApellido?.dirty && editForm.controls.primerApellido?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.primerApellido?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.email" for="field_email">Email</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'email')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="historiaMedicaAdulto.email" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.cedula" for="field_cedula">Cedula</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'cedula')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="cedula" id="field_cedula"
+                        [(ngModel)]="historiaMedicaAdulto.cedula" />
+                </div>
+
+                <br>
+                <h3>Antecedentes Médicos Familiares</h3>
+                <br>
+
+                <h5>Abuelos</h5>
+                <div class="form-group">
+                    <input type="checkbox" name="abuelosViven" id="field_abuelosViven"
+                           [(ngModel)]="historiaMedicaAdulto.abuelosViven" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.abuelosViven" for="field_abuelosViven">Abuelos Viven</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadAbuelos" for="field_edadAbuelos">Edad Abuelos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'edadAbuelos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="edadAbuelos" id="field_edadAbuelos"
+                        [(ngModel)]="historiaMedicaAdulto.edadAbuelos" />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroAbuelos" for="field_numeroAbuelos">Numero Abuelos</label>
+                    <input type="text" class="form-control" name="numeroAbuelos" id="field_numeroAbuelos"
+                        [(ngModel)]="historiaMedicaAdulto.numeroAbuelos" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadAbuelos" for="field_enfermedadAbuelos">Enfermedad Abuelos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'enfermedadAbuelos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadAbuelos" id="field_enfermedadAbuelos"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadAbuelos" />
+                </div>
+                <br>
+                <h5>Tíos</h5>
+                <div class="form-group">
+                    <input type="checkbox" name="tiosViven" id="field_tiosViven"
+                           [(ngModel)]="historiaMedicaAdulto.tiosViven" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.tiosViven" for="field_tiosViven">Tios Viven</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadTios" for="field_edadTios">Edad Tios</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'edadTios')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="edadTios" id="field_edadTios"
+                        [(ngModel)]="historiaMedicaAdulto.edadTios" />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroTios" for="field_numeroTios">Numero Tios</label>
+                    <input type="text" class="form-control" name="numeroTios" id="field_numeroTios"
+                        [(ngModel)]="historiaMedicaAdulto.numeroTios" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadTios" for="field_enfermedadTios">Enfermedad Tios</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'enfermedadTios')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadTios" id="field_enfermedadTios"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadTios" />
+                </div>
+
+                <br>
+                <h5>Padre</h5>
+                <div class="form-group">
+                    <input type="checkbox" name="padreVive" id="field_padreVive"
+                           [(ngModel)]="historiaMedicaAdulto.padreVive" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.padreVive" for="field_padreVive">Padre Vive</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadPadre" for="field_edadPadre">Edad Padre</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'edadPadre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="edadPadre" id="field_edadPadre"
+                        [(ngModel)]="historiaMedicaAdulto.edadPadre" />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroPadre" for="field_numeroPadre">Numero Padre</label>
+                    <input type="text" class="form-control" name="numeroPadre" id="field_numeroPadre"
+                        [(ngModel)]="historiaMedicaAdulto.numeroPadre" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadPadre" for="field_enfermedadPadre">Enfermedad Padre</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'enfermedadPadre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadPadre" id="field_enfermedadPadre"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadPadre" />
+                </div>
+
+                <br>
+                <h5>Madre</h5>
+                <div class="form-group">
+                    <input type="checkbox" name="madreVive" id="field_madreVive"
+                           [(ngModel)]="historiaMedicaAdulto.madreVive" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.madreVive" for="field_madreVive">Madre Vive</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadMadre" for="field_edadMadre">Edad Madre</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'edadMadre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="edadMadre" id="field_edadMadre"
+                        [(ngModel)]="historiaMedicaAdulto.edadMadre" />
+                </div>
+                <!--<div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroMadre" for="field_numeroMadre">Numero Madre</label>
+                    <input type="text" class="form-control" name="numeroMadre" id="field_numeroMadre"
+                        [(ngModel)]="historiaMedicaAdulto.numeroMadre" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadMadre" for="field_enfermedadMadre">Enfermedad Madre</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'enfermedadMadre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadMadre" id="field_enfermedadMadre"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadMadre" />
+                </div>
+
+                <br>
+                <h5>Hermanos</h5>
+                <div class="form-group">
+                    <input type="checkbox" name="hermanosViven" id="field_hermanosViven"
+                           [(ngModel)]="historiaMedicaAdulto.hermanosViven" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.hermanosViven" for="field_hermanosViven">Hermanos Viven</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadHermanos" for="field_edadHermanos">Edad Hermanos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'edadHermanos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="edadHermanos" id="field_edadHermanos"
+                        [(ngModel)]="historiaMedicaAdulto.edadHermanos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroHermanos" for="field_numeroHermanos">Numero Hermanos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'primerNombre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="numeroHermanos" id="field_numeroHermanos"
+                        [(ngModel)]="historiaMedicaAdulto.numeroHermanos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadHermanos" for="field_enfermedadHermanos">Enfermedad Hermanos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'numeroHermanos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadHermanos" id="field_enfermedadHermanos"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadHermanos" />
+                </div>
+
+                <br>
+                <h5>Esposo(a)</h5>
+                <div class="form-group">
+                    <input type="checkbox" name="esposoVive" id="field_esposoVive"
+                           [(ngModel)]="historiaMedicaAdulto.esposoVive" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.esposoVive" for="field_esposoVive">Esposo Vive</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadEsposo" for="field_edadEsposo">Edad Esposo</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'edadEsposo')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="edadEsposo" id="field_edadEsposo"
+                        [(ngModel)]="historiaMedicaAdulto.edadEsposo" />
+                </div>
+               <!-- <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroEsposo" for="field_numeroEsposo">Numero Esposo</label>
+                    <input type="text" class="form-control" name="numeroEsposo" id="field_numeroEsposo"
+                        [(ngModel)]="historiaMedicaAdulto.numeroEsposo" />
+                </div>-->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadEsposo" for="field_enfermedadEsposo">Enfermedad Esposo</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'enfermedadEsposo')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadEsposo" id="field_enfermedadEsposo"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadEsposo" />
+                </div>
+
+               <!-- <br>
+                <h5>Hijas</h5>
+                <div class="form-group">
+                    <input type="checkbox" name="hijasViven" id="field_hijasViven"
+                           [(ngModel)]="historiaMedicaAdulto.hijasViven" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.hijasViven" for="field_hijasViven">Hijas Viven</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadHijas" for="field_edadHijas">Edad Hijas</label>
+                    <input type="text" class="form-control" name="edadHijas" id="field_edadHijas"
+                        [(ngModel)]="historiaMedicaAdulto.edadHijas" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroHijas" for="field_numeroHijas">Numero Hijas</label>
+                    <input type="text" class="form-control" name="numeroHijas" id="field_numeroHijas"
+                        [(ngModel)]="historiaMedicaAdulto.numeroHijas" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadHijas" for="field_enfermedadHijas">Enfermedad Hijas</label>
+                    <input type="text" class="form-control" name="enfermedadHijas" id="field_enfermedadHijas"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadHijas" />
+                </div>-->
+
+                <br>
+                <h5>Hijos</h5>
+                <div class="form-group">
+                    <input type="checkbox" name="hijosViven" id="field_hijosViven"
+                           [(ngModel)]="historiaMedicaAdulto.hijosViven" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.hijosViven" for="field_hijosViven">Hijos Viven</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadHijos" for="field_edadHijos">Edad Hijos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'edadHijos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="edadHijos" id="field_edadHijos"
+                           [(ngModel)]="historiaMedicaAdulto.edadHijos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroHijos" for="field_numeroHijos">Numero Hijos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'numeroHijos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="numeroHijos" id="field_numeroHijos"
+                           [(ngModel)]="historiaMedicaAdulto.numeroHijos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadHijos" for="field_enfermedadHijos">Enfermedad Hijos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'enfermedadHijos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadHijos" id="field_enfermedadHijos"
+                           [(ngModel)]="historiaMedicaAdulto.enfermedadHijos" />
+                </div>
+
+                <br>
+                <h3>Antecedentes Médicos Personales</h3>
+
+                <h5>Ha padecido o padece alguno de los siguientes problemas</h5>
+                <br>
+
+                <div class="form-group">
+                    <input type="checkbox" name="sarampion" id="field_sarampion"
+                           [(ngModel)]="historiaMedicaAdulto.sarampion" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.sarampion" for="field_sarampion">Sarampion</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="renales" id="field_renales"
+                           [(ngModel)]="historiaMedicaAdulto.renales" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.renales" for="field_renales">Renales</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="vertigos" id="field_vertigos"
+                           [(ngModel)]="historiaMedicaAdulto.vertigos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.vertigos" for="field_vertigos">Vertigos</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="cardiacos" id="field_cardiacos"
+                           [(ngModel)]="historiaMedicaAdulto.cardiacos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.cardiacos" for="field_cardiacos">Cardiacos</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="dolorDeCabeza" id="field_dolorDeCabeza"
+                           [(ngModel)]="historiaMedicaAdulto.dolorDeCabeza" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.dolorDeCabeza" for="field_dolorDeCabeza">Dolor De Cabeza</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="lechina" id="field_lechina"
+                           [(ngModel)]="historiaMedicaAdulto.lechina" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.lechina" for="field_lechina">Lechina</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="alergias" id="field_alergias"
+                           [(ngModel)]="historiaMedicaAdulto.alergias" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.alergias" for="field_alergias">Alergias</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="diarreas" id="field_diarreas"
+                           [(ngModel)]="historiaMedicaAdulto.diarreas" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.diarreas" for="field_diarreas">Diarreas</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="varices" id="field_varices"
+                           [(ngModel)]="historiaMedicaAdulto.varices" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.varices" for="field_varices">Varices</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="hipertensionArterial" id="field_hipertensionArterial"
+                           [(ngModel)]="historiaMedicaAdulto.hipertensionArterial" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.hipertensionArterial" for="field_hipertensionArterial">Hipertension Arterial</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="rubeola" id="field_rubeola"
+                           [(ngModel)]="historiaMedicaAdulto.rubeola" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.rubeola" for="field_rubeola">Rubeola</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="neurologicos" id="field_neurologicos"
+                           [(ngModel)]="historiaMedicaAdulto.neurologicos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.neurologicos" for="field_neurologicos">Neurologicos</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="otorrinolaringologos" id="field_otorrinolaringologos"
+                           [(ngModel)]="historiaMedicaAdulto.otorrinolaringologos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.otorrinolaringologos" for="field_otorrinolaringologos">Otorrinolaringologos</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="catarros" id="field_catarros"
+                           [(ngModel)]="historiaMedicaAdulto.catarros" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.catarros" for="field_catarros">Catarros</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="enfermedadMental" id="field_enfermedadMental"
+                           [(ngModel)]="historiaMedicaAdulto.enfermedadMental" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadMental" for="field_enfermedadMental">Enfermedad Mental</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="parotiditis" id="field_parotiditis"
+                           [(ngModel)]="historiaMedicaAdulto.parotiditis" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.parotiditis" for="field_parotiditis">Parotiditis</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="sobrepeso" id="field_sobrepeso"
+                           [(ngModel)]="historiaMedicaAdulto.sobrepeso" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.sobrepeso" for="field_sobrepeso">Sobrepeso</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="reumaticos" id="field_reumaticos"
+                           [(ngModel)]="historiaMedicaAdulto.reumaticos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.reumaticos" for="field_reumaticos">Reumaticos</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="infecciones" id="field_infecciones"
+                           [(ngModel)]="historiaMedicaAdulto.infecciones" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.infecciones" for="field_infecciones">Infecciones</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="intervencionQuirurgica" id="field_intervencionQuirurgica"
+                           [(ngModel)]="historiaMedicaAdulto.intervencionQuirurgica" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.intervencionQuirurgica" for="field_intervencionQuirurgica">Intervencion Quirurgica</label>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="parasitosis" id="field_parasitosis"
+                           [(ngModel)]="historiaMedicaAdulto.parasitosis" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.parasitosis" for="field_parasitosis">Parasitosis</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="epilepsia" id="field_epilepsia"
+                           [(ngModel)]="historiaMedicaAdulto.epilepsia" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.epilepsia" for="field_epilepsia">Epilepsia</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="dermatologicos" id="field_dermatologicos"
+                           [(ngModel)]="historiaMedicaAdulto.dermatologicos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.dermatologicos" for="field_dermatologicos">Dermatologicos</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="pulmonares" id="field_pulmonares"
+                           [(ngModel)]="historiaMedicaAdulto.pulmonares" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.pulmonares" for="field_pulmonares">Pulmonares</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="trastornosDelAprendizaje" id="field_trastornosDelAprendizaje"
+                           [(ngModel)]="historiaMedicaAdulto.trastornosDelAprendizaje" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.trastornosDelAprendizaje" for="field_trastornosDelAprendizaje">Trastornos Del Aprendizaje</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="tiroides" id="field_tiroides"
+                           [(ngModel)]="historiaMedicaAdulto.tiroides" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.tiroides" for="field_tiroides">Tiroides</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="asma" id="field_asma"
+                           [(ngModel)]="historiaMedicaAdulto.asma" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.asma" for="field_asma">Asma</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="dolorDeColumna" id="field_dolorDeColumna"
+                           [(ngModel)]="historiaMedicaAdulto.dolorDeColumna" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.dolorDeColumna" for="field_dolorDeColumna">Dolor De Columna</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="tuberculosis" id="field_tuberculosis"
+                           [(ngModel)]="historiaMedicaAdulto.tuberculosis" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.tuberculosis" for="field_tuberculosis">Tuberculosis</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="traumatismosCraneoencefalicos" id="field_traumatismosCraneoencefalicos"
+                           [(ngModel)]="historiaMedicaAdulto.traumatismosCraneoencefalicos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.traumatismosCraneoencefalicos" for="field_traumatismosCraneoencefalicos">Traumatismos Craneoencefalicos</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="mareos" id="field_mareos"
+                           [(ngModel)]="historiaMedicaAdulto.mareos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.mareos" for="field_mareos">Mareos</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="desmayos" id="field_desmayos"
+                           [(ngModel)]="historiaMedicaAdulto.desmayos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.desmayos" for="field_desmayos">Desmayos</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="muscularOFractura" id="field_muscularOFractura"
+                           [(ngModel)]="historiaMedicaAdulto.muscularOFractura" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.muscularOFractura" for="field_muscularOFractura">Muscular O Fractura</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="intestinales" id="field_intestinales"
+                           [(ngModel)]="historiaMedicaAdulto.intestinales" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.intestinales" for="field_intestinales">Intestinales</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="enfermedadDeTransmisionSexual" id="field_enfermedadDeTransmisionSexual"
+                           [(ngModel)]="historiaMedicaAdulto.enfermedadDeTransmisionSexual" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadDeTransmisionSexual" for="field_enfermedadDeTransmisionSexual">Enfermedad De Transmision Sexual</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="estomacales" id="field_estomacales"
+                           [(ngModel)]="historiaMedicaAdulto.estomacales" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.estomacales" for="field_estomacales">Estomacales</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="higado" id="field_higado"
+                           [(ngModel)]="historiaMedicaAdulto.higado" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.higado" for="field_higado">Higado</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="colesterolTrigliceridos" id="field_colesterolTrigliceridos"
+                           [(ngModel)]="historiaMedicaAdulto.colesterolTrigliceridos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.colesterolTrigliceridos" for="field_colesterolTrigliceridos">Colesterol Trigliceridos</label>
+
+                </div>
+
+                <br>
+                <h5>Sexo femenino</h5>
+                <br>
+                <div class="form-group">
+                    <input type="checkbox" name="desordenMenstrual" id="field_desordenMenstrual"
+                           [(ngModel)]="historiaMedicaAdulto.desordenMenstrual" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.desordenMenstrual" for="field_desordenMenstrual">Desorden Menstrual</label>
+
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="usoDeMetodoAnticonceptivo" id="field_usoDeMetodoAnticonceptivo"
+                           [(ngModel)]="historiaMedicaAdulto.usoDeMetodoAnticonceptivo" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.usoDeMetodoAnticonceptivo" for="field_usoDeMetodoAnticonceptivo">Uso De Metodo Anticonceptivo</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.cuantosEmbarazos" for="field_cuantosEmbarazos">Cuantos Embarazos</label>
+                    <input type="text" class="form-control" name="cuantosEmbarazos" id="field_cuantosEmbarazos"
+                        [(ngModel)]="historiaMedicaAdulto.cuantosEmbarazos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.cuantosAbortos" for="field_cuantosAbortos">Cuantos Abortos</label>
+                    <input type="text" class="form-control" name="cuantosAbortos" id="field_cuantosAbortos"
+                        [(ngModel)]="historiaMedicaAdulto.cuantosAbortos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.cuantosHijosViven" for="field_cuantosHijosViven">Cuantos Hijos Viven</label>
+                    <input type="text" class="form-control" name="cuantosHijosViven" id="field_cuantosHijosViven"
+                        [(ngModel)]="historiaMedicaAdulto.cuantosHijosViven" />
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="problemasEnLosSenos" id="field_problemasEnLosSenos"
+                           [(ngModel)]="historiaMedicaAdulto.problemasEnLosSenos" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.problemasEnLosSenos" for="field_problemasEnLosSenos">Problemas En Los Senos</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.ultimaMenstruacion" for="field_ultimaMenstruacion">Ultima Menstruacion</label>
+                    <input type="text" class="form-control" name="ultimaMenstruacion" id="field_ultimaMenstruacion"
+                        [(ngModel)]="historiaMedicaAdulto.ultimaMenstruacion" />
+                </div>
+
+                <br>
+                <h3>Enfermedades Diagnosticadas</h3>
+                <br>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadYAnoDelDiagnostico1" for="field_enfermedadYAnoDelDiagnostico1">Enfermedad Y Ano Del Diagnostico 1</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'enfermedadYAnoDelDiagnostico1')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadYAnoDelDiagnostico1" id="field_enfermedadYAnoDelDiagnostico1"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadYAnoDelDiagnostico1" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica1" for="field_tratamientoIndicadoOIntervencionQuirurgica1">Tratamiento Indicado O Intervencion Quirurgica 1</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'tratamientoIndicadoOIntervencionQuirurgica1')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="tratamientoIndicadoOIntervencionQuirurgica1" id="field_tratamientoIndicadoOIntervencionQuirurgica1"
+                        [(ngModel)]="historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica1" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadYAnoDelDiagnostico2" for="field_enfermedadYAnoDelDiagnostico2">Enfermedad Y Ano Del Diagnostico 2</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'enfermedadYAnoDelDiagnostico2')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadYAnoDelDiagnostico2" id="field_enfermedadYAnoDelDiagnostico2"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadYAnoDelDiagnostico2" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica2" for="field_tratamientoIndicadoOIntervencionQuirurgica2">Tratamiento Indicado O Intervencion Quirurgica 2</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'tratamientoIndicadoOIntervencionQuirurgica2')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="tratamientoIndicadoOIntervencionQuirurgica2" id="field_tratamientoIndicadoOIntervencionQuirurgica2"
+                        [(ngModel)]="historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica2" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadYAnoDelDiagnostico3" for="field_enfermedadYAnoDelDiagnostico3">Enfermedad Y Ano Del Diagnostico 3</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'enfermedadYAnoDelDiagnostico3')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="enfermedadYAnoDelDiagnostico3" id="field_enfermedadYAnoDelDiagnostico3"
+                        [(ngModel)]="historiaMedicaAdulto.enfermedadYAnoDelDiagnostico3" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica3" for="field_tratamientoIndicadoOIntervencionQuirurgica3">Tratamiento Indicado O Intervencion Quirurgica 3</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaMedicaAdulto,'tratamientoIndicadoOIntervencionQuirurgica3')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="tratamientoIndicadoOIntervencionQuirurgica3" id="field_tratamientoIndicadoOIntervencionQuirurgica3"
+                        [(ngModel)]="historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica3" />
+                </div>
+
+                <br>
+                <h3>Hábitos Medicamentosos</h3>
+                <br>
+                <div class="form-group">
+
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="form-control-label" for="field_tratamiento">Medicamentos Recetados</h4>
+                        </div>
+
+                    </div>
+
+                    <div [hidden]="medicamento.tipo != 1" *ngFor="let medicamento of medicamentos; let i = index" class="carta-gris">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:45%">
+                                    <span><b><fa-icon [icon]="'heart'"></fa-icon>  Medicamento Recetado</b></span>
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td  style="width:45%; text-align: right;">
+                                    <div class="btn btn-danger" (click)="deleteFieldMedicamento(i)">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        <span class="hidden-xs">
+                                             <fa-icon [icon]="'times'"></fa-icon> Eliminar Medicamento
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="form-group" >
+                            <div class="form-group">
+                                <label class="form-control-label">Nombre del Medicamento</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].nombre"
+                                       [(ngModel)]="medicamentos[i].nombre" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">¿Cuánto?</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].cantidad"
+                                       [(ngModel)]="medicamentos[i].cantidad" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">¿Con qué frecuencia?</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].frecuencia"
+                                       [(ngModel)]="medicamentos[i].frecuencia" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Dosis</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].dosis"
+                                       [(ngModel)]="medicamentos[i].dosis" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="btn btn-success" (click)="addFieldMedicamento(1)">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="hidden-xs">
+                                    + Agregar Medicamento
+                                </span>
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="form-control-label" for="field_tratamiento">Medicamentos Automedicados</h4>
+                        </div>
+
+                    </div>
+
+                    <div class="carta-gris" [hidden]="medicamento.tipo != 2" *ngFor="let medicamento of medicamentos; let i = index">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:45%">
+                                    <span><b><fa-icon [icon]="'heart'"></fa-icon>  Medicamento Automedicado</b></span>
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td  style="width:45%; text-align: right;">
+                                    <div class="btn btn-danger" (click)="deleteFieldMedicamento(i)">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        <span class="hidden-xs">
+                                             <fa-icon [icon]="'times'"></fa-icon> Eliminar Medicamento
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="form-control-label">Nombre del Medicamento</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].nombre"
+                                       [(ngModel)]="medicamentos[i].nombre" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">¿Cuánto?</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].cantidad"
+                                       [(ngModel)]="medicamentos[i].cantidad" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">¿Con qué frecuencia?</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].frecuencia"
+                                       [(ngModel)]="medicamentos[i].frecuencia" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Dosis</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].dosis"
+                                       [(ngModel)]="medicamentos[i].dosis" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="btn btn-success" (click)="addFieldMedicamento(2)">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="hidden-xs">
+                                    + Agregar Medicamento
+                                </span>
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="form-control-label" for="field_tratamiento">Medicamentos Alternativos</h4>
+                        </div>
+
+                    </div>
+
+                    <div class="carta-gris" [hidden]="medicamento.tipo != 3" *ngFor="let medicamento of medicamentos; let i = index">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:45%">
+                                    <span><b><fa-icon [icon]="'heart'"></fa-icon>  Medicamento Alternativo</b></span>
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td  style="width:45%; text-align: right;">
+                                    <div class="btn btn-danger" (click)="deleteFieldMedicamento(i)">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        <span class="hidden-xs">
+                                             <fa-icon [icon]="'times'"></fa-icon> Eliminar Medicamento
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="form-control-label">Nombre del Medicamento</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].nombre"
+                                       [(ngModel)]="medicamentos[i].nombre" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">Dosis</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].dosis"
+                                       [(ngModel)]="medicamentos[i].dosis" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">¿Con qué frecuencia?</label>
+                                <input type="text" class="form-control" name="medicamentos[{{i}}].frecuencia"
+                                       [(ngModel)]="medicamentos[i].frecuencia" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-auto">
+                        <div class="btn btn-success" (click)="addFieldMedicamento(3)">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="hidden-xs">
+                                    + Agregar Medicamento
+                                </span>
+                        </div>
+                    </div>
+
+                    <br/>
+
+                    <!--<textarea rows="8" cols="50" type="text" class="form-control" name="medicamento1" id="field_medicamento1"
+                              [(ngModel)]="historiaMedicaAdulto.medicamento1"></textarea>-->
+                </div>
+
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                <button type="button" *jhiHasNotAuthority="['ROLE_ADMIN', 'ROLE_MEDICO','ROLE_RECEPCION']" (click)="next()" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span>Siguiente ></span>
+                </button>
+                <button type="button" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO','ROLE_RECEPCION']" (click)="next()" class="btn btn-primary">
+                    <span>Siguiente ></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

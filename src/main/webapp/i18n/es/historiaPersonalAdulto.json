@@ -1,0 +1,54 @@
+{
+    "innapcitasApp": {
+        "historiaPersonalAdulto": {
+            "home": {
+                "title": "Datos Personales de Adultos",
+                "createLabel": "Crear nuevo Datos Personales de Adulto",
+                "createOrEditLabel": "Datos Personales de Adulto"
+            },
+            "created": "Un nuevo Datos Personales de Adulto ha sido creado con el identificador {{ param }}",
+            "updated": "Un Datos Personales de Adulto ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Datos Personales de Adulto ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Datos Personales de Adulto {{ id }}?"
+            },
+            "detail": {
+                "title": "Datos Personales de Adulto"
+            },
+            "primerNombre": "Primer Nombre",
+            "segundoNombre": "Segundo Nombre",
+            "primerApellido": "Primer Apellido",
+            "segundoApellido": "Segundo Apellido",
+            "edad": "Edad",
+            "lugarNacimiento": "Lugar de Nacimiento",
+            "fechaNacimiento": "Fecha de Nacimiento",
+            "cedula": "Cédula/Pasaporte",
+            "nacionalidad": "Nacionalidad",
+            "profesion": "Profesión",
+            "ocupacionActual": "Ocupación Actual",
+            "religion": "Religión",
+            "direccionHabitacion": "Dirección de Habitación",
+            "ciudad": "Ciudad",
+            "estado": "Estado",
+            "pais": "País",
+            "telefonoFijo": "Teléfono Fijo",
+            "telefonoCelular": "Teléfono Celular",
+            "email": "Email",
+            "direccionTrabajo": "Dirección de Trabajo",
+            "telefonoTrabajo": "Teléfono de Trabajo",
+            "faxTrabajo": "Fax Trabajo",
+            "familiarMedico": "¿Hijo(a) de Médico?",
+            "carnetFamiliarMedico": "Carnet del Familiar Medico",
+            "especialidadFamiliarMedico": "Especialidad del Familiar Medico",
+            "lugarTrabajoFamiliarMedico": "Lugar de Trabajo del Familiar Medico",
+            "notas": "Notas",
+            "sexo": "Sexo",
+            "referidoPor": "Referido Por",
+            "estadoCivil": "Estado Civil",
+            "tipoConsulta": "Tipo de Consulta",
+            "especialidad": "Especialidad",
+            "cita": "Cita",
+            "exito": "Datos guardados correctamente. Por favor llene su historia médica."
+        }
+    }
+}

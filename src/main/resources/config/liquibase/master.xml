@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508145319_added_entity_Especialidad.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508145546_added_entity_EspecialidadMedico.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508150838_added_entity_Cita.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508145755_added_entity_DiaSemana.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508150428_added_entity_EstatusPago.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508150009_added_entity_HorarioDisponibilidad.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508150150_added_entity_RangoHoras.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508150556_added_entity_TipoPago.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508151443_added_entity_Pago.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190523033335_added_entity_TipoConsulta.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190523041744_added_entity_MonedaCambio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200423163216_added_entity_Sexo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200423203556_added_entity_ReferenciaMedica.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200423205515_added_entity_EstadoCivil.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200423214103_added_entity_HistoriaPersonalAdulto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200423222259_added_entity_GradoInstruccion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200423224724_added_entity_HistoriaPersonalNino.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200424063406_added_entity_HistoriaMedicaAdulto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200424063406_added_entity_HistoriaMedicaNino.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200424105530_added_entity_PlantillaHistoriaPersonalAdulto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200424105530_added_entity_PlantillaHistoriaPersonalNino.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200424105530_added_entity_PlantillaHistoriaMedicaAdulto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200424105530_added_entity_PlantillaHistoriaMedicaNino.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200513192045_added_entity_EstatusCita.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200608165311_added_entity_EmailCita.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200717080355_added_entity_EvolucionPaciente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200717081313_added_entity_ExamenComplementario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200723135154_added_entity_PlantillaInforme.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200723135339_added_entity_PlantillaRecipe.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201002164553_added_entity_Bitacora.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210314161734_added_entity_Perfil.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210323154222_added_entity_CabeceraInforme.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210323162555_added_entity_PieDePaginaInforme.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210917174056_added_entity_PlantillaAntecedentes.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20190508145546_added_entity_constraints_EspecialidadMedico.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508150838_added_entity_constraints_Cita.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508150009_added_entity_constraints_HorarioDisponibilidad.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508151443_added_entity_constraints_Pago.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190508150150_added_entity_constraints_RangoHoras.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200423214103_added_entity_constraints_HistoriaPersonalAdulto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200423224724_added_entity_constraints_HistoriaPersonalNino.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200424063406_added_entity_constraints_HistoriaMedicaAdulto.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200424063406_added_entity_constraints_HistoriaMedicaNino.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200717080355_added_entity_constraints_EvolucionPaciente.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200717081313_added_entity_constraints_ExamenComplementario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200723135154_added_entity_constraints_PlantillaInforme.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200723135339_added_entity_constraints_PlantillaRecipe.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20201002164553_added_entity_constraints_Bitacora.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210314161734_added_entity_constraints_Perfil.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-moneda-cambio-heading" jhiTranslate="innapcitasApp.monedaCambio.home.createOrEditLabel">Create or edit a Moneda Cambio</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!monedaCambio.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="monedaCambio.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.monedaCambio.nombreMoneda" for="field_nombreMoneda">Nombre Moneda</label>
+                    <input type="text" class="form-control" name="nombreMoneda" id="field_nombreMoneda"
+                        [(ngModel)]="monedaCambio.nombreMoneda" required/>
+                    <div [hidden]="!(editForm.controls.nombreMoneda?.dirty && editForm.controls.nombreMoneda?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nombreMoneda?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.monedaCambio.simbolo" for="field_simbolo">Simbolo</label>
+                    <input type="text" class="form-control" name="simbolo" id="field_simbolo"
+                        [(ngModel)]="monedaCambio.simbolo" required/>
+                    <div [hidden]="!(editForm.controls.simbolo?.dirty && editForm.controls.simbolo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.simbolo?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.monedaCambio.montoCambio" for="field_montoCambio">Monto Cambio</label>
+                    <input type="number" class="form-control" name="montoCambio" id="field_montoCambio"
+                        [(ngModel)]="monedaCambio.montoCambio" required/>
+                    <div [hidden]="!(editForm.controls.montoCambio?.dirty && editForm.controls.montoCambio?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.montoCambio?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.montoCambio?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+{
+    "innapcitasApp": {
+        "historiaPersonalAdulto": {
+            "home": {
+                "title": "Historia Personal Adultos",
+                "createLabel": "Create a new Historia Personal Adulto",
+                "createOrEditLabel": "Create or edit a Historia Personal Adulto"
+            },
+            "created": "A new Historia Personal Adulto is created with identifier {{ param }}",
+            "updated": "A Historia Personal Adulto is updated with identifier {{ param }}",
+            "deleted": "A Historia Personal Adulto is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Historia Personal Adulto {{ id }}?"
+            },
+            "detail": {
+                "title": "Historia Personal Adulto"
+            },
+            "primerNombre": "Primer Nombre",
+            "segundoNombre": "Segundo Nombre",
+            "primerApellido": "Primer Apellido",
+            "segundoApellido": "Segundo Apellido",
+            "edad": "Edad",
+            "lugarNacimiento": "Lugar Nacimiento",
+            "fechaNacimiento": "Fecha Nacimiento",
+            "cedula": "Cedula",
+            "nacionalidad": "Nacionalidad",
+            "profesion": "Profesion",
+            "ocupacionActual": "Ocupacion Actual",
+            "religion": "Religion",
+            "direccionHabitacion": "Direccion Habitacion",
+            "ciudad": "Ciudad",
+            "estado": "Estado",
+            "pais": "Pais",
+            "telefonoFijo": "Telefono Fijo",
+            "telefonoCelular": "Telefono Celular",
+            "email": "Email",
+            "direccionTrabajo": "Direccion Trabajo",
+            "telefonoTrabajo": "Telefono Trabajo",
+            "faxTrabajo": "Fax Trabajo",
+            "familiarMedico": "Familiar Medico",
+            "carnetFamiliarMedico": "Carnet Familiar Medico",
+            "especialidadFamiliarMedico": "Especialidad Familiar Medico",
+            "lugarTrabajoFamiliarMedico": "Lugar Trabajo Familiar Medico",
+            "notas": "Notas",
+            "sexo": "Sexo",
+            "referidoPor": "Referido Por",
+            "estadoCivil": "Estado Civil",
+            "tipoConsulta": "Tipo Consulta",
+            "especialidad": "Especialidad",
+            "paciente": "Paciente"
+        }
+    }
+}

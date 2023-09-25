@@ -1,0 +1,22 @@
+{
+    "innapcitasApp": {
+        "pieDePaginaInforme": {
+            "home": {
+                "title": "Pie De Pagina Informes",
+                "createLabel": "Create a new Pie De Pagina Informe",
+                "createOrEditLabel": "Create or edit a Pie De Pagina Informe"
+            },
+            "created": "A new Pie De Pagina Informe is created with identifier {{ param }}",
+            "updated": "A Pie De Pagina Informe is updated with identifier {{ param }}",
+            "deleted": "A Pie De Pagina Informe is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Pie De Pagina Informe {{ id }}?"
+            },
+            "detail": {
+                "title": "Pie De Pagina Informe"
+            },
+            "nombre": "Nombre",
+            "pieDePagina": "Pie De Pagina"
+        }
+    }
+}

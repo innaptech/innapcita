@@ -1,0 +1,22 @@
+{
+    "innapcitasApp": {
+        "plantillaAntecedentes": {
+            "home": {
+                "title": "Plantilla Antecedentes",
+                "createLabel": "Create a new Plantilla Antecedentes",
+                "createOrEditLabel": "Create or edit a Plantilla Antecedentes"
+            },
+            "created": "A new Plantilla Antecedentes is created with identifier {{ param }}",
+            "updated": "A Plantilla Antecedentes is updated with identifier {{ param }}",
+            "deleted": "A Plantilla Antecedentes is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Plantilla Antecedentes {{ id }}?"
+            },
+            "detail": {
+                "title": "Plantilla Antecedentes"
+            },
+            "nombre": "Nombre",
+            "antecedentes": "Antecedentes"
+        }
+    }
+}

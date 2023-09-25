@@ -1,0 +1,23 @@
+{
+    "innapcitasApp": {
+        "plantillaRecipe": {
+            "home": {
+                "title": "Plantilla Recipes",
+                "createLabel": "Crear nuevo Plantilla Recipe",
+                "createOrEditLabel": "Crear o editar Plantilla Recipe"
+            },
+            "created": "Un nuevo Plantilla Recipe ha sido creado con el identificador {{ param }}",
+            "updated": "Un Plantilla Recipe ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Plantilla Recipe ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Plantilla Recipe {{ id }}?"
+            },
+            "detail": {
+                "title": "Plantilla Recipe"
+            },
+            "nombre": "Nombre",
+            "texto": "Texto",
+            "medico": "Medico"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "innapcitasApp": {
+        "estatusPago": {
+            "home": {
+                "title": "Estatus Pagos",
+                "createLabel": "Crear nuevo Estatus Pago",
+                "createOrEditLabel": "Crear o editar Estatus Pago",
+                "search": "Search for Estatus Pago"
+            },
+            "created": "Un nuevo Estatus Pago ha sido creado con el identificador {{ param }}",
+            "updated": "Un Estatus Pago ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Estatus Pago ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Estatus Pago {{ id }}?"
+            },
+            "detail": {
+                "title": "Estatus Pago"
+            },
+            "nombre": "Nombre",
+            "descripcion": "Descripcion"
+        }
+    }
+}

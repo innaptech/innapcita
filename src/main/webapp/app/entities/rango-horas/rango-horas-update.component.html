@@ -1,0 +1,97 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-rango-horas-heading" jhiTranslate="innapcitasApp.rangoHoras.home.createOrEditLabel">Create or edit a Rango Horas</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!rangoHoras.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="rangoHoras.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.rangoHoras.horaInicio" for="field_horaInicio">Hora Inicio</label>
+                    <input type="number" class="form-control" name="horaInicio" id="field_horaInicio"
+                        [(ngModel)]="rangoHoras.horaInicio" required/>
+                    <div [hidden]="!(editForm.controls.horaInicio?.dirty && editForm.controls.horaInicio?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.horaInicio?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.horaInicio?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.rangoHoras.minutoInicio" for="field_minutoInicio">Minuto Inicio</label>
+                    <input type="number" class="form-control" name="minutoInicio" id="field_minutoInicio"
+                        [(ngModel)]="rangoHoras.minutoInicio" required/>
+                    <div [hidden]="!(editForm.controls.minutoInicio?.dirty && editForm.controls.minutoInicio?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.minutoInicio?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.minutoInicio?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.rangoHoras.horaFin" for="field_horaFin">Hora Fin</label>
+                    <input type="number" class="form-control" name="horaFin" id="field_horaFin"
+                        [(ngModel)]="rangoHoras.horaFin" required/>
+                    <div [hidden]="!(editForm.controls.horaFin?.dirty && editForm.controls.horaFin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.horaFin?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.horaFin?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.rangoHoras.minutoFin" for="field_minutoFin">Minuto Fin</label>
+                    <input type="number" class="form-control" name="minutoFin" id="field_minutoFin"
+                        [(ngModel)]="rangoHoras.minutoFin" required/>
+                    <div [hidden]="!(editForm.controls.minutoFin?.dirty && editForm.controls.minutoFin?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.minutoFin?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.minutoFin?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.rangoHoras.horarioDisponibilidad" for="field_horarioDisponibilidad">Horario Disponibilidad</label>
+                    <select class="form-control" id="field_horarioDisponibilidad" name="horarioDisponibilidad" [(ngModel)]="rangoHoras.horarioDisponibilidad"  required>
+                        <option *ngIf="!editForm.value.horarioDisponibilidad" [ngValue]="null" selected></option>
+                        <option [ngValue]="horarioDisponibilidadOption.id === rangoHoras.horarioDisponibilidad?.id ? rangoHoras.horarioDisponibilidad : horarioDisponibilidadOption" *ngFor="let horarioDisponibilidadOption of horariodisponibilidads; trackBy: trackHorarioDisponibilidadById">{{horarioDisponibilidadOption.diaSemana}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.horarioDisponibilidad?.dirty && editForm.controls.horarioDisponibilidad?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.horarioDisponibilidad?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

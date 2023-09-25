@@ -1,0 +1,23 @@
+{
+    "innapcitasApp": {
+        "monedaCambio": {
+            "home": {
+                "title": "Moneda Cambios",
+                "createLabel": "Crear nuevo Moneda Cambio",
+                "createOrEditLabel": "Crear o editar Moneda Cambio"
+            },
+            "created": "Un nuevo Moneda Cambio ha sido creado con el identificador {{ param }}",
+            "updated": "Un Moneda Cambio ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Moneda Cambio ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Moneda Cambio {{ id }}?"
+            },
+            "detail": {
+                "title": "Moneda Cambio"
+            },
+            "nombreMoneda": "Nombre Moneda",
+            "simbolo": "Simbolo",
+            "montoCambio": "Monto Cambio"
+        }
+    }
+}

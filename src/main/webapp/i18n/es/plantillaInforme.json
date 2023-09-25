@@ -1,0 +1,23 @@
+{
+    "innapcitasApp": {
+        "plantillaInforme": {
+            "home": {
+                "title": "Plantilla Informes",
+                "createLabel": "Crear nuevo Plantilla Informe",
+                "createOrEditLabel": "Crear o editar Plantilla Informe"
+            },
+            "created": "Un nuevo Plantilla Informe ha sido creado con el identificador {{ param }}",
+            "updated": "Un Plantilla Informe ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Plantilla Informe ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Plantilla Informe {{ id }}?"
+            },
+            "detail": {
+                "title": "Plantilla Informe"
+            },
+            "nombre": "Nombre",
+            "texto": "Texto",
+            "especialidad": "Especialidad"
+        }
+    }
+}

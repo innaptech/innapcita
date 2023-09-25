@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-pago-heading" jhiTranslate="innapcitasApp.pago.home.createOrEditLabel">Create or edit a Pago</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!pago.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="pago.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.pago.monto" for="field_monto">Monto</label>
+                    <input type="number" class="form-control" name="monto" id="field_monto"
+                        [(ngModel)]="pago.monto" required/>
+                    <div [hidden]="!(editForm.controls.monto?.dirty && editForm.controls.monto?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.monto?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.monto?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.pago.fechaEmision" for="field_fechaEmision">Fecha Emision</label>
+                    <div class="d-flex">
+                        <input id="field_fechaEmision" type="datetime-local" class="form-control" name="fechaEmision" [(ngModel)]="fechaEmision" placeholder="YYYY-MM-DD HH:mm"
+                        required/>
+                    </div>
+                    <div [hidden]="!(editForm.controls.fechaEmision?.dirty && editForm.controls.fechaEmision?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fechaEmision?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.fechaEmision?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.pago.fechaEstatus" for="field_fechaEstatus">Fecha Estatus</label>
+                    <div class="d-flex">
+                        <input id="field_fechaEstatus" type="datetime-local" class="form-control" name="fechaEstatus" [(ngModel)]="fechaEstatus" placeholder="YYYY-MM-DD HH:mm"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.pago.cita" for="field_cita">Cita</label>
+                    <select class="form-control" id="field_cita" name="cita" [(ngModel)]="pago.cita"  required>
+                        <option *ngIf="!editForm.value.cita" [ngValue]="null" selected></option>
+                        <option [ngValue]="citaOption.id === pago.cita?.id ? pago.cita : citaOption" *ngFor="let citaOption of citas; trackBy: trackCitaById">{{citaOption.id}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.cita?.dirty && editForm.controls.cita?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.cita?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.pago.estatusPago" for="field_estatusPago">Estatus Pago</label>
+                    <select class="form-control" id="field_estatusPago" name="estatusPago" [(ngModel)]="pago.estatusPago"  required>
+                        <option *ngIf="!editForm.value.estatusPago" [ngValue]="null" selected></option>
+                        <option [ngValue]="estatusPagoOption.id === pago.estatusPago?.id ? pago.estatusPago : estatusPagoOption" *ngFor="let estatusPagoOption of estatuspagos; trackBy: trackEstatusPagoById">{{estatusPagoOption.nombre}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.estatusPago?.dirty && editForm.controls.estatusPago?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.estatusPago?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.pago.tipoPago" for="field_tipoPago">Tipo Pago</label>
+                    <select class="form-control" id="field_tipoPago" name="tipoPago" [(ngModel)]="pago.tipoPago"  required>
+                        <option *ngIf="!editForm.value.tipoPago" [ngValue]="null" selected></option>
+                        <option [ngValue]="tipoPagoOption.id === pago.tipoPago?.id ? pago.tipoPago : tipoPagoOption" *ngFor="let tipoPagoOption of tipopagos; trackBy: trackTipoPagoById">{{tipoPagoOption.nombre}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.tipoPago?.dirty && editForm.controls.tipoPago?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.tipoPago?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

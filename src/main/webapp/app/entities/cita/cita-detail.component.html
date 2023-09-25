@@ -1,0 +1,123 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cita">
+            <h2><span jhiTranslate="innapcitasApp.cita.detail.title">Cita</span> {{cita.id}}</h2>
+            <!-- Historias nino -->
+            <button style="animation: pulse 2s infinite;" *ngIf="cita.pacienteNino && !cita.historiaPersonalNinos[0].primerNombre" [routerLink]="['/historia-personal-nino', cita.historiaPersonalNinos[0].id, 'edit']" type="button" class="btn btn-success">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="innapcitasApp.cita.llenarHistoriaPersonalNino"> Llenar historia</span>
+            </button>
+            <button *ngIf="cita.pacienteNino && cita.historiaPersonalNinos[0].primerNombre" [routerLink]="['/historia-personal-nino', cita.historiaPersonalNinos[0].id, 'edit']" type="button" class="btn btn-success">
+                <fa-icon [icon]="'eye'"></fa-icon>&nbsp;<span jhiTranslate="innapcitasApp.cita.historiaPersonalNino"> Ver historia</span>
+            </button>
+
+            <button *ngIf="cita.pacienteNino && !cita.historiaMedicaNinos[0].primerNombre" [routerLink]="['/historia-medica-nino', cita.historiaMedicaNinos[0].id, 'edit']" type="button" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="innapcitasApp.cita.llenarHistoriaMedicaNino"> Llenar historia</span>
+            </button>
+            <button *ngIf="cita.pacienteNino && cita.historiaMedicaNinos[0].primerNombre" [routerLink]="['/historia-medica-nino', cita.historiaMedicaNinos[0].id, 'edit']" type="button" class="btn btn-primary">
+                <fa-icon [icon]="'eye'"></fa-icon>&nbsp;<span jhiTranslate="innapcitasApp.cita.historiaMedicaNino"> Ver historia</span>
+            </button>
+
+            <!-- Historias adulto -->
+            <button style="animation: pulse 2s infinite;" *ngIf="!cita.pacienteNino && !cita.historiaPersonalAdultos[0].primerNombre" [routerLink]="['/historia-personal-adulto', cita.historiaPersonalAdultos[0].id, 'edit']" type="button" class="btn btn-success">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="innapcitasApp.cita.llenarHistoriaPersonalAdulto"> Llenar historia</span>
+            </button>
+            <button *ngIf="!cita.pacienteNino && cita.historiaPersonalAdultos[0].primerNombre" [routerLink]="['/historia-personal-adulto', cita.historiaPersonalAdultos[0].id, 'edit']" type="button" class="btn btn-success">
+                <fa-icon [icon]="'eye'"></fa-icon>&nbsp;<span jhiTranslate="innapcitasApp.cita.historiaPersonalAdulto"> Ver historia</span>
+            </button>
+
+            <button *ngIf="!cita.pacienteNino && !cita.historiaMedicaAdultos[0].primerNombre" [routerLink]="['/historia-medica-adulto', cita.historiaMedicaAdultos[0].id, 'edit']" type="button" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="innapcitasApp.cita.llenarHistoriaMedicaAdulto"> Llenar historia</span>
+            </button>
+            <button *ngIf="!cita.pacienteNino && cita.historiaMedicaAdultos[0].primerNombre" [routerLink]="['/historia-medica-adulto', cita.historiaMedicaAdultos[0].id, 'edit']" type="button" class="btn btn-primary">
+                <fa-icon [icon]="'eye'"></fa-icon>&nbsp;<span jhiTranslate="innapcitasApp.cita.historiaMedicaAdulto"> Ver historia</span>
+            </button>
+
+            <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO']" [routerLink]="['/evolucion-paciente', cita.evolucionPaciente.id, 'edit']" type="button" class="btn btn-secondary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Evolución del Paciente</span>
+            </button>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.cita.fecha">Fecha</span></dt>
+                <dd>
+                    <span>{{cita.fecha  | date:'medium'}} <i *ngIf="cita.fecha">{{zonaHoraria}}</i></span>
+                </dd>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.user" for="field_paciente"><b>Usuario</b> </label> <a *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO']" [routerLink]="['/cita/paciente-detail', cita.paciente.login, 'view' ]">{{cita.paciente?.id}}</a>
+                    <input disabled type="text" class="form-control" id="field_paciente" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
+                           [(ngModel)]="cita.paciente.login" minlength=1 maxlength=50 #firstNameInput="ngModel" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.paciente" for="field_paciente">Paciente</label>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="form-control-label" jhiTranslate="settings.form.firstname" for="field_paciente">Nombre</label>
+                                <input disabled type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
+                                       [(ngModel)]="cita.paciente.firstName" minlength=1 maxlength=50 #firstNameInput="ngModel" required>
+                            </div>
+                            <div class="col-sm">
+                                <label class="form-control-label" jhiTranslate="settings.form.lastname" for="field_paciente">Apellido</label>
+                                <input disabled type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'settings.form.lastname.placeholder' | translate}}"
+                                       [(ngModel)]="cita.paciente.lastName" minlength=1 maxlength=50 #lastNameInput="ngModel" required>
+                            </div>
+                        </div>
+                        <div class="row">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="form-control-label" jhiTranslate="settings.form.telefono" for="field_paciente">Telefono</label>
+                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="{{'settings.form.telefono.placeholder' | translate}}"
+                                       [(ngModel)]="cita.paciente.telefono" #telefonoInput="ngModel" readonly>
+                            </div>
+                            <div class="col-sm" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO']">
+                                <label class="form-control-label" jhiTranslate="settings.form.numeroHistoria" for="field_paciente">Numero Historia</label>
+                                <input type="text" class="form-control" id="numeroHistoria" name="numeroHistoria" placeholder="{{'settings.form.numeroHistoria.placeholder' | translate}}"
+                                       [(ngModel)]="cita.paciente.numeroHistoria" #numeroHistoriaInput="ngModel" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <dt><span jhiTranslate="innapcitasApp.cita.especialidadMedico">Especialidad Medico</span></dt>
+                <dd>
+                    <div *ngIf="cita.especialidadMedico">
+                        {{cita.especialidadMedico.medico.firstName}} {{cita.especialidadMedico.medico.lastName}} - {{cita.especialidadMedico.especialidad.especialidad}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.cita.especialidad">Especialidad</span></dt>
+                <dd>
+                    <div *ngIf="cita.especialidad">
+                        {{cita.especialidad?.especialidad}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.cita.tipoConsulta">Tipo Consulta</span></dt>
+                <dd>
+                    <div *ngIf="cita.tipoConsulta">
+                        {{cita.tipoConsulta?.nombre}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.cita.estatusCita">Estatus Cita</span></dt>
+                <dd>
+                    <div *ngIf="cita.estatusCita">
+                        {{cita.estatusCita?.nombre}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.cita.notas">Notas</span></dt>
+                <dd>
+                    <span>{{cita.notas}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cita', cita.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

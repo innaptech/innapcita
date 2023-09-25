@@ -1,0 +1,22 @@
+{
+    "innapcitasApp": {
+        "emailCita": {
+            "home": {
+                "title": "Email Citas",
+                "createLabel": "Crear nuevo Email Cita",
+                "createOrEditLabel": "Crear o editar Email Cita"
+            },
+            "created": "Un nuevo Email Cita ha sido creado con el identificador {{ param }}",
+            "updated": "Un Email Cita ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Email Cita ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Email Cita {{ id }}?"
+            },
+            "detail": {
+                "title": "Email Cita"
+            },
+            "titulo": "Titulo",
+            "mensaje": "Mensaje"
+        }
+    }
+}

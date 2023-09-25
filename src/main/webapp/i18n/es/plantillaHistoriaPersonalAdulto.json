@@ -1,0 +1,23 @@
+{
+    "innapcitasApp": {
+        "plantillaHistoriaPersonalAdulto": {
+            "home": {
+                "title": "Plantilla Datos Personales de Adultos",
+                "createLabel": "Crear nuevo Plantilla Datos Personales de Adulto",
+                "createOrEditLabel": "Crear o editar Plantilla Datos Personales de Adulto"
+            },
+            "created": "Un nuevo Plantilla Datos Personales de Adulto ha sido creado con el identificador {{ param }}",
+            "updated": "Un Plantilla Datos Personales de Adulto ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Plantilla Datos Personales de Adulto ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Plantilla Datos Personales de Adulto {{ id }}?"
+            },
+            "detail": {
+                "title": "Plantilla Datos Personales de Adulto"
+            },
+            "nombre": "Nombre",
+            "contenido": "Contenido",
+            "activo": "Activo"
+        }
+    }
+}

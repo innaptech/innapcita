@@ -1,0 +1,345 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="historiaMedicaNino">
+            <h2><span jhiTranslate="innapcitasApp.historiaMedicaNino.detail.title">Historia Medica Nino</span> {{historiaMedicaNino.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.primerNombre">Primer Nombre</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.primerNombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.primerApellido">Primer Apellido</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.primerApellido}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.email">Email</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.cedula">Cedula</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.cedula}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.abuelosViven">Abuelos Viven</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.abuelosViven}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.edadAbuelos">Edad Abuelos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.edadAbuelos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.numeroAbuelos">Numero Abuelos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.numeroAbuelos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadAbuelos">Enfermedad Abuelos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadAbuelos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.tiosViven">Tios Viven</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.tiosViven}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.edadTios">Edad Tios</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.edadTios}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.numeroTios">Numero Tios</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.numeroTios}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadTios">Enfermedad Tios</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadTios}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.padreVive">Padre Vive</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.padreVive}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.edadPadre">Edad Padre</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.edadPadre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.numeroPadre">Numero Padre</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.numeroPadre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadPadre">Enfermedad Padre</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadPadre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.madreVive">Madre Vive</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.madreVive}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.edadMadre">Edad Madre</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.edadMadre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.numeroMadre">Numero Madre</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.numeroMadre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadMadre">Enfermedad Madre</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadMadre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.hermanosViven">Hermanos Viven</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.hermanosViven}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.edadHermanos">Edad Hermanos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.edadHermanos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.numeroHermanos">Numero Hermanos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.numeroHermanos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadHermanos">Enfermedad Hermanos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadHermanos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.esposoVive">Esposo Vive</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.esposoVive}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.edadEsposo">Edad Esposo</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.edadEsposo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.numeroEsposo">Numero Esposo</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.numeroEsposo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadEsposo">Enfermedad Esposo</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadEsposo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.sarampion">Sarampion</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.sarampion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.renales">Renales</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.renales}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.vertigos">Vertigos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.vertigos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.cardiacos">Cardiacos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.cardiacos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.dolorDeCabeza">Dolor De Cabeza</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.dolorDeCabeza}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.lechina">Lechina</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.lechina}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.alergias">Alergias</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.alergias}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.diarreas">Diarreas</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.diarreas}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.varices">Varices</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.varices}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.hipertensionArterial">Hipertension Arterial</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.hipertensionArterial}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.rubeola">Rubeola</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.rubeola}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.neurologicos">Neurologicos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.neurologicos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.otorrinolaringologos">Otorrinolaringologos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.otorrinolaringologos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.catarros">Catarros</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.catarros}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadMental">Enfermedad Mental</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadMental}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.parotiditis">Parotiditis</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.parotiditis}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.sobrepeso">Sobrepeso</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.sobrepeso}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.reumaticos">Reumaticos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.reumaticos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.infecciones">Infecciones</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.infecciones}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.intervencionQuirurgica">Intervencion Quirurgica</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.intervencionQuirurgica}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.parasitosis">Parasitosis</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.parasitosis}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.epilepsia">Epilepsia</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.epilepsia}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.dermatologicos">Dermatologicos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.dermatologicos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.pulmonares">Pulmonares</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.pulmonares}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.trastornosDelAprendizaje">Trastornos Del Aprendizaje</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.trastornosDelAprendizaje}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.tiroides">Tiroides</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.tiroides}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.asma">Asma</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.asma}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.dolorDeColumna">Dolor De Columna</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.dolorDeColumna}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.tuberculosis">Tuberculosis</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.tuberculosis}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.traumatismosCraneoencefalicos">Traumatismos Craneoencefalicos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.traumatismosCraneoencefalicos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.mareos">Mareos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.mareos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.desmayos">Desmayos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.desmayos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.muscularOFractura">Muscular O Fractura</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.muscularOFractura}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.intestinales">Intestinales</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.intestinales}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadDeTransmisionSexual">Enfermedad De Transmision Sexual</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadDeTransmisionSexual}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.estomacales">Estomacales</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.estomacales}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.higado">Higado</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.higado}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.colesterolTrigliceridos">Colesterol Trigliceridos</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.colesterolTrigliceridos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadYAnoDelDiagnostico1">Enfermedad Y Ano Del Diagnostico 1</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadYAnoDelDiagnostico1}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.tratamientoIndicadoOIntervencionQuirurgica1">Tratamiento Indicado O Intervencion Quirurgica 1</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.tratamientoIndicadoOIntervencionQuirurgica1}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadYAnoDelDiagnostico2">Enfermedad Y Ano Del Diagnostico 2</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadYAnoDelDiagnostico2}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.tratamientoIndicadoOIntervencionQuirurgica2">Tratamiento Indicado O Intervencion Quirurgica 2</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.tratamientoIndicadoOIntervencionQuirurgica2}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.enfermedadYAnoDelDiagnostico3">Enfermedad Y Ano Del Diagnostico 3</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.enfermedadYAnoDelDiagnostico3}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.tratamientoIndicadoOIntervencionQuirurgica3">Tratamiento Indicado O Intervencion Quirurgica 3</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.tratamientoIndicadoOIntervencionQuirurgica3}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.medicamento1">Medicamento 1</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.medicamento1}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.dosisDiaria1">Dosis Diaria 1</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.dosisDiaria1}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.medicamento2">Medicamento 2</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.medicamento2}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.dosisDiaria2">Dosis Diaria 2</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.dosisDiaria2}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.medicamento3">Medicamento 3</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.medicamento3}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.dosisDiaria3">Dosis Diaria 3</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.dosisDiaria3}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.notas">Notas</span></dt>
+                <dd>
+                    <span>{{historiaMedicaNino.notas}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaMedicaNino.paciente">Cita</span></dt>
+                <dd>
+                    <div *ngIf="historiaMedicaNino.paciente">
+                        <a [routerLink]="['/cita', historiaMedicaNino.paciente?.id, 'view']">{{historiaMedicaNino.paciente?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/historia-medica-nino', historiaMedicaNino.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+{
+    "innapcitasApp": {
+        "historiaPersonalNino": {
+            "home": {
+                "title": "Historia Personal Ninos",
+                "createLabel": "Create a new Historia Personal Nino",
+                "createOrEditLabel": "Create or edit a Historia Personal Nino"
+            },
+            "created": "A new Historia Personal Nino is created with identifier {{ param }}",
+            "updated": "A Historia Personal Nino is updated with identifier {{ param }}",
+            "deleted": "A Historia Personal Nino is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Historia Personal Nino {{ id }}?"
+            },
+            "detail": {
+                "title": "Historia Personal Nino"
+            },
+            "primerNombre": "Primer Nombre",
+            "segundoNombre": "Segundo Nombre",
+            "primerApellido": "Primer Apellido",
+            "segundoApellido": "Segundo Apellido",
+            "edad": "Edad",
+            "lugarNacimiento": "Lugar Nacimiento",
+            "fechaNacimiento": "Fecha Nacimiento",
+            "cedula": "Cedula",
+            "nacionalidad": "Nacionalidad",
+            "profesion": "Profesion",
+            "ocupacionActual": "Ocupacion Actual",
+            "religion": "Religion",
+            "direccionHabitacion": "Direccion Habitacion",
+            "ciudad": "Ciudad",
+            "estado": "Estado",
+            "pais": "Pais",
+            "telefonoFijo": "Telefono Fijo",
+            "telefonoCelular": "Telefono Celular",
+            "email": "Email",
+            "familiarMedico": "Familiar Medico",
+            "carnetFamiliarMedico": "Carnet Familiar Medico",
+            "especialidadFamiliarMedico": "Especialidad Familiar Medico",
+            "lugarTrabajoFamiliarMedico": "Lugar Trabajo Familiar Medico",
+            "appellidosNombresRepresentante": "Appellidos Nombres Representante",
+            "lugarFechaNacimientoRepresentante": "Lugar Fecha Nacimiento Representante",
+            "cedulaRepresentante": "Cedula Representante",
+            "edadRepresentante": "Edad Representante",
+            "telefonoCelularRepresentante": "Telefono Celular Representante",
+            "telefonoHabitacionRepresentante": "Telefono Habitacion Representante",
+            "quienTraeNinoConsulta": "Quien Trae Nino Consulta",
+            "cantidadHermanos": "Cantidad Hermanos",
+            "posicionHermano": "Posicion Hermano",
+            "relacionMadre": "Relacion Madre",
+            "relacionPadre": "Relacion Padre",
+            "relacionHermanos": "Relacion Hermanos",
+            "relacionOtros": "Relacion Otros",
+            "gradoAfectividadNino": "Grado Afectividad Nino",
+            "caracterNino": "Caracter Nino",
+            "quienCuidaNinoPadresTrabajan": "Quien Cuida Nino Padres Trabajan",
+            "sexo": "Sexo",
+            "referidoPor": "Referido Por",
+            "estadoCivil": "Estado Civil",
+            "tipoConsulta": "Tipo Consulta",
+            "especialidad": "Especialidad",
+            "gradoInstruccionMadre": "Grado Instruccion Madre",
+            "gradoInstruccionPadre": "Grado Instruccion Padre",
+            "gradoInstruccionOtro": "Grado Instruccion Otro",
+            "paciente": "Paciente"
+        }
+    }
+}

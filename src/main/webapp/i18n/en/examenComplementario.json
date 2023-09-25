@@ -1,0 +1,23 @@
+{
+    "innapcitasApp": {
+        "examenComplementario": {
+            "home": {
+                "title": "Examen Complementarios",
+                "createLabel": "Create a new Examen Complementario",
+                "createOrEditLabel": "Create or edit a Examen Complementario"
+            },
+            "created": "A new Examen Complementario is created with identifier {{ param }}",
+            "updated": "A Examen Complementario is updated with identifier {{ param }}",
+            "deleted": "A Examen Complementario is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Examen Complementario {{ id }}?"
+            },
+            "detail": {
+                "title": "Examen Complementario"
+            },
+            "descripcion": "Descripcion",
+            "archivo": "Archivo",
+            "evolucionPaciente": "Evolucion Paciente"
+        }
+    }
+}

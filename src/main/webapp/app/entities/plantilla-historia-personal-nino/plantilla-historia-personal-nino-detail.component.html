@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="plantillaHistoriaPersonalNino">
+            <h2><span jhiTranslate="innapcitasApp.plantillaHistoriaPersonalNino.detail.title">Plantilla Historia Personal Nino</span> {{plantillaHistoriaPersonalNino.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.plantillaHistoriaPersonalNino.nombre">Nombre</span></dt>
+                <dd>
+                    <span>{{plantillaHistoriaPersonalNino.nombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.plantillaHistoriaPersonalNino.contenido">Contenido</span></dt>
+                <dd>
+                    <span>{{plantillaHistoriaPersonalNino.contenido}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.plantillaHistoriaPersonalNino.activo">Activo</span></dt>
+                <dd>
+                    <span>{{plantillaHistoriaPersonalNino.activo}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/plantilla-historia-personal-nino', plantillaHistoriaPersonalNino.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

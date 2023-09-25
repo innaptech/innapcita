@@ -1,0 +1,254 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="innapcitasApp.historiaMedicaAdulto.home.title">Historia Medica Adultos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-historia-medica-adulto" [routerLink]="['/historia-medica-adulto/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="innapcitasApp.historiaMedicaAdulto.home.createLabel">
+            Create new Historia Medica Adulto
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="historiaMedicaAdultos">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="primerNombre"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.primerNombre">Primer Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="primerApellido"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.primerApellido">Primer Apellido</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cedula"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.cedula">Cedula</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="abuelosViven"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.abuelosViven">Abuelos Viven</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edadAbuelos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadAbuelos">Edad Abuelos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numeroAbuelos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroAbuelos">Numero Abuelos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadAbuelos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadAbuelos">Enfermedad Abuelos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tiosViven"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.tiosViven">Tios Viven</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edadTios"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadTios">Edad Tios</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numeroTios"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroTios">Numero Tios</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadTios"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadTios">Enfermedad Tios</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="padreVive"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.padreVive">Padre Vive</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edadPadre"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadPadre">Edad Padre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numeroPadre"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroPadre">Numero Padre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadPadre"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadPadre">Enfermedad Padre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="madreVive"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.madreVive">Madre Vive</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edadMadre"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadMadre">Edad Madre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numeroMadre"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroMadre">Numero Madre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadMadre"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadMadre">Enfermedad Madre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hermanosViven"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.hermanosViven">Hermanos Viven</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edadHermanos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadHermanos">Edad Hermanos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numeroHermanos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroHermanos">Numero Hermanos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadHermanos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadHermanos">Enfermedad Hermanos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="esposoVive"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.esposoVive">Esposo Vive</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edadEsposo"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadEsposo">Edad Esposo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numeroEsposo"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroEsposo">Numero Esposo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadEsposo"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadEsposo">Enfermedad Esposo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hijosViven"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.hijosViven">Hijos Viven</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edadHijos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadHijos">Edad Hijos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numeroHijos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroHijos">Numero Hijos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadHijos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadHijos">Enfermedad Hijos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hijasViven"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.hijasViven">Hijas Viven</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edadHijas"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.edadHijas">Edad Hijas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="numeroHijas"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.numeroHijas">Numero Hijas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadHijas"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadHijas">Enfermedad Hijas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sarampion"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.sarampion">Sarampion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="renales"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.renales">Renales</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="vertigos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.vertigos">Vertigos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cardiacos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.cardiacos">Cardiacos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dolorDeCabeza"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.dolorDeCabeza">Dolor De Cabeza</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lechina"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.lechina">Lechina</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="alergias"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.alergias">Alergias</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="diarreas"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.diarreas">Diarreas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="varices"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.varices">Varices</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="hipertensionArterial"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.hipertensionArterial">Hipertension Arterial</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rubeola"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.rubeola">Rubeola</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="neurologicos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.neurologicos">Neurologicos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="otorrinolaringologos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.otorrinolaringologos">Otorrinolaringologos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="catarros"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.catarros">Catarros</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadMental"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadMental">Enfermedad Mental</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="parotiditis"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.parotiditis">Parotiditis</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sobrepeso"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.sobrepeso">Sobrepeso</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="reumaticos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.reumaticos">Reumaticos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="infecciones"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.infecciones">Infecciones</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="intervencionQuirurgica"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.intervencionQuirurgica">Intervencion Quirurgica</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="parasitosis"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.parasitosis">Parasitosis</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="epilepsia"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.epilepsia">Epilepsia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dermatologicos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.dermatologicos">Dermatologicos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pulmonares"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.pulmonares">Pulmonares</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="trastornosDelAprendizaje"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.trastornosDelAprendizaje">Trastornos Del Aprendizaje</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tiroides"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.tiroides">Tiroides</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="asma"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.asma">Asma</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dolorDeColumna"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.dolorDeColumna">Dolor De Columna</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tuberculosis"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.tuberculosis">Tuberculosis</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="traumatismosCraneoencefalicos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.traumatismosCraneoencefalicos">Traumatismos Craneoencefalicos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mareos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.mareos">Mareos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="desmayos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.desmayos">Desmayos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="muscularOFractura"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.muscularOFractura">Muscular O Fractura</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="intestinales"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.intestinales">Intestinales</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadDeTransmisionSexual"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadDeTransmisionSexual">Enfermedad De Transmision Sexual</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estomacales"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.estomacales">Estomacales</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="higado"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.higado">Higado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="colesterolTrigliceridos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.colesterolTrigliceridos">Colesterol Trigliceridos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="desordenMenstrual"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.desordenMenstrual">Desorden Menstrual</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="usoDeMetodoAnticonceptivo"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.usoDeMetodoAnticonceptivo">Uso De Metodo Anticonceptivo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cuantosEmbarazos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.cuantosEmbarazos">Cuantos Embarazos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cuantosAbortos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.cuantosAbortos">Cuantos Abortos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cuantosHijosViven"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.cuantosHijosViven">Cuantos Hijos Viven</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="problemasEnLosSenos"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.problemasEnLosSenos">Problemas En Los Senos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ultimaMenstruacion"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.ultimaMenstruacion">Ultima Menstruacion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadYAnoDelDiagnostico1"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadYAnoDelDiagnostico1">Enfermedad Y Ano Del Diagnostico 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tratamientoIndicadoOIntervencionQuirurgica1"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica1">Tratamiento Indicado O Intervencion Quirurgica 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadYAnoDelDiagnostico2"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadYAnoDelDiagnostico2">Enfermedad Y Ano Del Diagnostico 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tratamientoIndicadoOIntervencionQuirurgica2"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica2">Tratamiento Indicado O Intervencion Quirurgica 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="enfermedadYAnoDelDiagnostico3"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.enfermedadYAnoDelDiagnostico3">Enfermedad Y Ano Del Diagnostico 3</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tratamientoIndicadoOIntervencionQuirurgica3"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica3">Tratamiento Indicado O Intervencion Quirurgica 3</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="medicamento1"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.medicamento1">Medicamento 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dosisDiaria1"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.dosisDiaria1">Dosis Diaria 1</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="medicamento2"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.medicamento2">Medicamento 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dosisDiaria2"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.dosisDiaria2">Dosis Diaria 2</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="medicamento3"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.medicamento3">Medicamento 3</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="dosisDiaria3"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.dosisDiaria3">Dosis Diaria 3</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="notas"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.notas">Notas</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cita.id"><span jhiTranslate="innapcitasApp.historiaMedicaAdulto.cita">Cita</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let historiaMedicaAdulto of historiaMedicaAdultos ;trackBy: trackId">
+                <td><a [routerLink]="['/historia-medica-adulto', historiaMedicaAdulto.id, 'view' ]">{{historiaMedicaAdulto.id}}</a></td>
+                <td>{{historiaMedicaAdulto.primerNombre}}</td>
+                <td>{{historiaMedicaAdulto.primerApellido}}</td>
+                <td>{{historiaMedicaAdulto.email}}</td>
+                <td>{{historiaMedicaAdulto.cedula}}</td>
+                <td>{{historiaMedicaAdulto.abuelosViven}}</td>
+                <td>{{historiaMedicaAdulto.edadAbuelos}}</td>
+                <td>{{historiaMedicaAdulto.numeroAbuelos}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadAbuelos}}</td>
+                <td>{{historiaMedicaAdulto.tiosViven}}</td>
+                <td>{{historiaMedicaAdulto.edadTios}}</td>
+                <td>{{historiaMedicaAdulto.numeroTios}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadTios}}</td>
+                <td>{{historiaMedicaAdulto.padreVive}}</td>
+                <td>{{historiaMedicaAdulto.edadPadre}}</td>
+                <td>{{historiaMedicaAdulto.numeroPadre}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadPadre}}</td>
+                <td>{{historiaMedicaAdulto.madreVive}}</td>
+                <td>{{historiaMedicaAdulto.edadMadre}}</td>
+                <td>{{historiaMedicaAdulto.numeroMadre}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadMadre}}</td>
+                <td>{{historiaMedicaAdulto.hermanosViven}}</td>
+                <td>{{historiaMedicaAdulto.edadHermanos}}</td>
+                <td>{{historiaMedicaAdulto.numeroHermanos}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadHermanos}}</td>
+                <td>{{historiaMedicaAdulto.esposoVive}}</td>
+                <td>{{historiaMedicaAdulto.edadEsposo}}</td>
+                <td>{{historiaMedicaAdulto.numeroEsposo}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadEsposo}}</td>
+                <td>{{historiaMedicaAdulto.hijosViven}}</td>
+                <td>{{historiaMedicaAdulto.edadHijos}}</td>
+                <td>{{historiaMedicaAdulto.numeroHijos}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadHijos}}</td>
+                <td>{{historiaMedicaAdulto.hijasViven}}</td>
+                <td>{{historiaMedicaAdulto.edadHijas}}</td>
+                <td>{{historiaMedicaAdulto.numeroHijas}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadHijas}}</td>
+                <td>{{historiaMedicaAdulto.sarampion}}</td>
+                <td>{{historiaMedicaAdulto.renales}}</td>
+                <td>{{historiaMedicaAdulto.vertigos}}</td>
+                <td>{{historiaMedicaAdulto.cardiacos}}</td>
+                <td>{{historiaMedicaAdulto.dolorDeCabeza}}</td>
+                <td>{{historiaMedicaAdulto.lechina}}</td>
+                <td>{{historiaMedicaAdulto.alergias}}</td>
+                <td>{{historiaMedicaAdulto.diarreas}}</td>
+                <td>{{historiaMedicaAdulto.varices}}</td>
+                <td>{{historiaMedicaAdulto.hipertensionArterial}}</td>
+                <td>{{historiaMedicaAdulto.rubeola}}</td>
+                <td>{{historiaMedicaAdulto.neurologicos}}</td>
+                <td>{{historiaMedicaAdulto.otorrinolaringologos}}</td>
+                <td>{{historiaMedicaAdulto.catarros}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadMental}}</td>
+                <td>{{historiaMedicaAdulto.parotiditis}}</td>
+                <td>{{historiaMedicaAdulto.sobrepeso}}</td>
+                <td>{{historiaMedicaAdulto.reumaticos}}</td>
+                <td>{{historiaMedicaAdulto.infecciones}}</td>
+                <td>{{historiaMedicaAdulto.intervencionQuirurgica}}</td>
+                <td>{{historiaMedicaAdulto.parasitosis}}</td>
+                <td>{{historiaMedicaAdulto.epilepsia}}</td>
+                <td>{{historiaMedicaAdulto.dermatologicos}}</td>
+                <td>{{historiaMedicaAdulto.pulmonares}}</td>
+                <td>{{historiaMedicaAdulto.trastornosDelAprendizaje}}</td>
+                <td>{{historiaMedicaAdulto.tiroides}}</td>
+                <td>{{historiaMedicaAdulto.asma}}</td>
+                <td>{{historiaMedicaAdulto.dolorDeColumna}}</td>
+                <td>{{historiaMedicaAdulto.tuberculosis}}</td>
+                <td>{{historiaMedicaAdulto.traumatismosCraneoencefalicos}}</td>
+                <td>{{historiaMedicaAdulto.mareos}}</td>
+                <td>{{historiaMedicaAdulto.desmayos}}</td>
+                <td>{{historiaMedicaAdulto.muscularOFractura}}</td>
+                <td>{{historiaMedicaAdulto.intestinales}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadDeTransmisionSexual}}</td>
+                <td>{{historiaMedicaAdulto.estomacales}}</td>
+                <td>{{historiaMedicaAdulto.higado}}</td>
+                <td>{{historiaMedicaAdulto.colesterolTrigliceridos}}</td>
+                <td>{{historiaMedicaAdulto.desordenMenstrual}}</td>
+                <td>{{historiaMedicaAdulto.usoDeMetodoAnticonceptivo}}</td>
+                <td>{{historiaMedicaAdulto.cuantosEmbarazos}}</td>
+                <td>{{historiaMedicaAdulto.cuantosAbortos}}</td>
+                <td>{{historiaMedicaAdulto.cuantosHijosViven}}</td>
+                <td>{{historiaMedicaAdulto.problemasEnLosSenos}}</td>
+                <td>{{historiaMedicaAdulto.ultimaMenstruacion}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadYAnoDelDiagnostico1}}</td>
+                <td>{{historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica1}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadYAnoDelDiagnostico2}}</td>
+                <td>{{historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica2}}</td>
+                <td>{{historiaMedicaAdulto.enfermedadYAnoDelDiagnostico3}}</td>
+                <td>{{historiaMedicaAdulto.tratamientoIndicadoOIntervencionQuirurgica3}}</td>
+                <td>{{historiaMedicaAdulto.medicamento1}}</td>
+                <td>{{historiaMedicaAdulto.dosisDiaria1}}</td>
+                <td>{{historiaMedicaAdulto.medicamento2}}</td>
+                <td>{{historiaMedicaAdulto.dosisDiaria2}}</td>
+                <td>{{historiaMedicaAdulto.medicamento3}}</td>
+                <td>{{historiaMedicaAdulto.dosisDiaria3}}</td>
+                <td>{{historiaMedicaAdulto.notas}}</td>
+                <td>
+                    <div *ngIf="historiaMedicaAdulto.cita">
+                        <a [routerLink]="['../cita', historiaMedicaAdulto.cita?.id, 'view' ]" >{{historiaMedicaAdulto.cita?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/historia-medica-adulto', historiaMedicaAdulto.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/historia-medica-adulto', historiaMedicaAdulto.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'historia-medica-adulto', { outlets: { popup: historiaMedicaAdulto.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="historiaMedicaAdultos && historiaMedicaAdultos.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

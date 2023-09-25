@@ -1,0 +1,24 @@
+{
+    "innapcitasApp": {
+        "tipoPago": {
+            "home": {
+                "title": "Tipo Pagos",
+                "createLabel": "Create a new Tipo Pago",
+                "createOrEditLabel": "Create or edit a Tipo Pago",
+                "search": "Search for Tipo Pago"
+            },
+            "created": "A new Tipo Pago is created with identifier {{ param }}",
+            "updated": "A Tipo Pago is updated with identifier {{ param }}",
+            "deleted": "A Tipo Pago is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tipo Pago {{ id }}?"
+            },
+            "detail": {
+                "title": "Tipo Pago"
+            },
+            "nombre": "Nombre",
+            "descripcion": "Descripcion",
+            "instantaneo": "Instantaneo"
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "innapcitasApp": {
+        "gradoInstruccion": {
+            "home": {
+                "title": "Grado Instruccions",
+                "createLabel": "Crear nuevo Grado Instruccion",
+                "createOrEditLabel": "Crear o editar Grado Instruccion"
+            },
+            "created": "Un nuevo Grado Instruccion ha sido creado con el identificador {{ param }}",
+            "updated": "Un Grado Instruccion ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Grado Instruccion ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Grado Instruccion {{ id }}?"
+            },
+            "detail": {
+                "title": "Grado Instruccion"
+            },
+            "nombre": "Nombre",
+            "descripcion": "Descripcion"
+        }
+    }
+}

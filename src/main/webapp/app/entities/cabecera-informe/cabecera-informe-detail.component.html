@@ -1,0 +1,31 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cabeceraInforme">
+            <h2><span jhiTranslate="innapcitasApp.cabeceraInforme.detail.title">Cabecera Informe</span> {{cabeceraInforme.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.cabeceraInforme.nombre">Nombre</span></dt>
+                <dd>
+                    <span>{{cabeceraInforme.nombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.cabeceraInforme.cabecera">Cabecera</span></dt>
+                <dd>
+                    <span>{{cabeceraInforme.cabecera}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cabecera-informe', cabeceraInforme.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

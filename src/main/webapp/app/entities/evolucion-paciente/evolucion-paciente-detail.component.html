@@ -1,0 +1,173 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="evolucionPaciente">
+            <h2><span jhiTranslate="innapcitasApp.evolucionPaciente.detail.title">Evolucion Paciente</span> {{evolucionPaciente.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.fecha">Fecha</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.fecha}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.peso">Peso</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.peso}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.tAAcostada">T A Acostada</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.tAAcostada}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.tASentada">T A Sentada</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.tASentada}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.tAParada">T A Parada</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.tAParada}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.talla">Talla</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.talla}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.imc">Imc</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.imc}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.firma">Firma</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.firma}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.nuevosSintomas">Nuevos Sintomas</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.nuevosSintomas}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadMano">Lateralidad Mano</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.lateralidadMano}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadPierna">Lateralidad Pierna</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.lateralidadPierna}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadOjo">Lateralidad Ojo</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.lateralidadOjo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.lateralidadOido">Lateralidad Oido</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.lateralidadOido}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenPiel">Examen Piel</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenPiel}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenCabeza">Examen Cabeza</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenCabeza}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenOjos">Examen Ojos</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenOjos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenOrl">Examen Orl</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenOrl}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenCuello">Examen Cuello</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenCuello}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenCardiovascular">Examen Cardiovascular</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenCardiovascular}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenPulmonar">Examen Pulmonar</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenPulmonar}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenAbdomen">Examen Abdomen</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenAbdomen}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenGenitourinario">Examen Genitourinario</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenGenitourinario}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenNeurologico">Examen Neurologico</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenNeurologico}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenArticular">Examen Articular</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenArticular}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenNeuromuscular">Examen Neuromuscular</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenNeuromuscular}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.impresionesDiagnosticas">Impresiones Diagnosticas</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.impresionesDiagnosticas}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.tratamiento">Tratamiento</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.tratamiento}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.recomendaciones">Recomendaciones</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.recomendaciones}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.proximaConsulta">Proxima Consulta</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.proximaConsulta}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.frecuenciaCardiaca">Frecuencia Cardiaca</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.frecuenciaCardiaca}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.frecuenciaRespiratoria">Frecuencia Respiratoria</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.frecuenciaRespiratoria}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.examenMental">Examen Mental</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.examenMental}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.informacionRelevante">Informacion Relevante</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.informacionRelevante}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.recomendacionesGenerales">Recomendaciones Generales</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.recomendacionesGenerales}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.recipe">Recipe</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.recipe}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.indicaciones">Indicaciones</span></dt>
+                <dd>
+                    <span>{{evolucionPaciente.indicaciones}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.evolucionPaciente.cita">Cita</span></dt>
+                <dd>
+                    <div *ngIf="evolucionPaciente.cita">
+                        <a [routerLink]="['/cita', evolucionPaciente.cita?.id, 'view']">{{evolucionPaciente.cita?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/evolucion-paciente', evolucionPaciente.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

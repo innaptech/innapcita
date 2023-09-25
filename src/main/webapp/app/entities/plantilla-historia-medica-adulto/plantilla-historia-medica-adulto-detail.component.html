@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="plantillaHistoriaMedicaAdulto">
+            <h2><span jhiTranslate="innapcitasApp.plantillaHistoriaMedicaAdulto.detail.title">Plantilla Historia Medica Adulto</span> {{plantillaHistoriaMedicaAdulto.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.plantillaHistoriaMedicaAdulto.nombre">Nombre</span></dt>
+                <dd>
+                    <span>{{plantillaHistoriaMedicaAdulto.nombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.plantillaHistoriaMedicaAdulto.contenido">Contenido</span></dt>
+                <dd>
+                    <span>{{plantillaHistoriaMedicaAdulto.contenido}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.plantillaHistoriaMedicaAdulto.activo">Activo</span></dt>
+                <dd>
+                    <span>{{plantillaHistoriaMedicaAdulto.activo}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/plantilla-historia-medica-adulto', plantillaHistoriaMedicaAdulto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

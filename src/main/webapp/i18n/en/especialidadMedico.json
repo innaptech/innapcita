@@ -1,0 +1,26 @@
+{
+    "innapcitasApp": {
+        "especialidadMedico": {
+            "home": {
+                "title": "Servicio de Salud",
+                "createLabel": "Create a new Servicio de Salud",
+                "createOrEditLabel": "Create or edit a Servicio de Salud",
+                "search": "Search for Servicio de Salud"
+            },
+            "created": "A new Servicio de Salud is created with identifier {{ param }}",
+            "updated": "A Servicio de Salud is updated with identifier {{ param }}",
+            "deleted": "A Servicio de Salud is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Servicio de Salud {{ id }}?"
+            },
+            "detail": {
+                "title": "Servicio de Salud"
+            },
+            "montoHora": "Monto Hora",
+            "descripcion": "Descripcion",
+            "montoHoraOnline": "Monto Hora Online",
+            "medico": "Medico",
+            "especialidad": "Especialidad"
+        }
+    }
+}

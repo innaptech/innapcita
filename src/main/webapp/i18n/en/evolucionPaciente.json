@@ -1,0 +1,57 @@
+{
+    "innapcitasApp": {
+        "evolucionPaciente": {
+            "home": {
+                "title": "Evolucion Pacientes",
+                "createLabel": "Create a new Evolucion Paciente",
+                "createOrEditLabel": "Create or edit a Evolucion Paciente"
+            },
+            "created": "A new Evolucion Paciente is created with identifier {{ param }}",
+            "updated": "A Evolucion Paciente is updated with identifier {{ param }}",
+            "deleted": "A Evolucion Paciente is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Evolucion Paciente {{ id }}?"
+            },
+            "detail": {
+                "title": "Evolucion Paciente"
+            },
+            "fecha": "Fecha",
+            "peso": "Peso",
+            "tAAcostada": "T A Acostada",
+            "tASentada": "T A Sentada",
+            "tAParada": "T A Parada",
+            "talla": "Talla",
+            "imc": "Imc",
+            "firma": "Firma",
+            "nuevosSintomas": "Nuevos Sintomas",
+            "lateralidadMano": "Lateralidad Mano",
+            "lateralidadPierna": "Lateralidad Pierna",
+            "lateralidadOjo": "Lateralidad Ojo",
+            "lateralidadOido": "Lateralidad Oido",
+            "examenPiel": "Examen Piel",
+            "examenCabeza": "Examen Cabeza",
+            "examenOjos": "Examen Ojos",
+            "examenOrl": "Examen Orl",
+            "examenCuello": "Examen Cuello",
+            "examenCardiovascular": "Examen Cardiovascular",
+            "examenPulmonar": "Examen Pulmonar",
+            "examenAbdomen": "Examen Abdomen",
+            "examenGenitourinario": "Examen Genitourinario",
+            "examenNeurologico": "Examen Neurologico",
+            "examenArticular": "Examen Articular",
+            "examenNeuromuscular": "Examen Neuromuscular",
+            "impresionesDiagnosticas": "Impresiones Diagnosticas",
+            "tratamiento": "Tratamiento",
+            "recomendaciones": "Recomendaciones",
+            "proximaConsulta": "Proxima Consulta",
+            "frecuenciaCardiaca": "Frecuencia Cardiaca",
+            "frecuenciaRespiratoria": "Frecuencia Respiratoria",
+            "examenMental": "Examen Mental",
+            "informacionRelevante": "Informacion Relevante",
+            "recomendacionesGenerales": "Recomendaciones Generales",
+            "recipe": "Recipe",
+            "indicaciones": "Indicaciones",
+            "cita": "Cita"
+        }
+    }
+}

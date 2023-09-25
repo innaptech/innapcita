@@ -1,0 +1,22 @@
+{
+    "innapcitasApp": {
+        "tipoConsulta": {
+            "home": {
+                "title": "Tipo Consultas",
+                "createLabel": "Crear nuevo Tipo Consulta",
+                "createOrEditLabel": "Crear o editar Tipo Consulta"
+            },
+            "created": "Un nuevo Tipo Consulta ha sido creado con el identificador {{ param }}",
+            "updated": "Un Tipo Consulta ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Tipo Consulta ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Tipo Consulta {{ id }}?"
+            },
+            "detail": {
+                "title": "Tipo Consulta"
+            },
+            "nombre": "Nombre",
+            "descripcion": "Descripcion"
+        }
+    }
+}

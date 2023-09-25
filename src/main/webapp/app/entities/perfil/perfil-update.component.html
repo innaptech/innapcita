@@ -1,0 +1,178 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-perfil-heading" jhiTranslate="innapcitasApp.perfil.home.createOrEditLabel">Create or edit a Perfil</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!perfil.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="perfil.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.foto" for="field_foto">Foto</label>
+                    <div>
+                        <img [src]="'data:' + perfil.fotoContentType + ';base64,' + perfil.foto" style="max-height: 100px;" *ngIf="perfil.foto" alt="perfil image"/>
+                        <div *ngIf="perfil.foto" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{perfil.fotoContentType}}, {{byteSize(perfil.foto)}}</span>
+                            <button type="button" (click)="clearInputImage('foto', 'fotoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_foto" (change)="setFileData($event, perfil, 'foto', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="foto" id="field_foto"
+                        [(ngModel)]="perfil.foto" />
+                    <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
+                        [(ngModel)]="perfil.fotoContentType" />
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_titulo_abreviado">Titulo Abreviado</label>
+                                <input type="text" class="form-control" name="titulo_abreviado" id="field_titulo_abreviado"
+                                       [(ngModel)]="perfil.titulo_abreviado" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_nombre">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" id="field_nombre"
+                                       [(ngModel)]="perfil.nombre" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_appellido">Appelido</label>
+                                <input type="text" class="form-control" name="apellido" id="field_appellido"
+                                       [(ngModel)]="perfil.apellido" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.descripcion" for="field_descripcion">Descripcion</label>
+                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                        [(ngModel)]="perfil.descripcion" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.titulo" for="field_titulo">Titulo</label>
+                    <input type="text" class="form-control" name="titulo" id="field_titulo"
+                           [(ngModel)]="perfil.titulo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.sello" for="field_sello">Sello</label>
+                    <div>
+                        <img [src]="'data:' + perfil.selloContentType + ';base64,' + perfil.sello" style="max-height: 100px;" *ngIf="perfil.sello" alt="perfil image"/>
+                        <div *ngIf="perfil.sello" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{perfil.selloContentType}}, {{byteSize(perfil.sello)}}</span>
+                            <button type="button" (click)="clearInputImage('sello', 'selloContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_sello" (change)="setFileData($event, perfil, 'sello', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="sello" id="field_sello"
+                        [(ngModel)]="perfil.sello" />
+                    <input type="hidden" class="form-control" name="selloContentType" id="field_selloContentType"
+                        [(ngModel)]="perfil.selloContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.profesion" for="field_profesion">Profesion</label>
+                    <input type="text" class="form-control" name="profesion" id="field_profesion"
+                        [(ngModel)]="perfil.profesion" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="perfil.email" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.telefono" for="field_telefono">Telefono</label>
+                    <input type="text" class="form-control" name="telefono" id="field_telefono"
+                        [(ngModel)]="perfil.telefono" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.direccion" for="field_direccion">Direccion</label>
+                    <input type="text" class="form-control" name="direccion" id="field_direccion"
+                        [(ngModel)]="perfil.direccion" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.experiencia" for="field_experiencia">Experiencia</label>
+                    <input type="text" class="form-control" name="experiencia" id="field_experiencia"
+                        [(ngModel)]="perfil.experiencia" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.reconocimientos" for="field_reconocimientos">Reconocimientos</label>
+                    <input type="text" class="form-control" name="reconocimientos" id="field_reconocimientos"
+                        [(ngModel)]="perfil.reconocimientos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.actividadProfesionalActual" for="field_actividadProfesionalActual">Actividad Profesional Actual</label>
+                    <input type="text" class="form-control" name="actividadProfesionalActual" id="field_actividadProfesionalActual"
+                        [(ngModel)]="perfil.actividadProfesionalActual" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.colegiaturasAsociaciones" for="field_colegiaturasAsociaciones">Colegiaturas Asociaciones</label>
+                    <input type="text" class="form-control" name="colegiaturasAsociaciones" id="field_colegiaturasAsociaciones"
+                        [(ngModel)]="perfil.colegiaturasAsociaciones" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.areasDeInteres" for="field_areasDeInteres">Areas De Interes</label>
+                    <input type="text" class="form-control" name="areasDeInteres" id="field_areasDeInteres"
+                        [(ngModel)]="perfil.areasDeInteres" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.rif" for="field_rif">Rif</label>
+                    <input type="text" class="form-control" name="rif" id="field_rif"
+                        [(ngModel)]="perfil.rif" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.institucion" for="field_institucion">Institucion</label>
+                    <input type="text" class="form-control" name="institucion" id="field_institucion"
+                        [(ngModel)]="perfil.institucion" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.logoInstitucion" for="field_logoInstitucion">Logo Institucion</label>
+                    <div>
+                        <img [src]="'data:' + perfil.logoInstitucionContentType + ';base64,' + perfil.logoInstitucion" style="max-height: 100px;" *ngIf="perfil.logoInstitucion" alt="perfil image"/>
+                        <div *ngIf="perfil.logoInstitucion" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{perfil.logoInstitucionContentType}}, {{byteSize(perfil.logoInstitucion)}}</span>
+                            <button type="button" (click)="clearInputImage('logoInstitucion', 'logoInstitucionContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_logoInstitucion" (change)="setFileData($event, perfil, 'logoInstitucion', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="logoInstitucion" id="field_logoInstitucion"
+                        [(ngModel)]="perfil.logoInstitucion" />
+                    <input type="hidden" class="form-control" name="logoInstitucionContentType" id="field_logoInstitucionContentType"
+                        [(ngModel)]="perfil.logoInstitucionContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.perfil.otrasInstituciones" for="field_otrasInstituciones">Otras Instituciones</label>
+                    <input type="text" class="form-control" name="otrasInstituciones" id="field_otrasInstituciones"
+                        [(ngModel)]="perfil.otrasInstituciones" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.especialidadMedico" for="field_especialidadMedico">Especialidad Medico</label>
+                    <select class="form-control" id="field_especialidadMedico" name="especialidadMedico" [(ngModel)]="perfil.user" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="especialidadMedicoOption.medico.id === perfil.user?.id ? perfil.user : especialidadMedicoOption.medico" *ngFor="let especialidadMedicoOption of especialidadmedicos; trackBy: trackEspecialidadMedicoById">{{especialidadMedicoOption.medico.firstName}} {{especialidadMedicoOption.medico.lastName}} - {{especialidadMedicoOption.especialidad.especialidad}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

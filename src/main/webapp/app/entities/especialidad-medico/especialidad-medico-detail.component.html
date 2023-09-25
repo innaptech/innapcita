@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="especialidadMedico">
+            <h2><span jhiTranslate="innapcitasApp.especialidadMedico.detail.title">Especialidad Medico</span> {{especialidadMedico.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.especialidadMedico.montoHora">Monto Hora</span></dt>
+                <dd>
+                    <span>{{especialidadMedico.montoHora}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.especialidadMedico.descripcion">Descripcion</span></dt>
+                <dd>
+                    <span>{{especialidadMedico.descripcion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.especialidadMedico.montoHoraOnline">Monto Hora Online</span></dt>
+                <dd>
+                    <span>{{especialidadMedico.montoHoraOnline}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.especialidadMedico.medico">Medico</span></dt>
+                <dd>
+                    {{especialidadMedico.medico?.login}}
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.especialidadMedico.especialidad">Especialidad</span></dt>
+                <dd>
+                    <div *ngIf="especialidadMedico.especialidad">
+                        <a [routerLink]="['/especialidad', especialidadMedico.especialidad?.id, 'view']">{{especialidadMedico.especialidad?.especialidad}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/especialidad-medico', especialidadMedico.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

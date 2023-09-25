@@ -1,0 +1,167 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="historiaPersonalAdulto">
+            <h2><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.detail.title">Historia Personal Adulto</span> {{historiaPersonalAdulto.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.primerNombre">Primer Nombre</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.primerNombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.segundoNombre">Segundo Nombre</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.segundoNombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.primerApellido">Primer Apellido</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.primerApellido}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.segundoApellido">Segundo Apellido</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.segundoApellido}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.edad">Edad</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.edad}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.lugarNacimiento">Lugar Nacimiento</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.lugarNacimiento}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.fechaNacimiento">Fecha Nacimiento</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.fechaNacimiento}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.cedula">Cedula</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.cedula}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.nacionalidad">Nacionalidad</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.nacionalidad}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.profesion">Profesion</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.profesion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.ocupacionActual">Ocupacion Actual</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.ocupacionActual}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.religion">Religion</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.religion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.direccionHabitacion">Direccion Habitacion</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.direccionHabitacion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.ciudad">Ciudad</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.ciudad}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.estado">Estado</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.estado}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.pais">Pais</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.pais}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.telefonoFijo">Telefono Fijo</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.telefonoFijo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.telefonoCelular">Telefono Celular</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.telefonoCelular}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.email">Email</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.direccionTrabajo">Direccion Trabajo</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.direccionTrabajo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.telefonoTrabajo">Telefono Trabajo</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.telefonoTrabajo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.faxTrabajo">Fax Trabajo</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.faxTrabajo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.familiarMedico">Familiar Medico</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.familiarMedico}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.carnetFamiliarMedico">Carnet Familiar Medico</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.carnetFamiliarMedico}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.especialidadFamiliarMedico">Especialidad Familiar Medico</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.especialidadFamiliarMedico}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.lugarTrabajoFamiliarMedico">Lugar Trabajo Familiar Medico</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.lugarTrabajoFamiliarMedico}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.notas">Notas</span></dt>
+                <dd>
+                    <span>{{historiaPersonalAdulto.notas}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.sexo">Sexo</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalAdulto.sexo">
+                        <a [routerLink]="['/sexo', historiaPersonalAdulto.sexo?.id, 'view']">{{historiaPersonalAdulto.sexo?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.referidoPor">Referido Por</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalAdulto.referidoPor">
+                        <a [routerLink]="['/referencia-medica', historiaPersonalAdulto.referidoPor?.id, 'view']">{{historiaPersonalAdulto.referidoPor?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.estadoCivil">Estado Civil</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalAdulto.estadoCivil">
+                        <a [routerLink]="['/estado-civil', historiaPersonalAdulto.estadoCivil?.id, 'view']">{{historiaPersonalAdulto.estadoCivil?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.tipoConsulta">Tipo Consulta</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalAdulto.tipoConsulta">
+                        <a [routerLink]="['/tipo-consulta', historiaPersonalAdulto.tipoConsulta?.id, 'view']">{{historiaPersonalAdulto.tipoConsulta?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.especialidad">Especialidad</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalAdulto.especialidad">
+                        <a [routerLink]="['/especialidad', historiaPersonalAdulto.especialidad?.id, 'view']">{{historiaPersonalAdulto.especialidad?.especialidad}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.historiaPersonalAdulto.paciente">Cita</span></dt>
+                <dd>
+                    <div *ngIf="historiaPersonalAdulto.paciente">
+                        <a [routerLink]="['/cita', historiaPersonalAdulto.paciente?.id, 'view']">{{historiaPersonalAdulto.paciente?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/historia-personal-adulto', historiaPersonalAdulto.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

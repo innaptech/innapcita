@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="examenComplementario">
+            <h2><span jhiTranslate="innapcitasApp.examenComplementario.detail.title">Examen Complementario</span> {{examenComplementario.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.examenComplementario.descripcion">Descripcion</span></dt>
+                <dd>
+                    <span>{{examenComplementario.descripcion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.examenComplementario.archivo">Archivo</span></dt>
+                <dd>
+                    <div *ngIf="examenComplementario.archivo && examenComplementario.archivoContentType?.includes('image')">
+                        <a (click)="openFile(examenComplementario.archivoContentType, examenComplementario.archivo)">
+                            <img src="data:{{examenComplementario.archivoContentType}};base64,{{examenComplementario.archivo}}" />
+                        </a>
+                    </div>
+                    <div *ngIf="examenComplementario.archivo && examenComplementario.archivoContentType?.includes('video')">
+                        <a (click)="openFile(examenComplementario.archivoContentType, examenComplementario.archivo)">
+                            <video controls>
+                                <source src="data:{{examenComplementario.archivoContentType}};base64,{{examenComplementario.archivo}}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </a>
+                    </div>
+
+                    <div *ngIf="examenComplementario.archivo">
+                        <a (click)="openFile(examenComplementario.archivoContentType, examenComplementario.archivo)" jhiTranslate="entity.action.open">open</a>
+                        {{examenComplementario.archivoContentType}}, {{byteSize(examenComplementario.archivo)}}
+                    </div>
+                </dd>
+                <dt><span>Informe Médico</span></dt>
+                <dd>
+                    <div *ngIf="examenComplementario.evolucionPaciente">
+                        <a [routerLink]="['/evolucion-paciente', examenComplementario.evolucionPaciente?.id, 'view']">{{examenComplementario.evolucionPaciente?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/examen-complementario', examenComplementario.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

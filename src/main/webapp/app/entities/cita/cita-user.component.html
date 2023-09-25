@@ -1,0 +1,237 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="innapcitasApp.cita.home.titleUser">Citas</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cita" [routerLink]="['/cita/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="innapcitasApp.cita.home.createLabel">
+            Create new Cita
+            </span>
+        </button>
+    </h2>
+    <div name="searchForm" class="form-group">
+        <div class="input-group pull-right" >
+            <input (keyup.enter)="search(null)" type="text" class="form-control" [(ngModel)]="criteria" id="searchQuery" placeholder="Buscar">
+            <button (click)="search(null)" type="button" class="btn btn-info">
+                <fa-icon [icon]="'search'"></fa-icon>
+            </button>
+            <button *ngIf="criteria" (click)="loadAll()" type="button" class="btn btn-info">
+                <fa-icon [icon]="'trash-alt'"></fa-icon>
+            </button>
+        </div>
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MEDICO','ROLE_RECEPCION']" style="margin-top: 15px">
+            <div class="input-group pull-right" >
+                <div class="col">
+                    <label class="form-control-label">Estatus de Cita</label>
+                    <select (change)="advancedCriteriaUpdate()" class="form-control" name="criteriaEstatusCita" [(ngModel)]="criteriaEstatusCita">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="estatusCitaOption.nombre === criteriaEstatusCita ? criteriaEstatusCita : estatusCitaOption" *ngFor="let estatusCitaOption of estatusCitas;">{{estatusCitaOption.nombre}}</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Online/Presencial</label>
+                    <select (change)="advancedCriteriaUpdate()" class="form-control" name="criteriaTipoCita" [(ngModel)]="criteriaTipoCita">
+                        <option [ngValue]="null"></option>
+                        <option>Online</option>
+                        <option>Presencial</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Mes</label>
+                    <select (change)="advancedCriteriaUpdateMes()" class="form-control" name="criteriaTipoCita" [(ngModel)]="criteriaMesCita">
+                        <option [ngValue]="null"></option>
+                        <option>Enero</option>
+                        <option>Febrero</option>
+                        <option>Marzo</option>
+                        <option>Abril</option>
+                        <option>Mayo</option>
+                        <option>Junio</option>
+                        <option>Julio</option>
+                        <option>Agosto</option>
+                        <option>Septiembre</option>
+                        <option>Octubre</option>
+                        <option>Noviembre</option>
+                        <option>Diciembre</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Fecha</label>
+                    <input (change)="advancedCriteriaUpdateFecha()" type="date" class="form-control" id="criteriaFechaCita" name="criteriaFechaCita"
+                           [(ngModel)]="criteriaFechaCita" placeholder="DD-MM-YYYY" />
+                </div>
+                <div class="col">
+                    <label class="form-control-label">Fecha Rango Final</label>
+                    <input (change)="advancedCriteriaUpdateFechaFinal()" type="date" class="form-control" id="criteriaFechaFinalCita" name="criteriaFechaFinalCita"
+                           [(ngModel)]="criteriaFechaFinalCita" placeholder="DD-MM-YYYY" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <jhi-alert></jhi-alert>
+    <div class="table-responsive" *ngIf="citas">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="fecha"><span jhiTranslate="innapcitasApp.cita.fecha">Fecha</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="paciente.login"><span jhiTranslate="innapcitasApp.cita.paciente">Paciente</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="especialidadMedico.id"><span jhiTranslate="innapcitasApp.cita.especialidadMedico">Especialidad Medico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="especialidad.especialidad"><span jhiTranslate="innapcitasApp.cita.especialidad">Especialidad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="tipoConsulta.nombre"><span jhiTranslate="innapcitasApp.cita.tipoConsulta">Tipo Consulta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="estatusCita.nombre"><span jhiTranslate="innapcitasApp.cita.estatusCita">Estatus Cita</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th>
+                    <fa-icon [icon]="'eye'" (click)="changeView()"  style="cursor: pointer; float: right;"></fa-icon>
+                </th>
+            </tr>
+            </thead>
+            <tbody *ngIf="!cardView">
+                <tr *ngFor="let cita of citas ;trackBy: trackId" style="vertical-align: middle;">
+                    <td>{{cita.id}}</td>
+                    <td>{{cita.fecha | date:'d MMM y h:mm a'}}</td>
+                    <td>{{cita.paciente.login}}</td>
+                    <td>{{cita.especialidadMedico?.medico?.firstName}} {{cita.especialidadMedico?.medico?.lastName}}</td>
+                    <td>{{cita.especialidad?.especialidad}}</td>
+                    <td>{{cita.tipoConsulta?.nombre}} - {{cita.consultaOnline ? 'Online' : 'Presencial'}}</td>
+                    <td>
+                        <div class="float-right">
+                            <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MEDICO','ROLE_RECEPCION']">
+                                <select id="field_updateCita2" (change)="updateEstatus(cita, false)" class="form-control" name="estatusCita" [(ngModel)]="cita.estatusCita">
+                                    <option [ngValue]="estatusCitaOption.id === cita.estatusCita.id ? cita.estatusCita : estatusCitaOption" *ngFor="let estatusCitaOption of estatusCitas;">{{estatusCitaOption.nombre}}</option>
+                                </select>
+                            </div>
+                            <div *jhiHasAnyAuthority="['ROLE_MEDICO']">
+                                <button *ngIf="cita.estatusCita?.id == 1 || cita.estatusCita?.id == 4" (click)="updateEstatus(cita, true)" type="button" class="btn btn-success">
+                                    <fa-icon [icon]="'check'"></fa-icon>&nbsp;<span class="d-none d-md-inline"> Finalizar Cita</span>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="(cita.estatusCita && cita.estatusCita.id != 3) || (!cita.estatusCita)" class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    [routerLink]="['/cita', cita.id, 'view' ]"
+                                    class="btn btn-info btn-sm botoncillo-izquierdo">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/cita', cita.id, 'edit']"
+                                    class="btn btn-warning btn-sm botoncillo-derecho">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <!--<button type="submit"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                    [routerLink]="['/', 'cita', { outlets: { popup: cita.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.cancelar">Delete</span>
+                            </button>-->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="cardView">
+            <div style="margin: 25px; padding: 24px; border-radius: 25px; border-width: 2px solid; border-color: ##d1d1d1; box-shadow: 0px 0px 8px 2px #d1d1d1;" *ngFor="let cita of citas ;trackBy: trackId">
+                <div class="float-right"><div><b><label jhiTranslate="innapcitasApp.cita.fecha" class="font-weight-bold">Fecha</label></b>: {{cita.fecha | date:'d MMM y h:mm a'}} <i *ngIf="cita.fecha">{{zonaHoraria}}</i>
+                    <a type="submit" id="show-calendar" [href]="getCalendarLink(cita)" [hidden]="!cita.fecha" class="btn btn-primary"  target="_blank">
+                        <span><fa-icon [icon]="'plus'"></fa-icon> <fa-icon [icon]="'calendar'"></fa-icon></span>
+                    </a>
+                </div><br/>
+                    <div class="float-right"><b><label jhiTranslate="innapcitasApp.cita.estatusCita" class="font-weight-bold">Estatus</label></b>: <b>{{cita.estatusCita?.nombre}}</b>
+                        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MEDICO','ROLE_RECEPCION']">
+                            <select id="field_updateCita" (change)="updateEstatus(cita, false)" class="form-control" name="estatusCita" [(ngModel)]="cita.estatusCita">
+                                <option [ngValue]="estatusCitaOption.id === cita.estatusCita.id ? cita.estatusCita : estatusCitaOption" *ngFor="let estatusCitaOption of estatusCitas;">{{estatusCitaOption.nombre}}</option>
+                            </select>
+                        </div>
+                        <div *jhiHasAnyAuthority="['ROLE_MEDICO']">
+                            <button *ngIf="cita.estatusCita?.id == 1 || cita.estatusCita?.id == 4" (click)="updateEstatus(cita, true)" type="button" class="btn btn-success">
+                                <fa-icon [icon]="'check'"></fa-icon>&nbsp;<span class="d-none d-md-inline"> Finalizar Cita</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div><h4><span jhiTranslate="innapcitasApp.cita.detail.title" class="font-weight-bold">Cita</span>: <a [routerLink]="['/cita', cita.id, 'view' ]">{{cita.id}}</a></h4><div><h4><span jhiTranslate="innapcitasApp.cita.paciente" class="font-weight-bold">Paciente</span>: {{cita.paciente?.firstName}} {{cita.paciente?.lastName}}</h4></div></div>
+                <div><b><span jhiTranslate="innapcitasApp.cita.user" class="font-weight-bold">Usuario</span>:</b> <a *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO', 'ROLE_RECEPCION']" [routerLink]="['/cita/paciente-detail', cita.paciente.login, 'view' ]">{{cita.paciente?.id}}</a> {{cita.paciente?.login}}</div>
+                <div><b><span jhiTranslate="innapcitasApp.cita.notas" class="font-weight-bold">Notas</span>:</b> {{cita.notas}}</div>
+                <div><span jhiTranslate="innapcitasApp.cita.tipoConsulta" class="font-weight-bold">Tipo Consulta</span>: {{cita.tipoConsulta?.nombre}}</div>
+                <div><span jhiTranslate="innapcitasApp.cita.consultaOnline" class="font-weight-bold">Cita Online</span>: {{cita.consultaOnline ? 'Sí' : 'No'}}</div>
+                <div><span jhiTranslate="innapcitasApp.cita.pacienteNino" class="font-weight-bold">Paciente Nino</span>: {{cita.pacienteNino ? 'Sí' : 'No'}}</div>
+                <div><span jhiTranslate="innapcitasApp.cita.especialidadMedico" class="font-weight-bold">Especialidad Medico</span>: {{cita.especialidadMedico?.medico?.firstName}} {{cita.especialidadMedico?.medico?.lastName}}     <span jhiTranslate="innapcitasApp.cita.especialidad" class="font-weight-bold">Especialidad</span>: {{cita.especialidad?.especialidad}}</div>
+                <div style="margin-top: 25px;">
+                    <div *ngIf="(cita.estatusCita && cita.estatusCita.id != 3) || (!cita.estatusCita)" class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/cita', cita.id, 'view' ]"
+                                class="btn btn-info btn-sm botoncillo-izquierdo">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+
+                        <!-- Historias nino -->
+                        <button style="animation: pulse 2s infinite;" *ngIf="cita.pacienteNino && cita.historiaPersonalNinos && (cita.historiaPersonalNinos.length > 0) && !cita.historiaPersonalNinos[0].primerNombre" [routerLink]="['/historia-personal-nino', cita.historiaPersonalNinos[0].id, 'edit']" type="button" class="btn btn-success">
+                            <fa-icon [icon]="'user'"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.llenarHistoriaPersonalNino"> Llenar historia</span>
+                        </button>
+                        <button *ngIf="cita.pacienteNino && cita.historiaPersonalNinos && (cita.historiaPersonalNinos.length > 0) && cita.historiaPersonalNinos[0].primerNombre" [routerLink]="['/historia-personal-nino', cita.historiaPersonalNinos[0].id, 'edit']" type="button" class="btn btn-success">
+                            <fa-icon [icon]="'user'"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.historiaPersonalNino"> Ver historia</span>
+                        </button>
+
+                        <button *ngIf="cita.pacienteNino && cita.historiaMedicaNinos && (cita.historiaMedicaNinos.length > 0) && !cita.historiaMedicaNinos[0].primerNombre" [routerLink]="['/historia-medica-nino', cita.historiaMedicaNinos[0].id, 'edit']" type="button" class="btn btn-primary">
+                            <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.llenarHistoriaMedicaNino"> Llenar historia</span>
+                        </button>
+                        <button *ngIf="cita.pacienteNino && cita.historiaMedicaNinos && (cita.historiaMedicaNinos.length > 0) && cita.historiaMedicaNinos[0].primerNombre" [routerLink]="['/historia-medica-nino', cita.historiaMedicaNinos[0].id, 'edit']" type="button" class="btn btn-primary">
+                            <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.historiaMedicaNino"> Ver historia</span>
+                        </button>
+
+                        <!-- Historias adulto -->
+                        <button style="animation: pulse 2s infinite;" *ngIf="!cita.pacienteNino && cita.historiaPersonalAdultos && (cita.historiaPersonalAdultos.length > 0) && !cita.historiaPersonalAdultos[0].primerNombre" [routerLink]="['/historia-personal-adulto', cita.historiaPersonalAdultos[0].id, 'edit']" type="button" class="btn btn-success">
+                            <fa-icon [icon]="'user'"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.llenarHistoriaPersonalAdulto"> Llenar historia</span>
+                        </button>
+                        <button *ngIf="!cita.pacienteNino && cita.historiaPersonalAdultos && (cita.historiaPersonalAdultos.length > 0) && cita.historiaPersonalAdultos[0].primerNombre" [routerLink]="['/historia-personal-adulto', cita.historiaPersonalAdultos[0].id, 'edit']" type="button" class="btn btn-success">
+                            <fa-icon [icon]="'user'"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.historiaPersonalAdulto"> Ver historia</span>
+                        </button>
+
+                        <button *ngIf="!cita.pacienteNino && cita.historiaMedicaAdultos && (cita.historiaMedicaAdultos.length > 0) && !cita.historiaMedicaAdultos[0].primerNombre" [routerLink]="['/historia-medica-adulto', cita.historiaMedicaAdultos[0].id, 'edit']" type="button" class="btn btn-primary">
+                            <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.llenarHistoriaMedicaAdulto"> Llenar historia</span>
+                        </button>
+                        <button *ngIf="!cita.pacienteNino && cita.historiaMedicaAdultos && (cita.historiaMedicaAdultos.length > 0) && cita.historiaMedicaAdultos[0].primerNombre" [routerLink]="['/historia-medica-adulto', cita.historiaMedicaAdultos[0].id, 'edit']" type="button" class="btn btn-primary">
+                            <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.historiaMedicaAdulto"> Ver historia</span>
+                        </button>
+
+                        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO']" [routerLink]="['/evolucion-paciente', cita.evolucionPaciente.id, 'edit']" type="button" class="btn btn-secondary">
+                            <fa-icon [icon]="'tasks'"></fa-icon>&nbsp;<span class="d-none d-md-inline"> Datos Clínicos</span>
+                        </button>
+
+                        <button type="submit"
+                                [routerLink]="['/cita', cita.id, 'edit']"
+                                class="btn btn-warning btn-sm botoncillo-derecho">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+
+                        <!--<button type="submit"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN']"
+                                [routerLink]="['/', 'cita', { outlets: { popup: cita.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="innapcitasApp.cita.cancelar">Delete</span>
+                        </button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="citas && citas.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

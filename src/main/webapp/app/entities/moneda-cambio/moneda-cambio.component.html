@@ -1,0 +1,66 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="innapcitasApp.monedaCambio.home.title">Moneda Cambios</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-moneda-cambio" [routerLink]="['/moneda-cambio/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="innapcitasApp.monedaCambio.home.createLabel">
+            Create new Moneda Cambio
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="monedaCambios">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nombreMoneda"><span jhiTranslate="innapcitasApp.monedaCambio.nombreMoneda">Nombre Moneda</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="simbolo"><span jhiTranslate="innapcitasApp.monedaCambio.simbolo">Simbolo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="montoCambio"><span jhiTranslate="innapcitasApp.monedaCambio.montoCambio">Monto Cambio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let monedaCambio of monedaCambios ;trackBy: trackId">
+                <td><a [routerLink]="['/moneda-cambio', monedaCambio.id, 'view' ]">{{monedaCambio.id}}</a></td>
+                <td>{{monedaCambio.nombreMoneda}}</td>
+                <td>{{monedaCambio.simbolo}}</td>
+                <td>{{monedaCambio.montoCambio}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/moneda-cambio', monedaCambio.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/moneda-cambio', monedaCambio.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'moneda-cambio', { outlets: { popup: monedaCambio.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="monedaCambios && monedaCambios.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

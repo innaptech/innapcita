@@ -1,0 +1,24 @@
+{
+    "innapcitasApp": {
+        "tipoPago": {
+            "home": {
+                "title": "Tipo Pagos",
+                "createLabel": "Crear nuevo Tipo Pago",
+                "createOrEditLabel": "Crear o editar Tipo Pago",
+                "search": "Search for Tipo Pago"
+            },
+            "created": "Un nuevo Tipo Pago ha sido creado con el identificador {{ param }}",
+            "updated": "Un Tipo Pago ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Tipo Pago ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Tipo Pago {{ id }}?"
+            },
+            "detail": {
+                "title": "Tipo Pago"
+            },
+            "nombre": "Nombre",
+            "descripcion": "Descripcion",
+            "instantaneo": "Instantaneo"
+        }
+    }
+}

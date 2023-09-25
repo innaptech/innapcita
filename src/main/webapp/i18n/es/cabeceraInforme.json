@@ -1,0 +1,22 @@
+{
+    "innapcitasApp": {
+        "cabeceraInforme": {
+            "home": {
+                "title": "Cabecera Informes",
+                "createLabel": "Crear nuevo Cabecera Informe",
+                "createOrEditLabel": "Crear o editar Cabecera Informe"
+            },
+            "created": "Un nuevo Cabecera Informe ha sido creado con el identificador {{ param }}",
+            "updated": "Un Cabecera Informe ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Cabecera Informe ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Cabecera Informe {{ id }}?"
+            },
+            "detail": {
+                "title": "Cabecera Informe"
+            },
+            "nombre": "Nombre",
+            "cabecera": "Cabecera"
+        }
+    }
+}

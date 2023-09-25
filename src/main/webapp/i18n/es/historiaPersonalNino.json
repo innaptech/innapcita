@@ -1,0 +1,69 @@
+{
+    "innapcitasApp": {
+        "historiaPersonalNino": {
+            "home": {
+                "title": "Datos Personales de Niños",
+                "createLabel": "Crear nuevo Datos Personales de Niño",
+                "createOrEditLabel": "Datos Personales de Niño"
+            },
+            "created": "Un nuevo Datos Personales de Niño ha sido creado con el identificador {{ param }}",
+            "updated": "Un Datos Personales de Niño ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Datos Personales de Niño ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Datos Personales de Niño {{ id }}?"
+            },
+            "detail": {
+                "title": "Datos Personales de Niño"
+            },
+            "primerNombre": "Primer Nombre",
+            "segundoNombre": "Segundo Nombre",
+            "primerApellido": "Primer Apellido",
+            "segundoApellido": "Segundo Apellido",
+            "edad": "Edad",
+            "lugarNacimiento": "Lugar de Nacimiento",
+            "fechaNacimiento": "Fecha de Nacimiento",
+            "cedula": "Cedula/Pasaporte",
+            "nacionalidad": "Nacionalidad",
+            "profesion": "Profesión",
+            "ocupacionActual": "Ocupación Actual",
+            "religion": "Religion",
+            "direccionHabitacion": "Dirección de Habitación",
+            "ciudad": "Ciudad",
+            "estado": "Estado",
+            "pais": "País",
+            "telefonoFijo": "Teléfono Fijo",
+            "telefonoCelular": "Teléfono Celular",
+            "email": "Email",
+            "familiarMedico": "¿Hijo(a) de Médico?",
+            "carnetFamiliarMedico": "Carnet del Familiar Medico",
+            "especialidadFamiliarMedico": "Especialidad del Familiar Medico",
+            "lugarTrabajoFamiliarMedico": "Lugar Trabajo del Familiar Medico",
+            "appellidosNombresRepresentante": "Appellidos y Nombres de lRepresentante",
+            "lugarFechaNacimientoRepresentante": "Lugar y Fecha de Nacimiento del Representante",
+            "cedulaRepresentante": "Cedula/Pasaporte del Representante",
+            "edadRepresentante": "Edad del Representante",
+            "telefonoCelularRepresentante": "Teléfono Celular del Representante",
+            "telefonoHabitacionRepresentante": "Teléfono de Habitacion del Representante",
+            "quienTraeNinoConsulta": "¿Quién trae al niño a la consulta?",
+            "cantidadHermanos": "¿Cuántos hermanos(as) tiene el niño(a)?",
+            "posicionHermano": "¿Que posicion ocupa el niño(a) entre sus hermanos(as)?",
+            "relacionMadre": "Relación con Madre",
+            "relacionPadre": "Relación con Padre",
+            "relacionHermanos": "Relación con Hermanos",
+            "relacionOtros": "Relación con Otros (Abuelos, Tíos, Primos, etc)",
+            "gradoAfectividadNino": "¿Cómo es la afectividad del niño(a)?",
+            "caracterNino": "¿Cómo cataloga el carácter del niño(a)?",
+            "quienCuidaNinoPadresTrabajan": "¿Quien permanece con el niño(a)? mientras los padres trabajan?",
+            "sexo": "Sexo",
+            "referidoPor": "Referido Por",
+            "estadoCivil": "Estado Civil",
+            "tipoConsulta": "Tipo de Consulta",
+            "especialidad": "Especialidad",
+            "gradoInstruccionMadre": "Grado de Instrucción de la Madre",
+            "gradoInstruccionPadre": "Grado de Instrucción del Padre",
+            "gradoInstruccionOtro": "Grado de Instrucción Otro",
+            "cita": "Cita",
+            "exito": "Datos guardados correctamente. Por favor llene su historia médica."
+        }
+    }
+}

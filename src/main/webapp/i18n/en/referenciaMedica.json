@@ -1,0 +1,22 @@
+{
+    "innapcitasApp": {
+        "referenciaMedica": {
+            "home": {
+                "title": "Referencia Medicas",
+                "createLabel": "Create a new Referencia Medica",
+                "createOrEditLabel": "Create or edit a Referencia Medica"
+            },
+            "created": "A new Referencia Medica is created with identifier {{ param }}",
+            "updated": "A Referencia Medica is updated with identifier {{ param }}",
+            "deleted": "A Referencia Medica is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Referencia Medica {{ id }}?"
+            },
+            "detail": {
+                "title": "Referencia Medica"
+            },
+            "nombre": "Nombre",
+            "descripcion": "Descripcion"
+        }
+    }
+}

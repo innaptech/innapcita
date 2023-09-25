@@ -1,0 +1,25 @@
+{
+    "innapcitasApp": {
+        "bitacora": {
+            "home": {
+                "title": "Bitacoras",
+                "createLabel": "Create a new Bitacora",
+                "createOrEditLabel": "Create or edit a Bitacora"
+            },
+            "created": "A new Bitacora is created with identifier {{ param }}",
+            "updated": "A Bitacora is updated with identifier {{ param }}",
+            "deleted": "A Bitacora is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Bitacora {{ id }}?"
+            },
+            "detail": {
+                "title": "Bitacora"
+            },
+            "fecha": "Fecha",
+            "titulo": "Titulo",
+            "detalle": "Detalle",
+            "tipo": "Tipo",
+            "user": "User"
+        }
+    }
+}

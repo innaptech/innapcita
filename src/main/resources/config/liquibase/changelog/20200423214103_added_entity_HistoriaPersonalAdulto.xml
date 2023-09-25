@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity HistoriaPersonalAdulto.
+    -->
+    <changeSet id="20200423214103-1" author="jhipster">
+        <createTable tableName="historia_personal_adulto">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="primer_nombre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="segundo_nombre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="primer_apellido" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="segundo_apellido" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="edad" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lugar_nacimiento" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fecha_nacimiento" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cedula" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nacionalidad" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="profesion" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="ocupacion_actual" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="religion" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="direccion_habitacion" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="ciudad" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="estado" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pais" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="telefono_fijo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="telefono_celular" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="email" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="direccion_trabajo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="telefono_trabajo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fax_trabajo" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="familiar_medico" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="carnet_familiar_medico" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="especialidad_familiar_medico" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lugar_trabajo_familiar_medico" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="notas" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sexo_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="referido_por_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="estado_civil_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tipo_consulta_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="especialidad_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="paciente_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

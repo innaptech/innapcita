@@ -1,0 +1,406 @@
+<div class="row justify-content-center" style="margin-right: 0px; margin-left: 0px;">
+    <div *ngIf="isSaving" class="loading-screen"><div class="loading-animation"></div></div>
+    <div class="col-12">
+        <jhi-alert></jhi-alert>
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="getFile()" type="button" class="btn btn-success float-right">
+                <fa-icon [icon]="'book'"></fa-icon>&nbsp;<span > PDF</span>
+            </button>
+            <h2 id="jhi-historia-personal-nino-heading" jhiTranslate="innapcitasApp.historiaPersonalNino.home.createOrEditLabel">Create or edit a Historia Personal Nino</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!historiaPersonalNino.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="historiaPersonalNino.id" readonly />
+                </div>
+
+                <br>
+                <h3>Datos del Paciente</h3>
+                <br>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.primerNombre" for="field_primerNombre">Primer Nombre</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'primerNombre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="primerNombre" id="field_primerNombre"
+                        [(ngModel)]="historiaPersonalNino.primerNombre" required/>
+                    <div [hidden]="!(editForm.controls.primerNombre?.dirty && editForm.controls.primerNombre?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.primerNombre?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.segundoNombre" for="field_segundoNombre">Segundo Nombre</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'segundoNombre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="segundoNombre" id="field_segundoNombre"
+                        [(ngModel)]="historiaPersonalNino.segundoNombre" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.primerApellido" for="field_primerApellido">Primer Apellido</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'primerApellido')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="primerApellido" id="field_primerApellido"
+                        [(ngModel)]="historiaPersonalNino.primerApellido" required/>
+                    <div [hidden]="!(editForm.controls.primerApellido?.dirty && editForm.controls.primerApellido?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.primerApellido?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.segundoApellido" for="field_segundoApellido">Segundo Apellido</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'segundoApellido')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="segundoApellido" id="field_segundoApellido"
+                        [(ngModel)]="historiaPersonalNino.segundoApellido" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.fechaNacimiento" for="field_fechaNacimiento">Fecha Nacimiento</label>
+                    <div class="input-group">
+                        <input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" ngbDatepicker  #fechaNacimientoDp="ngbDatepicker" [(ngModel)]="historiaPersonalNino.fechaNacimiento"
+                               required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fechaNacimientoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.fechaNacimiento?.dirty && editForm.controls.fechaNacimiento?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fechaNacimiento?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.edad" for="field_edad">Edad</label>
+                    <input type="number" class="form-control" name="edad" id="field_edad"
+                        [(ngModel)]="historiaPersonalNino.edad" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.sexo" for="field_sexo">Sexo</label>
+                    <select class="form-control" id="field_sexo" name="sexo" [(ngModel)]="historiaPersonalNino.sexo"  required>
+                        <option *ngIf="!editForm.value.sexo" [ngValue]="null" selected></option>
+                        <option [ngValue]="sexoOption.id === historiaPersonalNino.sexo?.id ? historiaPersonalNino.sexo : sexoOption" *ngFor="let sexoOption of sexos; trackBy: trackSexoById">{{sexoOption.nombre}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.sexo?.dirty && editForm.controls.sexo?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.sexo?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.lugarNacimiento" for="field_lugarNacimiento">Lugar Nacimiento</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'primerNombre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="lugarNacimiento" id="field_lugarNacimiento"
+                        [(ngModel)]="historiaPersonalNino.lugarNacimiento" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.cedula" for="field_cedula">Cedula</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'cedula')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="cedula" id="field_cedula"
+                        [(ngModel)]="historiaPersonalNino.cedula" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.estadoCivil" for="field_estadoCivil">Estado Civil</label>
+                    <select class="form-control" id="field_estadoCivil" name="estadoCivil" [(ngModel)]="historiaPersonalNino.estadoCivil" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="estadoCivilOption.id === historiaPersonalNino.estadoCivil?.id ? historiaPersonalNino.estadoCivil : estadoCivilOption" *ngFor="let estadoCivilOption of estadocivils; trackBy: trackEstadoCivilById">{{estadoCivilOption.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.nacionalidad" for="field_nacionalidad">Nacionalidad</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'nacionalidad')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="nacionalidad" id="field_nacionalidad"
+                        [(ngModel)]="historiaPersonalNino.nacionalidad" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.profesion" for="field_profesion">Profesion</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'profesion')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="profesion" id="field_profesion"
+                        [(ngModel)]="historiaPersonalNino.profesion" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.ocupacionActual" for="field_ocupacionActual">Ocupacion Actual</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'ocupacionActual')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="ocupacionActual" id="field_ocupacionActual"
+                        [(ngModel)]="historiaPersonalNino.ocupacionActual" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.religion" for="field_religion">Religion</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'religion')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="religion" id="field_religion"
+                        [(ngModel)]="historiaPersonalNino.religion" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.direccionHabitacion" for="field_direccionHabitacion">Direccion Habitacion</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'direccionHabitacion')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="direccionHabitacion" id="field_direccionHabitacion"
+                        [(ngModel)]="historiaPersonalNino.direccionHabitacion" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.ciudad" for="field_ciudad">Ciudad</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'ciudad')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="ciudad" id="field_ciudad"
+                        [(ngModel)]="historiaPersonalNino.ciudad" required/>
+                    <div [hidden]="!(editForm.controls.ciudad?.dirty && editForm.controls.ciudad?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.ciudad?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.estado" for="field_estado">Estado</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'estado')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="estado" id="field_estado"
+                        [(ngModel)]="historiaPersonalNino.estado" required/>
+                    <div [hidden]="!(editForm.controls.estado?.dirty && editForm.controls.estado?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.estado?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.pais" for="field_pais">Pais</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'pais')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="pais" id="field_pais"
+                        [(ngModel)]="historiaPersonalNino.pais" required/>
+                    <div [hidden]="!(editForm.controls.pais?.dirty && editForm.controls.pais?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.pais?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoFijo" for="field_telefonoFijo">Telefono Fijo</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'telefonoFijo')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="telefonoFijo" id="field_telefonoFijo"
+                        [(ngModel)]="historiaPersonalNino.telefonoFijo" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoCelular" for="field_telefonoCelular">Telefono Celular</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'telefonoCelular')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="telefonoCelular" id="field_telefonoCelular"
+                        [(ngModel)]="historiaPersonalNino.telefonoCelular" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.email" for="field_email">Email</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'email')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="historiaPersonalNino.email" required/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.referidoPor" for="field_referidoPor">Referido Por</label>
+                    <select class="form-control" id="field_referidoPor" name="referidoPor" [(ngModel)]="historiaPersonalNino.referidoPor" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="referenciaMedicaOption.id === historiaPersonalNino.referidoPor?.id ? historiaPersonalNino.referidoPor : referenciaMedicaOption" *ngFor="let referenciaMedicaOption of referenciamedicas; trackBy: trackReferenciaMedicaById">{{referenciaMedicaOption.nombre}}</option>
+                    </select>
+                </div>
+
+                <br>
+                <h3>Tipo de Consulta</h3>
+                <br>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.tipoConsulta" for="field_tipoConsulta">Tipo Consulta</label>
+                    <select class="form-control" id="field_tipoConsulta" name="tipoConsulta" [(ngModel)]="historiaPersonalNino.tipoConsulta" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="tipoConsultaOption.id === historiaPersonalNino.tipoConsulta?.id ? historiaPersonalNino.tipoConsulta : tipoConsultaOption" *ngFor="let tipoConsultaOption of tipoconsultas; trackBy: trackTipoConsultaById">{{tipoConsultaOption.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.especialidad" for="field_especialidad">Especialidad</label>
+                    <select class="form-control" id="field_especialidad" name="especialidad" [(ngModel)]="historiaPersonalNino.especialidad" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="especialidadOption.id === historiaPersonalNino.especialidad?.id ? historiaPersonalNino.especialidad : especialidadOption" *ngFor="let especialidadOption of especialidads; trackBy: trackEspecialidadById">{{especialidadOption.especialidad}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="familiarMedico" id="field_familiarMedico"
+                           [(ngModel)]="historiaPersonalNino.familiarMedico" /> <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.familiarMedico" for="field_familiarMedico">Familiar Medico</label>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.carnetFamiliarMedico" for="field_carnetFamiliarMedico">Carnet Familiar Medico</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'carnetFamiliarMedico')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="carnetFamiliarMedico" id="field_carnetFamiliarMedico"
+                        [(ngModel)]="historiaPersonalNino.carnetFamiliarMedico" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.especialidadFamiliarMedico" for="field_especialidadFamiliarMedico">Especialidad Familiar Medico</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'especialidadFamiliarMedico')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="especialidadFamiliarMedico" id="field_especialidadFamiliarMedico"
+                        [(ngModel)]="historiaPersonalNino.especialidadFamiliarMedico" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.lugarTrabajoFamiliarMedico" for="field_lugarTrabajoFamiliarMedico">Lugar Trabajo Familiar Medico</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'lugarTrabajoFamiliarMedico')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="lugarTrabajoFamiliarMedico" id="field_lugarTrabajoFamiliarMedico"
+                        [(ngModel)]="historiaPersonalNino.lugarTrabajoFamiliarMedico" />
+                </div>
+
+                <br>
+                <h3>Datos Personales del Representante</h3>
+                <br>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.appellidosNombresRepresentante" for="field_appellidosNombresRepresentante">Appellidos Nombres Representante</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'appellidosNombresRepresentante')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="appellidosNombresRepresentante" id="field_appellidosNombresRepresentante"
+                        [(ngModel)]="historiaPersonalNino.appellidosNombresRepresentante" required/>
+                    <div [hidden]="!(editForm.controls.appellidosNombresRepresentante?.dirty && editForm.controls.appellidosNombresRepresentante?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.appellidosNombresRepresentante?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.lugarFechaNacimientoRepresentante" for="field_lugarFechaNacimientoRepresentante">Lugar Fecha Nacimiento Representante</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'lugarFechaNacimientoRepresentante')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="lugarFechaNacimientoRepresentante" id="field_lugarFechaNacimientoRepresentante"
+                        [(ngModel)]="historiaPersonalNino.lugarFechaNacimientoRepresentante" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.cedulaRepresentante" for="field_cedulaRepresentante">Cedula Representante</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'cedulaRepresentante')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="cedulaRepresentante" id="field_cedulaRepresentante"
+                        [(ngModel)]="historiaPersonalNino.cedulaRepresentante" required/>
+                    <div [hidden]="!(editForm.controls.cedulaRepresentante?.dirty && editForm.controls.cedulaRepresentante?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.cedulaRepresentante?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.edadRepresentante" for="field_edadRepresentante">Edad Representante</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'edadRepresentante')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="number" class="form-control" name="edadRepresentante" id="field_edadRepresentante"
+                        [(ngModel)]="historiaPersonalNino.edadRepresentante" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoCelularRepresentante" for="field_telefonoCelularRepresentante">Telefono Celular Representante</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'telefonoCelularRepresentante')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="telefonoCelularRepresentante" id="field_telefonoCelularRepresentante"
+                        [(ngModel)]="historiaPersonalNino.telefonoCelularRepresentante" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoHabitacionRepresentante" for="field_telefonoHabitacionRepresentante">Telefono Habitacion Representante</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'telefonoHabitacionRepresentante')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="telefonoHabitacionRepresentante" id="field_telefonoHabitacionRepresentante"
+                        [(ngModel)]="historiaPersonalNino.telefonoHabitacionRepresentante" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.quienTraeNinoConsulta" for="field_quienTraeNinoConsulta">Quien Trae Nino Consulta</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'quienTraeNinoConsulta')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="quienTraeNinoConsulta" id="field_quienTraeNinoConsulta"
+                        [(ngModel)]="historiaPersonalNino.quienTraeNinoConsulta" />
+                </div>
+
+                <h5>Grado de instrucción de los representantes(Nivel Completo)</h5>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.gradoInstruccionMadre" for="field_gradoInstruccionMadre">Grado Instruccion Madre</label>
+                    <select class="form-control" id="field_gradoInstruccionMadre" name="gradoInstruccionMadre" [(ngModel)]="historiaPersonalNino.gradoInstruccionMadre" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="gradoInstruccionOption.id === historiaPersonalNino.gradoInstruccionMadre?.id ? historiaPersonalNino.gradoInstruccionMadre : gradoInstruccionOption" *ngFor="let gradoInstruccionOption of gradoinstruccions; trackBy: trackGradoInstruccionById">{{gradoInstruccionOption.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.gradoInstruccionPadre" for="field_gradoInstruccionPadre">Grado Instruccion Padre</label>
+                    <select class="form-control" id="field_gradoInstruccionPadre" name="gradoInstruccionPadre" [(ngModel)]="historiaPersonalNino.gradoInstruccionPadre" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="gradoInstruccionOption.id === historiaPersonalNino.gradoInstruccionPadre?.id ? historiaPersonalNino.gradoInstruccionPadre : gradoInstruccionOption" *ngFor="let gradoInstruccionOption of gradoinstruccions; trackBy: trackGradoInstruccionById">{{gradoInstruccionOption.nombre}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.gradoInstruccionOtro" for="field_gradoInstruccionOtro">Grado Instruccion Otro</label>
+                    <select class="form-control" id="field_gradoInstruccionOtro" name="gradoInstruccionOtro" [(ngModel)]="historiaPersonalNino.gradoInstruccionOtro" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="gradoInstruccionOption.id === historiaPersonalNino.gradoInstruccionOtro?.id ? historiaPersonalNino.gradoInstruccionOtro : gradoInstruccionOption" *ngFor="let gradoInstruccionOption of gradoinstruccions; trackBy: trackGradoInstruccionById">{{gradoInstruccionOption.nombre}}</option>
+                    </select>
+                </div>
+                <br>
+                <h5>Dinámica Familiar</h5>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.cantidadHermanos" for="field_cantidadHermanos">Cantidad Hermanos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'cantidadHermanos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="number" class="form-control" name="cantidadHermanos" id="field_cantidadHermanos"
+                        [(ngModel)]="historiaPersonalNino.cantidadHermanos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.posicionHermano" for="field_posicionHermano">Posicion Hermano</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'posicionHermano')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="number" class="form-control" name="posicionHermano" id="field_posicionHermano"
+                        [(ngModel)]="historiaPersonalNino.posicionHermano" />
+                </div>
+                <h6>Relacion del niño con los demás miembros de la Familia</h6>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.relacionMadre" for="field_relacionMadre">Relacion Madre</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'relacionMadre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="relacionMadre" id="field_relacionMadre"
+                        [(ngModel)]="historiaPersonalNino.relacionMadre" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.relacionPadre" for="field_relacionPadre">Relacion Padre</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'relacionPadre')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="relacionPadre" id="field_relacionPadre"
+                        [(ngModel)]="historiaPersonalNino.relacionPadre" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.relacionHermanos" for="field_relacionHermanos">Relacion Hermanos</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'relacionHermanos')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="relacionHermanos" id="field_relacionHermanos"
+                        [(ngModel)]="historiaPersonalNino.relacionHermanos" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.relacionOtros" for="field_relacionOtros">Relacion Otros</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'relacionOtros')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="relacionOtros" id="field_relacionOtros"
+                        [(ngModel)]="historiaPersonalNino.relacionOtros" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.gradoAfectividadNino" for="field_gradoAfectividadNino">Grado Afectividad Nino</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'gradoAfectividadNino')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="gradoAfectividadNino" id="field_gradoAfectividadNino"
+                        [(ngModel)]="historiaPersonalNino.gradoAfectividadNino" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.caracterNino" for="field_caracterNino">Caracter Nino</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'caracterNino')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="caracterNino" id="field_caracterNino"
+                        [(ngModel)]="historiaPersonalNino.caracterNino" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.historiaPersonalNino.quienCuidaNinoPadresTrabajan" for="field_quienCuidaNinoPadresTrabajan">Quien Cuida Nino Padres Trabajan</label>
+                    &nbsp;&nbsp;<button [disabled]="service?.started$ | async" *ngIf="service" type="button" class="btn btn-sm btn-primary float-right" (click)="listen(historiaPersonalNino,'quienCuidaNinoPadresTrabajan')"><fa-icon [icon]="'comment-dots'"></fa-icon></button>
+                    <input type="text" class="form-control" name="quienCuidaNinoPadresTrabajan" id="field_quienCuidaNinoPadresTrabajan"
+                        [(ngModel)]="historiaPersonalNino.quienCuidaNinoPadresTrabajan" />
+                </div>
+
+
+
+
+
+
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+                <button type="button" *jhiHasNotAuthority="['ROLE_ADMIN', 'ROLE_MEDICO','ROLE_RECEPCION']" (click)="next()" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <span>Siguiente ></span>
+                </button>
+                <button type="button" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO','ROLE_RECEPCION']" (click)="next()" class="btn btn-primary">
+                    <span>Siguiente ></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

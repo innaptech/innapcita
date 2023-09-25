@@ -1,0 +1,110 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="perfil">
+            <h2><span jhiTranslate="innapcitasApp.perfil.detail.title">Perfil</span> {{perfil.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.perfil.foto">Foto</span></dt>
+                <dd>
+                    <div *ngIf="perfil.foto">
+                        <a (click)="openFile(perfil.fotoContentType, perfil.foto)">
+                            <img [src]="'data:' + perfil.fotoContentType + ';base64,' + perfil.foto" style="max-width: 100%;" alt="perfil image"/>
+                        </a>
+                        {{perfil.fotoContentType}}, {{byteSize(perfil.foto)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.descripcion">Descripcion</span></dt>
+                <dd>
+                    <span>{{perfil.descripcion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.sello">Sello</span></dt>
+                <dd>
+                    <div *ngIf="perfil.sello">
+                        <a (click)="openFile(perfil.selloContentType, perfil.sello)">
+                            <img [src]="'data:' + perfil.selloContentType + ';base64,' + perfil.sello" style="max-width: 100%;" alt="perfil image"/>
+                        </a>
+                        {{perfil.selloContentType}}, {{byteSize(perfil.sello)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.profesion">Profesion</span></dt>
+                <dd>
+                    <span>{{perfil.profesion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.email">Email</span></dt>
+                <dd>
+                    <span>{{perfil.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.telefono">Telefono</span></dt>
+                <dd>
+                    <span>{{perfil.telefono}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.direccion">Direccion</span></dt>
+                <dd>
+                    <span>{{perfil.direccion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.experiencia">Experiencia</span></dt>
+                <dd>
+                    <span>{{perfil.experiencia}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.reconocimientos">Reconocimientos</span></dt>
+                <dd>
+                    <span>{{perfil.reconocimientos}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.actividadProfesionalActual">Actividad Profesional Actual</span></dt>
+                <dd>
+                    <span>{{perfil.actividadProfesionalActual}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.colegiaturasAsociaciones">Colegiaturas Asociaciones</span></dt>
+                <dd>
+                    <span>{{perfil.colegiaturasAsociaciones}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.areasDeInteres">Areas De Interes</span></dt>
+                <dd>
+                    <span>{{perfil.areasDeInteres}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.rif">Rif</span></dt>
+                <dd>
+                    <span>{{perfil.rif}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.institucion">Institucion</span></dt>
+                <dd>
+                    <span>{{perfil.institucion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.logoInstitucion">Logo Institucion</span></dt>
+                <dd>
+                    <div *ngIf="perfil.logoInstitucion">
+                        <a (click)="openFile(perfil.logoInstitucionContentType, perfil.logoInstitucion)">
+                            <img [src]="'data:' + perfil.logoInstitucionContentType + ';base64,' + perfil.logoInstitucion" style="max-width: 100%;" alt="perfil image"/>
+                        </a>
+                        {{perfil.logoInstitucionContentType}}, {{byteSize(perfil.logoInstitucion)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.otrasInstituciones">Otras Instituciones</span></dt>
+                <dd>
+                    <span>{{perfil.otrasInstituciones}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.titulo">Titulo</span></dt>
+                <dd>
+                    <span>{{perfil.titulo}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.perfil.user">User</span></dt>
+                <dd>
+                    {{perfil.user?.login}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/perfil', perfil.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

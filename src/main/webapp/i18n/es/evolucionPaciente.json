@@ -1,0 +1,65 @@
+{
+    "innapcitasApp": {
+        "evolucionPaciente": {
+            "home": {
+                "title": "Datos Clínicos",
+                "createLabel": "Crear nuevo Datos Clínicos",
+                "createOrEditLabel": "Informe de Evolucion del Paciente",
+                "informeMedico": "Informe Médico",
+                "informeMedicoAnteriores": "Evolución del Paciente"
+            },
+            "created": "Datos Clínicos han sido creado con el identificador {{ param }}",
+            "updated": "Datos Clínicos han sido actualizados con el identificador {{ param }}",
+            "print": "Imprimiendo Informe...",
+            "send": "Enviando Informe...",
+            "sent": "Informe enviado exitosamente",
+            "deleted": "Datos Clínicos han sido eliminados con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Datos Clínicos {{ id }}?"
+            },
+            "detail": {
+                "title": "Datos Clínicos"
+            },
+            "fecha": "Fecha",
+            "fechaCita": "Fecha Cita",
+            "peso": "Peso (Kg)",
+            "tAAcostada": "P. A. Acostada",
+            "tASentada": "P. A. Sentada",
+            "tAParada": "P. A. de Pie",
+            "talla": "Talla (Mts)",
+            "imc": "IMC",
+            "firma": "Persona",
+            "nuevosSintomas": "Nuevos Síntomas",
+            "lateralidadMano": "Mano",
+            "lateralidadPierna": "Pierna",
+            "lateralidadOjo": "Ojo",
+            "lateralidadOido": "Oído",
+            "examenPiel": "Piel",
+            "examenCabeza": "Cabeza",
+            "examenOjos": "Ojos",
+            "examenOrl": "ORL",
+            "examenCuello": "Cuello",
+            "examenCardiovascular": "Cardiovascular",
+            "examenPulmonar": "Pulmonar",
+            "examenAbdomen": "Abdomen",
+            "examenGenitourinario": "Genitourinario",
+            "examenNeurologico": "Neurológico",
+            "examenArticular": "Articular",
+            "examenNeuromuscular": "Neuromuscular",
+            "impresionesDiagnosticas": "Impresiones Diagnósticas",
+            "planes": "Planes",
+            "tratamiento": "Tratamiento Farmacológico",
+            "recomendaciones": "Indicaciones Médicas",
+            "examenesIndicados": "Exámenes Indicados",
+            "proximaConsulta": "Próxima Consulta",
+            "frecuenciaCardiaca": "Frecuencia Cardíaca",
+            "frecuenciaRespiratoria": "Frecuencia Respiratoria",
+            "examenMental": "Examen Mental",
+            "informacionRelevante": "Enfermedad Actual",
+            "recomendacionesGenerales": "Recomendaciones Generales",
+            "recipe": "Récipe",
+            "indicaciones": "Indicaciones",
+            "cita": "Cita"
+        }
+    }
+}

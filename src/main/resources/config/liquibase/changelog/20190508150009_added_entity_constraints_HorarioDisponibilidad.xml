@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity HorarioDisponibilidad.
+    -->
+    <changeSet id="20190508150009-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="dia_semana_id"
+                                 baseTableName="horario_disponibilidad"
+                                 constraintName="fk_horario_disponibilidad_dia_semana_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dia_semana"/>
+
+        <addForeignKeyConstraint baseColumnNames="especialidad_medico_id"
+                                 baseTableName="horario_disponibilidad"
+                                 constraintName="fk_horario_disponibilidad_especialidad_medico_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="especialidad_medico"/>
+
+    </changeSet>
+</databaseChangeLog>

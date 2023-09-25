@@ -1,0 +1,26 @@
+{
+    "innapcitasApp": {
+        "rangoHoras": {
+            "home": {
+                "title": "Rango Horas",
+                "createLabel": "Crear nuevo Rango Horas",
+                "createOrEditLabel": "Crear o editar Rango Horas",
+                "search": "Search for Rango Horas"
+            },
+            "created": "Un nuevo Rango Horas ha sido creado con el identificador {{ param }}",
+            "updated": "Un Rango Horas ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Rango Horas ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Rango Horas {{ id }}?"
+            },
+            "detail": {
+                "title": "Rango Horas"
+            },
+            "horaInicio": "Hora Inicio",
+            "minutoInicio": "Minuto Inicio",
+            "horaFin": "Hora Fin",
+            "minutoFin": "Minuto Fin",
+            "horarioDisponibilidad": "Horario Disponibilidad"
+        }
+    }
+}

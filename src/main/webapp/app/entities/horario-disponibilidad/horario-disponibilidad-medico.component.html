@@ -1,0 +1,33 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="innapcitasApp.horarioDisponibilidad.home.title">Horario Disponibilidads</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-horario-disponibilidad" [routerLink]="['/horario-disponibilidad/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="innapcitasApp.horarioDisponibilidad.home.createLabel">
+            Create new Horario Disponibilidad
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="table-responsive">
+
+        <div style="padding: 25px;">
+            <mwl-calendar-week-view
+                [viewDate]="viewDate"
+                [events]="events"
+            >
+            </mwl-calendar-week-view>
+            <br/><br/>
+            <mwl-calendar-month-view
+                [viewDate]="viewDate"
+                [events]="events"
+            >
+            </mwl-calendar-month-view>
+        </div>
+
+        <br/>
+
+    </div>
+
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="especialidad">
+            <h2><span jhiTranslate="innapcitasApp.especialidad.detail.title">Especialidad</span> {{especialidad.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.especialidad.especialidad">Especialidad</span></dt>
+                <dd>
+                    <span>{{especialidad.especialidad}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.especialidad.descripcion">Descripcion</span></dt>
+                <dd>
+                    <span>{{especialidad.descripcion}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.especialidad.email">Email</span></dt>
+                <dd>
+                    <span>{{especialidad.email}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.especialidad.administrador">Administrador</span></dt>
+                <dd>
+                    <span>{{especialidad.administrador}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/especialidad', especialidad.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

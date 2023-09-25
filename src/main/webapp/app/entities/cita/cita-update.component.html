@@ -1,0 +1,208 @@
+<div class="row justify-content-center" style="margin-right: 0px; margin-left: 0px;">
+    <div *ngIf="isSaving" class="loading-screen"><div class="loading-animation"></div></div>
+    <div class="col-12">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 *ngIf="cita.id" id="jhi-cita-heading">Editar Cita</h2>
+            <h2 *ngIf="!cita.id" id="jhi-cita-heading2">Agendar una Cita</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cita.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cita.id" readonly />
+                </div>
+
+                <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO', 'ROLE_RECEPCION']" class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.fecha" for="field_fecha">Fecha</label>
+                    <div class="d-flex">
+
+                        <input type="date" class="form-control" id="field_fecha" name="fecha"
+                               [(ngModel)]="fecha" placeholder="YYYY-MM-DD" />
+                        <input type="time" class="form-control" id="time" name="time"
+                               [(ngModel)]="time" placeholder="HH:mm" (blur)="createCalendar()"/>
+                        <!--<a type="submit" id="show-calendar" [href]="googleCalendarEventUrl" [hidden]="!showAddCalendar" class="btn btn-primary"  target="_blank">
+                            <span><fa-icon [icon]="'plus'"></fa-icon><fa-icon [icon]="'calendar'"></fa-icon></span>
+                        </a>-->
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.user" for="field_paciente">Usuario</label>
+                    <input *ngIf="!isAdmin && cita.paciente" type="text" class="form-control" id="field_paciente" name="paciente"
+                           [(ngModel)]="cita.paciente.email" readonly />
+                    <!--<select *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO']" class="form-control" id="field_paciente" name="paciente" [(ngModel)]="cita.paciente"  required>
+                        <option *ngIf="!editForm.value.paciente" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id === cita.paciente?.id ? cita.paciente : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.email
+                            }}</option>
+                    </select>-->
+                    <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO', 'ROLE_RECEPCION']" class="ng-autocomplete" style="width: 100%">
+                        <ng-autocomplete
+                            *ngIf="isAdmin"
+                            [(ngModel)]="cita.paciente ? cita.paciente.email : cita.paciente"
+                            name="cita.paciente"
+                            [data]="users"
+                            [searchKeyword]="keyword2"
+                            (selected)='selectEventPaciente($event)'
+                            (inputChanged)='onChangeSearchUsers($event)'
+                            (inputFocused)='onFocused($event)'
+                            [itemTemplate]="itemTemplatePaciente"
+                            [notFoundTemplate]="notFoundTemplatePaciente">
+                        </ng-autocomplete>
+
+                        <ng-template #itemTemplatePaciente let-item>
+                            <a [innerHTML]="item.firstName + ' ' + item.lastName + ' - ' + item.email"></a>
+                        </ng-template>
+
+                        <ng-template #notFoundTemplatePaciente let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="cita.paciente">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.paciente">Paciente</label>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="form-control-label" jhiTranslate="settings.form.firstname" for="firstName">Nombre</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="{{'settings.form.firstname.placeholder' | translate}}"
+                                       [(ngModel)]="cita.paciente.firstName" minlength=1 maxlength=50 #firstNameInput="ngModel" required>
+                                <div *ngIf="firstNameInput.dirty && firstNameInput.invalid">
+                                    <small class="form-text text-danger"
+                                           *ngIf="firstNameInput.errors.required" jhiTranslate="settings.messages.validate.firstname.required">
+                                        Your first name is required.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="firstNameInput.errors.minlength" jhiTranslate="settings.messages.validate.firstname.minlength">
+                                        Your first name is required to be at least 1 character.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="firstNameInput.errors.maxlength" jhiTranslate="settings.messages.validate.firstname.maxlength">
+                                        Your first name cannot be longer than 50 characters.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <label class="form-control-label" jhiTranslate="settings.form.lastname" for="lastName">Apellido</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'settings.form.lastname.placeholder' | translate}}"
+                                       [(ngModel)]="cita.paciente.lastName" minlength=1 maxlength=50 #lastNameInput="ngModel" required>
+                                <div *ngIf="lastNameInput.dirty && lastNameInput.invalid">
+                                    <small class="form-text text-danger"
+                                           *ngIf="lastNameInput.errors.required" jhiTranslate="settings.messages.validate.lastname.required">
+                                        Your last name is required.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="lastNameInput.errors.minlength" jhiTranslate="settings.messages.validate.lastname.minlength">
+                                        Your last name is required to be at least 1 character.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           *ngIf="lastNameInput.errors.maxlength" jhiTranslate="settings.messages.validate.lastname.maxlength">
+                                        Your last name cannot be longer than 50 characters.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="form-control-label" jhiTranslate="settings.form.telefono" for="telefono">Telefono</label>
+                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="{{'settings.form.telefono.placeholder' | translate}}"
+                                       [(ngModel)]="cita.paciente.telefono" #telefonoInput="ngModel" required>
+                            </div>
+                            <div class="col-sm" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MEDICO', 'ROLE_RECEPCION']">
+                                <label class="form-control-label" jhiTranslate="settings.form.numeroHistoria" for="numeroHistoria">Numero Historia</label>
+                                <input type="number" class="form-control" id="numeroHistoria" name="numeroHistoria" placeholder="{{'settings.form.numeroHistoria.placeholder' | translate}}"
+                                       [(ngModel)]="cita.paciente.numeroHistoria" #numeroHistoriaInput="ngModel">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="!(editForm.controls.paciente?.dirty && editForm.controls.paciente?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.paciente?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.especialidad" for="field_especialidad">Especialidad</label>
+                    <select class="form-control" id="field_especialidad" name="especialidad" [(ngModel)]="cita.especialidad"  required>
+                        <option *ngIf="!editForm.value.especialidad" [ngValue]="null" selected></option>
+                        <option [ngValue]="especialidadOption.id === cita.especialidad?.id ? cita.especialidad : especialidadOption" *ngFor="let especialidadOption of especialidads; trackBy: trackEspecialidadById">{{especialidadOption.especialidad}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.especialidad?.dirty && editForm.controls.especialidad?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.especialidad?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.especialidadMedico" for="field_especialidadMedico">Especialidad Medico</label>
+                    <select (change)="setEspecialidad()" class="form-control" id="field_especialidadMedico" name="especialidadMedico" [(ngModel)]="cita.especialidadMedico" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="especialidadMedicoOption.id === cita.especialidadMedico?.id ? cita.especialidadMedico : especialidadMedicoOption" *ngFor="let especialidadMedicoOption of especialidadmedicos; trackBy: trackEspecialidadMedicoById">{{especialidadMedicoOption.medico.firstName}} {{especialidadMedicoOption.medico.lastName}} - {{especialidadMedicoOption.especialidad.especialidad}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.especialidadDelMedico" for="field_especialidadMedico">Especialidad del Médico Tratante</label>
+                    <div class="ng-autocomplete" style="width: 100%">
+                        <ng-autocomplete
+                            [(ngModel)]="cita.especialidadMedico ? cita.especialidadMedico.descripcion : cita.especialidadMedico"
+                            name="cita.especialidadMedico"
+                            [data]="especialidadmedicos"
+                            [searchKeyword]="keyword"
+                            (selected)='selectEvent($event)'
+                            (inputChanged)='onChangeSearchEspecialidades($event)'
+                            (inputFocused)='onFocused($event)'
+                            [itemTemplate]="itemTemplate"
+                            [notFoundTemplate]="notFoundTemplate">
+                        </ng-autocomplete>
+
+                        <ng-template #itemTemplate let-item>
+                            <a [innerHTML]="item.medico.firstName + ' ' + item.medico.lastName + ': ' + item.descripcion"></a>
+                        </ng-template>
+
+                        <ng-template #notFoundTemplate let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.cita.tipoConsulta" for="field_tipoConsulta">Tipo Consulta</label>
+                    <select class="form-control" id="field_tipoConsulta" name="tipoConsulta" [(ngModel)]="cita.tipoConsulta"  required>
+                        <option *ngIf="!editForm.value.tipoConsulta" [ngValue]="null" selected></option>
+                        <option [ngValue]="tipoConsultaOption.id === cita.tipoConsulta?.id ? cita.tipoConsulta : tipoConsultaOption" *ngFor="let tipoConsultaOption of tipoconsultas; trackBy: trackTipoConsultaById">{{tipoConsultaOption.nombre}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.tipoConsulta?.dirty && editForm.controls.tipoConsulta?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.tipoConsulta?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="consultaOnline" id="field_citaOnline" [(ngModel)]="cita.consultaOnline" /> <label class="form-control-label" jhiTranslate="innapcitasApp.cita.consultaOnline" for="field_citaOnline">Cita Online</label>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="pacienteNino" id="field_pacienteNino" [(ngModel)]="cita.pacienteNino" /> <label class="form-control-label" jhiTranslate="innapcitasApp.cita.pacienteNino" for="field_pacienteNino">Paciente Nino</label>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="innapcitasApp.cita.notas" for="field_notas">Notas</label>
+                <textarea type="text" class="form-control" name="notas" id="field_notas"
+                          [(ngModel)]="cita.notas"></textarea>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

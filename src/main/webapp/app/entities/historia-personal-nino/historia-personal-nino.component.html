@@ -1,0 +1,192 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="innapcitasApp.historiaPersonalNino.home.title">Historia Personal Ninos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-historia-personal-nino" [routerLink]="['/historia-personal-nino/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="innapcitasApp.historiaPersonalNino.home.createLabel">
+            Create new Historia Personal Nino
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="historiaPersonalNinos">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="primerNombre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.primerNombre">Primer Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="segundoNombre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.segundoNombre">Segundo Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="primerApellido"><span jhiTranslate="innapcitasApp.historiaPersonalNino.primerApellido">Primer Apellido</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="segundoApellido"><span jhiTranslate="innapcitasApp.historiaPersonalNino.segundoApellido">Segundo Apellido</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edad"><span jhiTranslate="innapcitasApp.historiaPersonalNino.edad">Edad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lugarNacimiento"><span jhiTranslate="innapcitasApp.historiaPersonalNino.lugarNacimiento">Lugar Nacimiento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fechaNacimiento"><span jhiTranslate="innapcitasApp.historiaPersonalNino.fechaNacimiento">Fecha Nacimiento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cedula"><span jhiTranslate="innapcitasApp.historiaPersonalNino.cedula">Cedula</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nacionalidad"><span jhiTranslate="innapcitasApp.historiaPersonalNino.nacionalidad">Nacionalidad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="profesion"><span jhiTranslate="innapcitasApp.historiaPersonalNino.profesion">Profesion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ocupacionActual"><span jhiTranslate="innapcitasApp.historiaPersonalNino.ocupacionActual">Ocupacion Actual</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="religion"><span jhiTranslate="innapcitasApp.historiaPersonalNino.religion">Religion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="direccionHabitacion"><span jhiTranslate="innapcitasApp.historiaPersonalNino.direccionHabitacion">Direccion Habitacion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ciudad"><span jhiTranslate="innapcitasApp.historiaPersonalNino.ciudad">Ciudad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estado"><span jhiTranslate="innapcitasApp.historiaPersonalNino.estado">Estado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pais"><span jhiTranslate="innapcitasApp.historiaPersonalNino.pais">Pais</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefonoFijo"><span jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoFijo">Telefono Fijo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefonoCelular"><span jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoCelular">Telefono Celular</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="innapcitasApp.historiaPersonalNino.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="familiarMedico"><span jhiTranslate="innapcitasApp.historiaPersonalNino.familiarMedico">Familiar Medico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="carnetFamiliarMedico"><span jhiTranslate="innapcitasApp.historiaPersonalNino.carnetFamiliarMedico">Carnet Familiar Medico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="especialidadFamiliarMedico"><span jhiTranslate="innapcitasApp.historiaPersonalNino.especialidadFamiliarMedico">Especialidad Familiar Medico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lugarTrabajoFamiliarMedico"><span jhiTranslate="innapcitasApp.historiaPersonalNino.lugarTrabajoFamiliarMedico">Lugar Trabajo Familiar Medico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="appellidosNombresRepresentante"><span jhiTranslate="innapcitasApp.historiaPersonalNino.appellidosNombresRepresentante">Appellidos Nombres Representante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="lugarFechaNacimientoRepresentante"><span jhiTranslate="innapcitasApp.historiaPersonalNino.lugarFechaNacimientoRepresentante">Lugar Fecha Nacimiento Representante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cedulaRepresentante"><span jhiTranslate="innapcitasApp.historiaPersonalNino.cedulaRepresentante">Cedula Representante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="edadRepresentante"><span jhiTranslate="innapcitasApp.historiaPersonalNino.edadRepresentante">Edad Representante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefonoCelularRepresentante"><span jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoCelularRepresentante">Telefono Celular Representante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefonoHabitacionRepresentante"><span jhiTranslate="innapcitasApp.historiaPersonalNino.telefonoHabitacionRepresentante">Telefono Habitacion Representante</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="quienTraeNinoConsulta"><span jhiTranslate="innapcitasApp.historiaPersonalNino.quienTraeNinoConsulta">Quien Trae Nino Consulta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cantidadHermanos"><span jhiTranslate="innapcitasApp.historiaPersonalNino.cantidadHermanos">Cantidad Hermanos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="posicionHermano"><span jhiTranslate="innapcitasApp.historiaPersonalNino.posicionHermano">Posicion Hermano</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="relacionMadre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.relacionMadre">Relacion Madre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="relacionPadre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.relacionPadre">Relacion Padre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="relacionHermanos"><span jhiTranslate="innapcitasApp.historiaPersonalNino.relacionHermanos">Relacion Hermanos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="relacionOtros"><span jhiTranslate="innapcitasApp.historiaPersonalNino.relacionOtros">Relacion Otros</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gradoAfectividadNino"><span jhiTranslate="innapcitasApp.historiaPersonalNino.gradoAfectividadNino">Grado Afectividad Nino</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="caracterNino"><span jhiTranslate="innapcitasApp.historiaPersonalNino.caracterNino">Caracter Nino</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="quienCuidaNinoPadresTrabajan"><span jhiTranslate="innapcitasApp.historiaPersonalNino.quienCuidaNinoPadresTrabajan">Quien Cuida Nino Padres Trabajan</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sexo.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.sexo">Sexo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="referidoPor.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.referidoPor">Referido Por</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="estadoCivil.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.estadoCivil">Estado Civil</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tipoConsulta.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.tipoConsulta">Tipo Consulta</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="especialidad.especialidad"><span jhiTranslate="innapcitasApp.historiaPersonalNino.especialidad">Especialidad</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gradoInstruccionMadre.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.gradoInstruccionMadre">Grado Instruccion Madre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gradoInstruccionPadre.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.gradoInstruccionPadre">Grado Instruccion Padre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="gradoInstruccionOtro.nombre"><span jhiTranslate="innapcitasApp.historiaPersonalNino.gradoInstruccionOtro">Grado Instruccion Otro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="cita.id"><span jhiTranslate="innapcitasApp.historiaPersonalNino.cita">Cita</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let historiaPersonalNino of historiaPersonalNinos ;trackBy: trackId">
+                <td><a [routerLink]="['/historia-personal-nino', historiaPersonalNino.id, 'view' ]">{{historiaPersonalNino.id}}</a></td>
+                <td>{{historiaPersonalNino.primerNombre}}</td>
+                <td>{{historiaPersonalNino.segundoNombre}}</td>
+                <td>{{historiaPersonalNino.primerApellido}}</td>
+                <td>{{historiaPersonalNino.segundoApellido}}</td>
+                <td>{{historiaPersonalNino.edad}}</td>
+                <td>{{historiaPersonalNino.lugarNacimiento}}</td>
+                <td>{{historiaPersonalNino.fechaNacimiento | date:'mediumDate'}}</td>
+                <td>{{historiaPersonalNino.cedula}}</td>
+                <td>{{historiaPersonalNino.nacionalidad}}</td>
+                <td>{{historiaPersonalNino.profesion}}</td>
+                <td>{{historiaPersonalNino.ocupacionActual}}</td>
+                <td>{{historiaPersonalNino.religion}}</td>
+                <td>{{historiaPersonalNino.direccionHabitacion}}</td>
+                <td>{{historiaPersonalNino.ciudad}}</td>
+                <td>{{historiaPersonalNino.estado}}</td>
+                <td>{{historiaPersonalNino.pais}}</td>
+                <td>{{historiaPersonalNino.telefonoFijo}}</td>
+                <td>{{historiaPersonalNino.telefonoCelular}}</td>
+                <td>{{historiaPersonalNino.email}}</td>
+                <td>{{historiaPersonalNino.familiarMedico}}</td>
+                <td>{{historiaPersonalNino.carnetFamiliarMedico}}</td>
+                <td>{{historiaPersonalNino.especialidadFamiliarMedico}}</td>
+                <td>{{historiaPersonalNino.lugarTrabajoFamiliarMedico}}</td>
+                <td>{{historiaPersonalNino.appellidosNombresRepresentante}}</td>
+                <td>{{historiaPersonalNino.lugarFechaNacimientoRepresentante}}</td>
+                <td>{{historiaPersonalNino.cedulaRepresentante}}</td>
+                <td>{{historiaPersonalNino.edadRepresentante}}</td>
+                <td>{{historiaPersonalNino.telefonoCelularRepresentante}}</td>
+                <td>{{historiaPersonalNino.telefonoHabitacionRepresentante}}</td>
+                <td>{{historiaPersonalNino.quienTraeNinoConsulta}}</td>
+                <td>{{historiaPersonalNino.cantidadHermanos}}</td>
+                <td>{{historiaPersonalNino.posicionHermano}}</td>
+                <td>{{historiaPersonalNino.relacionMadre}}</td>
+                <td>{{historiaPersonalNino.relacionPadre}}</td>
+                <td>{{historiaPersonalNino.relacionHermanos}}</td>
+                <td>{{historiaPersonalNino.relacionOtros}}</td>
+                <td>{{historiaPersonalNino.gradoAfectividadNino}}</td>
+                <td>{{historiaPersonalNino.caracterNino}}</td>
+                <td>{{historiaPersonalNino.quienCuidaNinoPadresTrabajan}}</td>
+                <td>
+                    <div *ngIf="historiaPersonalNino.sexo">
+                        <a [routerLink]="['../sexo', historiaPersonalNino.sexo?.id, 'view' ]" >{{historiaPersonalNino.sexo?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalNino.referidoPor">
+                        <a [routerLink]="['../referencia-medica', historiaPersonalNino.referidoPor?.id, 'view' ]" >{{historiaPersonalNino.referidoPor?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalNino.estadoCivil">
+                        <a [routerLink]="['../estado-civil', historiaPersonalNino.estadoCivil?.id, 'view' ]" >{{historiaPersonalNino.estadoCivil?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalNino.tipoConsulta">
+                        <a [routerLink]="['../tipo-consulta', historiaPersonalNino.tipoConsulta?.id, 'view' ]" >{{historiaPersonalNino.tipoConsulta?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalNino.especialidad">
+                        <a [routerLink]="['../especialidad', historiaPersonalNino.especialidad?.id, 'view' ]" >{{historiaPersonalNino.especialidad?.especialidad}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalNino.gradoInstruccionMadre">
+                        <a [routerLink]="['../grado-instruccion', historiaPersonalNino.gradoInstruccionMadre?.id, 'view' ]" >{{historiaPersonalNino.gradoInstruccionMadre?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalNino.gradoInstruccionPadre">
+                        <a [routerLink]="['../grado-instruccion', historiaPersonalNino.gradoInstruccionPadre?.id, 'view' ]" >{{historiaPersonalNino.gradoInstruccionPadre?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalNino.gradoInstruccionOtro">
+                        <a [routerLink]="['../grado-instruccion', historiaPersonalNino.gradoInstruccionOtro?.id, 'view' ]" >{{historiaPersonalNino.gradoInstruccionOtro?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="historiaPersonalNino.cita">
+                        <a [routerLink]="['../cita', historiaPersonalNino.cita?.id, 'view' ]" >{{historiaPersonalNino.cita?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/historia-personal-nino', historiaPersonalNino.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/historia-personal-nino', historiaPersonalNino.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'historia-personal-nino', { outlets: { popup: historiaPersonalNino.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="historiaPersonalNinos && historiaPersonalNinos.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

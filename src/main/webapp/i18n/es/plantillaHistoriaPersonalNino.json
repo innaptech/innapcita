@@ -1,0 +1,23 @@
+{
+    "innapcitasApp": {
+        "plantillaHistoriaPersonalNino": {
+            "home": {
+                "title": "Plantilla Datos Personales de Niños",
+                "createLabel": "Crear nuevo Plantilla Datos Personales de Niño",
+                "createOrEditLabel": "Crear o editar Plantilla Datos Personales de Niño"
+            },
+            "created": "Un nuevo Plantilla Datos Personales de Niño ha sido creado con el identificador {{ param }}",
+            "updated": "Un Plantilla Datos Personales de Niño ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Plantilla Datos Personales de Niño ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Plantilla Datos Personales de Niño {{ id }}?"
+            },
+            "detail": {
+                "title": "Plantilla Datos Personales de Niño"
+            },
+            "nombre": "Nombre",
+            "contenido": "Contenido",
+            "activo": "Activo"
+        }
+    }
+}

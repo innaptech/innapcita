@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="horarioDisponibilidad">
+            <h2><span jhiTranslate="innapcitasApp.horarioDisponibilidad.detail.title">Horario Disponibilidad</span> {{horarioDisponibilidad.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.horarioDisponibilidad.diaSemana">Dia Semana</span></dt>
+                <dd>
+                    <div *ngIf="horarioDisponibilidad.diaSemana">
+                        <a [routerLink]="['/dia-semana', horarioDisponibilidad.diaSemana?.id, 'view']">{{horarioDisponibilidad.diaSemana?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.horarioDisponibilidad.especialidadMedico">Especialidad Medico</span></dt>
+                <dd>
+                    <div *ngIf="horarioDisponibilidad.especialidadMedico">
+                        <a [routerLink]="['/especialidad-medico', horarioDisponibilidad.especialidadMedico?.id, 'view']">{{horarioDisponibilidad.especialidadMedico?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/horario-disponibilidad', horarioDisponibilidad.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

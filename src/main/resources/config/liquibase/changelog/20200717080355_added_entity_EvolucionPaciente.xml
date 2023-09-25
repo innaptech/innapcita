@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity EvolucionPaciente.
+    -->
+    <changeSet id="20200717080355-1" author="jhipster">
+        <createTable tableName="evolucion_paciente">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fecha" type="datetime">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="peso" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="t_a_acostada" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="t_a_sentada" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="t_a_parada" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="talla" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="imc" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="firma" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="nuevos_sintomas" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lateralidad_mano" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lateralidad_pierna" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lateralidad_ojo" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lateralidad_oido" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_piel" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_cabeza" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_ojos" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_orl" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_cuello" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_cardiovascular" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_pulmonar" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_abdomen" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_genitourinario" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_neurologico" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_articular" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_neuromuscular" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="impresiones_diagnosticas" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tratamiento" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="recomendaciones" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="proxima_consulta" type="date">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="frecuencia_cardiaca" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="frecuencia_respiratoria" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examen_mental" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="informacion_relevante" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="recomendaciones_generales" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="recipe" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="indicaciones" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="examenes_indicados" type="text">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="cita_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="evolucion_paciente" columnName="fecha" columnDataType="datetime"/>
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

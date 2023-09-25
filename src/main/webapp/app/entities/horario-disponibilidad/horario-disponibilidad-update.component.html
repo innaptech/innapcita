@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-horario-disponibilidad-heading" jhiTranslate="innapcitasApp.horarioDisponibilidad.home.createOrEditLabel">Create or edit a Horario Disponibilidad</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!horarioDisponibilidad.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="horarioDisponibilidad.id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.horarioDisponibilidad.diaSemana" for="field_diaSemana">Dia Semana</label>
+                    <select class="form-control" id="field_diaSemana" name="diaSemana" [(ngModel)]="horarioDisponibilidad.diaSemana"  required>
+                        <option *ngIf="!editForm.value.diaSemana" [ngValue]="null" selected></option>
+                        <option [ngValue]="diaSemanaOption.id === horarioDisponibilidad.diaSemana?.id ? horarioDisponibilidad.diaSemana : diaSemanaOption" *ngFor="let diaSemanaOption of diasemanas; trackBy: trackDiaSemanaById">{{diaSemanaOption.nombre}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.diaSemana?.dirty && editForm.controls.diaSemana?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.diaSemana?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.horarioDisponibilidad.especialidadMedico" for="field_especialidadMedico">Especialidad Medico</label>
+                    <select class="form-control" id="field_especialidadMedico" name="especialidadMedico" [(ngModel)]="horarioDisponibilidad.especialidadMedico"  required>
+                        <option *ngIf="!editForm.value.especialidadMedico" [ngValue]="null" selected></option>
+                        <option [ngValue]="especialidadMedicoOption.id === horarioDisponibilidad.especialidadMedico?.id ? horarioDisponibilidad.especialidadMedico : especialidadMedicoOption" *ngFor="let especialidadMedicoOption of especialidadmedicos; trackBy: trackEspecialidadMedicoById">{{especialidadMedicoOption.especialidad.especialidad}}</option>
+                    </select>
+                </div>
+
+                <h4>
+                    <span jhiTranslate="innapcitasApp.rangoHoras.home.title">Rango</span>
+                    <div id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rango-fecha" (click)="nuevoRango()">
+                        <fa-icon [icon]="'plus'"></fa-icon>
+                    </div>
+                </h4>
+
+                <div class="form-group" *ngFor="let rangoHoras of rango;" style="background-color: 'gray'; border-radius: 15px;">
+                    <table class="table" style="background-color: #F5F5F5; border: 1px solid #D6D6D6; padding: 15px; ">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="innapcitasApp.rangoHoras.horaInicio">Hora Inicio</label>
+                                    <input type="number" class="form-control" name="horaInicio"
+                                           [(ngModel)]="rangoHoras.horaInicio" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="innapcitasApp.rangoHoras.minutoInicio">Minuto Inicio</label>
+                                    <input type="number" class="form-control" name="minutoInicio"
+                                           [(ngModel)]="rangoHoras.minutoInicio" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="innapcitasApp.rangoHoras.horaFin">Hora Fin</label>
+                                    <input type="number" class="form-control" name="horaFin"
+                                           [(ngModel)]="rangoHoras.horaFin" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="innapcitasApp.rangoHoras.minutoFin">Minuto Fin</label>
+                                    <input type="number" class="form-control" name="minutoFin"
+                                           [(ngModel)]="rangoHoras.minutoFin" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div [hidden]="!(editForm.controls.especialidadMedico?.dirty && editForm.controls.especialidadMedico?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.especialidadMedico?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

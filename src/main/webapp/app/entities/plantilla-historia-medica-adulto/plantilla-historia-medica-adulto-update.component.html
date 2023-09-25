@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-plantilla-historia-medica-adulto-heading" jhiTranslate="innapcitasApp.plantillaHistoriaMedicaAdulto.home.createOrEditLabel">Create or edit a Plantilla Historia Medica Adulto</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!plantillaHistoriaMedicaAdulto.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="plantillaHistoriaMedicaAdulto.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.plantillaHistoriaMedicaAdulto.nombre" for="field_nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+                        [(ngModel)]="plantillaHistoriaMedicaAdulto.nombre" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.plantillaHistoriaMedicaAdulto.contenido">Contenido</label>
+                    <editor name="contenido" id="field_contenido"
+                            [(ngModel)]="plantillaHistoriaMedicaAdulto.contenido"
+                            apiKey="5ymwv5nk2b0x6mtw4cyg4u74g2jnyuh6cf5uvfbj7tq1nwzx"
+                            [init]="{
+                                 height: 500,
+                                 menubar: false,
+                                 plugins: [
+                                    'advlist autolink lists link image charmap print',
+                                    'preview anchor searchreplace visualblocks code',
+                                    'fullscreen insertdatetime media table paste',
+                                    'help wordcount'
+                                 ],
+                                 toolbar:
+                                   'undo redo | formatselect | bold italic backcolor | \
+                                   alignleft aligncenter alignright alignjustify | \
+                                   bullist numlist outdent indent | removeformat | table media code'
+                               }"
+                    ></editor>
+                </div>
+
+                <div class="form-group">
+                    <h6>Valores aceptados como referencia:</h6>
+                    <div *ngFor="let valor of valores ;">{{valor}}</div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="innapcitasApp.plantillaHistoriaMedicaAdulto.activo" for="field_activo">Activo</label>
+                    <input type="checkbox" class="form-control" name="activo" id="field_activo"
+                        [(ngModel)]="plantillaHistoriaMedicaAdulto.activo" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+version: '2'
+services:
+    innapcitas-postgresql:
+        image: postgres:10.4
+        # volumes:
+        #     - ~/volumes/jhipster/innapcitas/postgresql/:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=innapcitas
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

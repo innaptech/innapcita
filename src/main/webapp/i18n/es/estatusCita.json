@@ -1,0 +1,22 @@
+{
+    "innapcitasApp": {
+        "estatusCita": {
+            "home": {
+                "title": "Estatus Citas",
+                "createLabel": "Crear nuevo Estatus Cita",
+                "createOrEditLabel": "Crear o editar Estatus Cita"
+            },
+            "created": "Un nuevo Estatus Cita ha sido creado con el identificador {{ param }}",
+            "updated": "Un Estatus Cita ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Estatus Cita ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Estatus Cita {{ id }}?"
+            },
+            "detail": {
+                "title": "Estatus Cita"
+            },
+            "nombre": "Nombre",
+            "descripcion": "Descripcion"
+        }
+    }
+}

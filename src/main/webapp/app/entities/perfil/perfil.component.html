@@ -1,0 +1,150 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="innapcitasApp.perfil.home.title">Perfils</span>
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-perfil" [routerLink]="['/perfil/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="innapcitasApp.perfil.home.createLabel">
+            Create new Perfil
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div *ngIf="perfils" style="width: 100%">
+
+        <div class="" *ngFor="let perfil of perfils ;trackBy: trackId" style="width: 100%; margin-bottom: 45px;">
+            <div class="row" style="width: 100%">
+                <div class="col-2" style="">
+                    <img [src]="'data:' + perfil.fotoContentType + ';base64,' + perfil.foto" style="margin-left: 10px; width: 100%; border-radius: 15px; border: 5px solid; border-color: #05997c; border-radius: 100%;" alt="perfil image"/>
+                </div>
+                <div class="col-10" style="padding-left: 30px">
+                    <div class="row" style="background-color: #f3f3f3">
+                        <div style="background-color: #1abc9c;  padding: 10px; color: white"><fa-icon icon="user-md"></fa-icon></div>
+                        <div style="padding: 10px">
+                           <b>{{perfil.titulo_abreviado}} {{perfil.nombre}} {{perfil.apellido}}</b>, {{perfil.profesion}}
+                        </div>
+                        <button type="submit" style="right: 0; position: absolute;"
+                                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                                [routerLink]="['/perfil', perfil.id, 'edit']"
+                                class="btn btn-light btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                        </button>
+                    </div>
+                    <div style="margin-top: 15px; text-align: left;">
+                        <b>Actividad Profesional Actual: </b> {{perfil.descripcion}}
+                    </div>
+                    <div style="margin-top: 15px; text-align: left;">
+                        <a [routerLink]="['/cita/new/' + perfil.user?.id]" style="color: #1abc9c;"><fa-icon icon="calendar"></fa-icon> Solicitar cita</a>
+                    </div>
+                    <hr>
+
+                    <div style="text-align: left;">
+                        <i>{{perfil.titulo}}</i>
+                    </div>
+                    <div style="text-align: left;">
+                        Email: <a style="color: #1abc9c; font-weight: normal" href="mailto:{{perfil.email}}">{{perfil.email}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foto"><span jhiTranslate="innapcitasApp.perfil.foto">Foto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="descripcion"><span jhiTranslate="innapcitasApp.perfil.descripcion">Descripcion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="sello"><span jhiTranslate="innapcitasApp.perfil.sello">Sello</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="profesion"><span jhiTranslate="innapcitasApp.perfil.profesion">Profesion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span jhiTranslate="innapcitasApp.perfil.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telefono"><span jhiTranslate="innapcitasApp.perfil.telefono">Telefono</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="direccion"><span jhiTranslate="innapcitasApp.perfil.direccion">Direccion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="experiencia"><span jhiTranslate="innapcitasApp.perfil.experiencia">Experiencia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="reconocimientos"><span jhiTranslate="innapcitasApp.perfil.reconocimientos">Reconocimientos</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actividadProfesionalActual"><span jhiTranslate="innapcitasApp.perfil.actividadProfesionalActual">Actividad Profesional Actual</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="colegiaturasAsociaciones"><span jhiTranslate="innapcitasApp.perfil.colegiaturasAsociaciones">Colegiaturas Asociaciones</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="areasDeInteres"><span jhiTranslate="innapcitasApp.perfil.areasDeInteres">Areas De Interes</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rif"><span jhiTranslate="innapcitasApp.perfil.rif">Rif</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="institucion"><span jhiTranslate="innapcitasApp.perfil.institucion">Institucion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="logoInstitucion"><span jhiTranslate="innapcitasApp.perfil.logoInstitucion">Logo Institucion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="otrasInstituciones"><span jhiTranslate="innapcitasApp.perfil.otrasInstituciones">Otras Instituciones</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="titulo"><span jhiTranslate="innapcitasApp.perfil.titulo">Titulo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="user.login"><span jhiTranslate="innapcitasApp.perfil.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let perfil of perfils ;trackBy: trackId">
+                <td><a [routerLink]="['/perfil', perfil.id, 'view' ]">{{perfil.id}}</a></td>
+                <td>
+                    <a *ngIf="perfil.foto" (click)="openFile(perfil.fotoContentType, perfil.foto)">
+                        <img [src]="'data:' + perfil.fotoContentType + ';base64,' + perfil.foto" style="max-height: 30px;" alt="perfil image"/>
+                    </a>
+                    <span *ngIf="perfil.foto">{{perfil.fotoContentType}}, {{byteSize(perfil.foto)}}</span>
+                </td>
+                <td>{{perfil.descripcion}}</td>
+                <td>
+                    <a *ngIf="perfil.sello" (click)="openFile(perfil.selloContentType, perfil.sello)">
+                        <img [src]="'data:' + perfil.selloContentType + ';base64,' + perfil.sello" style="max-height: 30px;" alt="perfil image"/>
+                    </a>
+                    <span *ngIf="perfil.sello">{{perfil.selloContentType}}, {{byteSize(perfil.sello)}}</span>
+                </td>
+                <td>{{perfil.profesion}}</td>
+                <td>{{perfil.email}}</td>
+                <td>{{perfil.telefono}}</td>
+                <td>{{perfil.direccion}}</td>
+                <td>{{perfil.experiencia}}</td>
+                <td>{{perfil.reconocimientos}}</td>
+                <td>{{perfil.actividadProfesionalActual}}</td>
+                <td>{{perfil.colegiaturasAsociaciones}}</td>
+                <td>{{perfil.areasDeInteres}}</td>
+                <td>{{perfil.rif}}</td>
+                <td>{{perfil.institucion}}</td>
+                <td>
+                    <a *ngIf="perfil.logoInstitucion" (click)="openFile(perfil.logoInstitucionContentType, perfil.logoInstitucion)">
+                        <img [src]="'data:' + perfil.logoInstitucionContentType + ';base64,' + perfil.logoInstitucion" style="max-height: 30px;" alt="perfil image"/>
+                    </a>
+                    <span *ngIf="perfil.logoInstitucion">{{perfil.logoInstitucionContentType}}, {{byteSize(perfil.logoInstitucion)}}</span>
+                </td>
+                <td>{{perfil.otrasInstituciones}}</td>
+                <td>{{perfil.titulo}}</td>
+                <td>
+                    {{perfil.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/perfil', perfil.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/perfil', perfil.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'perfil', { outlets: { popup: perfil.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>-->
+    </div>
+    <div *ngIf="perfils && perfils.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

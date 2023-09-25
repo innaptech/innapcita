@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pago">
+            <h2><span jhiTranslate="innapcitasApp.pago.detail.title">Pago</span> {{pago.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="innapcitasApp.pago.monto">Monto</span></dt>
+                <dd>
+                    <span>{{pago.monto}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.pago.fechaEmision">Fecha Emision</span></dt>
+                <dd>
+                    <span>{{pago.fechaEmision}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.pago.fechaEstatus">Fecha Estatus</span></dt>
+                <dd>
+                    <span>{{pago.fechaEstatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.pago.cita">Cita</span></dt>
+                <dd>
+                    <div *ngIf="pago.cita">
+                        <a [routerLink]="['/cita', pago.cita?.id, 'view']">{{pago.cita?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.pago.estatusPago">Estatus Pago</span></dt>
+                <dd>
+                    <div *ngIf="pago.estatusPago">
+                        <a [routerLink]="['/estatus-pago', pago.estatusPago?.id, 'view']">{{pago.estatusPago?.nombre}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="innapcitasApp.pago.tipoPago">Tipo Pago</span></dt>
+                <dd>
+                    <div *ngIf="pago.tipoPago">
+                        <a [routerLink]="['/tipo-pago', pago.tipoPago?.id, 'view']">{{pago.tipoPago?.nombre}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pago', pago.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
